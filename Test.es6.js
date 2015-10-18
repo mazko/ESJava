@@ -829,6 +829,10 @@ class NumberExtendsClass extends TestInterface {
         this.y2 = +0b1011;
         this.z2 = +0o52;
         this.k2 = +0xa5;
+        this.t1 = 0xDFFF;
+        this.t2 = 0xDFFF;
+        this.t3 = 0xDFFd;
+        this.t4 = 0xDFFD;
     }
 }
 class Animal {

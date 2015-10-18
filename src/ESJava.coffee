@@ -73,7 +73,9 @@ class RawVisitor extends PrimitivesVisitor
     builders.rawLiteral obj
 
   visitNumberLiteral: (node) ->
-    token = node.token.replace /[lLfFdD]$/, ''
+    token = node.token.replace /[lL]$/, ''
+    if not token.match /0[xX][0-9a-fA-F]+/
+      token = token.replace /[fFdD]$/, ''
     make_raw token.replace /^0([0-7]+)$/, '0o$1'
 
   visitStringLiteral: (node) ->

@@ -1093,6 +1093,7 @@ class NumberExtendsClass extends TestInterface {
     float f11 = -2.34E+22f, f22 = -1.0f, f33 = -0.0;
     int x1=-42, y1=-0b1011, z1=-052, k1=-0xa5;
     int x2=+42, y2=+0b1011, z2=+052L, k2=+0xa5;
+    int t1 = 0xDFFF, t2 =0xDFFFl, t3=0xDFFd, t4=0xDFFDL;
 }
 
 

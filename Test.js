@@ -1059,6 +1059,10 @@ var NumberExtendsClass = (function (_TestInterface3) {
         this.y2 = +11;
         this.z2 = +42;
         this.k2 = +0xa5;
+        this.t1 = 0xDFFF;
+        this.t2 = 0xDFFF;
+        this.t3 = 0xDFFd;
+        this.t4 = 0xDFFD;
     }
 
     return NumberExtendsClass;
