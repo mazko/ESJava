@@ -1198,6 +1198,9 @@ var BabelEvaluate = (function () {
             for (var i = 0; i < animals.length; i++) {
                 animals[i].move$0();
             }
+            var i1 = undefined,
+                i2 = undefined;
+            for (i1 = 42, i2 = codePointOffset;;) {}
         }
     }]);
 

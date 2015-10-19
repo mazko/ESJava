@@ -913,5 +913,8 @@ class BabelEvaluate {
         for (let i = 0; i < animals.length; i++) {
             animals[i].move$0();
         }
+        let i1, i2;
+        for (i1 = 42, i2 = codePointOffset;;) {
+        }
     }
 }

@@ -1159,6 +1159,9 @@ public class BabelEvaluate {
             // TODO: auto resolve binding
             animals[i].move$0();
         }
+        int i1, i2;
+        for (i1 = 42, i2 = codePointOffset; ; ) {
+        }
     }
 }
 /* BabelEvaluate.main(); */

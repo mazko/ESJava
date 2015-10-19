@@ -51,6 +51,8 @@ class VarScope
           @visit node.initializers, args...
         visitVariableDeclarationExpression: (node, args...) ->
           @visitVariableDeclarationStatement node, args...
+        visitAssignment: (node, args...) ->
+          @constructor.IGNORE_ME
         visitTypeDeclaration: (node, args...) ->
           throw 'NotImpl: Nested | Inner classes ?'
       new VarCollector().visit src
