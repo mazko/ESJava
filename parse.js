@@ -48,7 +48,7 @@ function parse(delay) {
         } catch (err) {
             str = !err.name 
                 ? err : err.name === 'SyntaxError' 
-                ? "Line " + err.line + ", column " + err.column + "\n" + err
+                ? "Location: " + JSON.stringify(err.location, null, 4) + "\n" + err
                 : err.name + ': ' + err.message;
             id('info').innerHTML = str;
             id('info').className = 'alert-box alert';
