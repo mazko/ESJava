@@ -1,3 +1,4 @@
+'use strict';
 import 'java.io.IOException';
 import 'org.apache.lucene.analysis.Tokenizer';
 import 'org.apache.lucene.analysis.tokenattributes.CharTermAttribute';

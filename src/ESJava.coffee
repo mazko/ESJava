@@ -85,6 +85,16 @@ class RawVisitor extends PrimitivesVisitor
     make_raw octal_to_unicode node.escapedValue
 
 
+class UseStrictVisitor extends RawVisitor
+  visitCompilationUnit: (node, args...) ->
+    su = super node, args...
+    (lazy) ->
+      su (statements) ->
+        literal = builders.literal 'use strict'
+        expr = builders.expressionStatement literal
+        lazy [expr, statements...]
+
+
 # class SuppressImportsVisitor extends PrimitivesVisitor
 #   visitImportDeclaration: (node) ->
 #     @constructor.IGNORE_ME
@@ -93,6 +103,6 @@ class RawVisitor extends PrimitivesVisitor
 module.exports = (src) -> 
   jast = javaparser.parse src
   #console.log "var ast = #{SuperVisitor.dump jast}"
-  jsast = new RawVisitor().visit jast
+  jsast = new UseStrictVisitor().visit jast
   #console.log SuperVisitor.dump jsast
   esgen.generate jsast, verbatim: 'x-raw'

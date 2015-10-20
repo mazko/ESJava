@@ -24984,7 +24984,7 @@ module.exports = BindingVisitor;
 @author  Oleg Mazko <o.mazko@mail.ru>
 @license New BSD License <http://creativecommons.org/licenses/BSD/>
  */
-var PrimitivesVisitor, RawVisitor, Scope, SuperVisitor, builders, esgen, estypes, javaparser,
+var PrimitivesVisitor, RawVisitor, Scope, SuperVisitor, UseStrictVisitor, builders, esgen, estypes, javaparser,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   slice = [].slice;
@@ -25116,10 +25116,35 @@ RawVisitor = (function(superClass) {
 
 })(PrimitivesVisitor);
 
+UseStrictVisitor = (function(superClass) {
+  extend(UseStrictVisitor, superClass);
+
+  function UseStrictVisitor() {
+    return UseStrictVisitor.__super__.constructor.apply(this, arguments);
+  }
+
+  UseStrictVisitor.prototype.visitCompilationUnit = function() {
+    var args, node, su;
+    node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    su = UseStrictVisitor.__super__.visitCompilationUnit.apply(this, [node].concat(slice.call(args)));
+    return function(lazy) {
+      return su(function(statements) {
+        var expr, literal;
+        literal = builders.literal('use strict');
+        expr = builders.expressionStatement(literal);
+        return lazy([expr].concat(slice.call(statements)));
+      });
+    };
+  };
+
+  return UseStrictVisitor;
+
+})(RawVisitor);
+
 module.exports = function(src) {
   var jast, jsast;
   jast = javaparser.parse(src);
-  jsast = new RawVisitor().visit(jast);
+  jsast = new UseStrictVisitor().visit(jast);
   return esgen.generate(jsast, {
     verbatim: 'x-raw'
   });
@@ -25314,7 +25339,11 @@ GenericVisitor = (function(superClass) {
     node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
     imports = this.visit.apply(this, [node.imports].concat(slice.call(args)));
     body = this.visit.apply(this, [node.types].concat(slice.call(args)));
-    return builders.program(slice.call(imports).concat(slice.call(body)));
+    return function(lazy) {
+      var statements;
+      statements = lazy(slice.call(imports).concat(slice.call(body)))[0];
+      return builders.program(statements);
+    };
   };
 
   GenericVisitor.prototype.visitImportDeclaration = function() {

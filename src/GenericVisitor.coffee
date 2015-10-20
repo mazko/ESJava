@@ -88,7 +88,9 @@ class GenericVisitor extends MicroVisitor
   visitCompilationUnit: (node, args...) ->
     imports = @visit node.imports, args...
     body    = @visit node.types, args...
-    builders.program [imports..., body...]
+    (lazy) ->
+      [statements] = lazy [imports..., body...]
+      builders.program statements
 
   visitImportDeclaration: (node, args...) ->
     qualified = @visit node.name, args...
