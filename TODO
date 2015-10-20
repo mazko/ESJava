@@ -1,14 +1,16 @@
 unit testing + rewrite binding impl
 enhanced for loop
+try-with-resources
 multiple interfaces inheritance (mixins?)
 inner classes
 enums
 generics
 varargs
+Threads(web workers)?
 java class [methods, fields?] names may conflict ws js keywords
 parser: add line, pos for ASSERT details
 constructor super before this ?
-
+---------------------------------------------------------------
 Current binding not include super as well as:
   class A {
     String[] i = {'hello'};
