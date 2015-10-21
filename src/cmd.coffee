@@ -8,7 +8,7 @@ ESJava = require './ESJava'
 
 
 echo = (msg) ->
-  process.stdout.write(msg + '\n');
+  process.stdout.write msg + '\n'
 
 
 if process.argv.length > 2

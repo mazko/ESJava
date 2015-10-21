@@ -1,6 +1,6 @@
 {
   "name": "esjava",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "EXPERIMENTAL Java => ES6 Transpiler",
   "dependencies": {
     "ast-types": "~0.8.13",
