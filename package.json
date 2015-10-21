@@ -1,0 +1,33 @@
+{
+  "name": "esjava",
+  "version": "0.0.1",
+  "description": "EXPERIMENTAL Java => ES6 Transpiler",
+  "dependencies": {
+    "ast-types": "~0.8.13",
+    "escodegen": "~1.7.0"
+  },
+  "devDependencies": {
+    "coffee-script": "latest"
+  },
+  "scripts": {
+    "prepublish": "coffee -o bin/ -c src/ && sed -i '1i#!/usr/bin/env node' bin/cmd.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mazko/ESJava.git"
+  },
+  "keywords": [
+    "java",
+    "transpiler",
+    "es6"
+  ],
+  "author": "Oleg Mazko",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mazko/ESJava/issues"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "esjava": "bin/cmd.js"
+  }
+}
