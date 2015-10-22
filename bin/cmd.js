@@ -7,21 +7,25 @@
  */
 
 (function() {
-  var ESJava, file, fs, i, len, ref, src;
+  var ESJava, echo, file, fs, i, len, ref, src;
 
   fs = require('fs');
 
   ESJava = require('./ESJava');
+
+  echo = function(msg) {
+    return process.stdout.write(msg + '\n');
+  };
 
   if (process.argv.length > 2) {
     ref = process.argv.slice(2);
     for (i = 0, len = ref.length; i < len; i++) {
       file = ref[i];
       src = fs.readFileSync(file, 'utf8');
-      console.log(ESJava(src));
+      echo(ESJava(src));
     }
   } else {
-    console.log("Usage: esjava file...");
+    echo("Usage: esjava file...");
   }
 
 }).call(this);
