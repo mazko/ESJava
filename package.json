@@ -1,10 +1,10 @@
 {
   "name": "esjava",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "EXPERIMENTAL Java => ES6 Transpiler",
   "dependencies": {
-    "ast-types": "~0.8.13",
-    "escodegen": "~1.7.0"
+    "ast-types": "~0.8.14",
+    "escodegen": "~1.7.1"
   },
   "devDependencies": {
     "coffee-script": "latest"
