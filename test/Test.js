@@ -1,12 +1,8 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _get = function get(_x5, _x6, _x7) { var _again = true; _function: while (_again) { var object = _x5, property = _x6, receiver = _x7; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x5 = parent; _x6 = property; _x7 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 require('java.io.IOException');
 
@@ -23,6 +19,12 @@ require('org.apache.lucene.analysis.tokenattributes.TypeAttribute');
 require('org.apache.lucene.util.AttributeFactory');
 
 require('java.io.Reader');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var StandardTokenizer = (function (_Tokenizer) {
     _inherits(StandardTokenizer, _Tokenizer);
@@ -113,8 +115,10 @@ var StandardTokenizer = (function (_Tokenizer) {
     function StandardTokenizer() {
         _classCallCheck(this, StandardTokenizer);
 
-        _get(Object.getPrototypeOf(StandardTokenizer.prototype), 'constructor', this).call(this);
-        this.scanner = null;
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StandardTokenizer).call(this));
+
+        _this.scanner = null;
+        return _this;
     }
 
     return StandardTokenizer;
@@ -153,7 +157,9 @@ var ClassicTokenizerImpl = (function () {
             while (i < l) {
                 var count = packed.charCodeAt(i++);
                 var value = packed.charCodeAt(i++);
-                do result[j++] = value; while (--count > 0);
+                do {
+                    result[j++] = value;
+                } while (--count > 0);
             }
             return j;
         }
@@ -195,7 +201,9 @@ var ClassicTokenizerImpl = (function () {
                 var count = packed.charCodeAt(i++);
                 var value = packed.charCodeAt(i++);
                 value--;
-                do result[j++] = value; while (--count > 0);
+                do {
+                    result[j++] = value;
+                } while (--count > 0);
             }
             return j;
         }
@@ -216,7 +224,9 @@ var ClassicTokenizerImpl = (function () {
             while (i < l) {
                 var count = packed.charCodeAt(i++);
                 var value = packed.charCodeAt(i++);
-                do result[j++] = value; while (--count > 0);
+                do {
+                    result[j++] = value;
+                } while (--count > 0);
             }
             return j;
         }
@@ -644,7 +654,9 @@ var ClassicTokenizerImpl = (function () {
             while (i < 1170) {
                 var count = packed.charCodeAt(i++);
                 var value = packed.charCodeAt(i++);
-                do map[j++] = value; while (--count > 0);
+                do {
+                    map[j++] = value;
+                } while (--count > 0);
             }
             return map;
         }
@@ -867,7 +879,7 @@ var Test = (function () {
                 var _ZZ_CMAP_PACKED7 = 0;
                 _ZZ_CMAP_PACKED7 = 42;
             }
-            for (var _x3 = "hello"; _x3;) {
+            for (var _x3 = "hello"; x;) {
                 _x3.charCodeAt();
             }
             Test.ZZ_CMAP_PACKED = 42;
@@ -1010,7 +1022,7 @@ var TestInterfaceClass = (function (_TestInterface) {
     function TestInterfaceClass() {
         _classCallCheck(this, TestInterfaceClass);
 
-        _get(Object.getPrototypeOf(TestInterfaceClass.prototype), 'constructor', this).apply(this, arguments);
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TestInterfaceClass).apply(this, arguments));
     }
 
     return TestInterfaceClass;
@@ -1022,7 +1034,7 @@ var TestExtendsClass = (function (_TestInterface2) {
     function TestExtendsClass() {
         _classCallCheck(this, TestExtendsClass);
 
-        _get(Object.getPrototypeOf(TestExtendsClass.prototype), 'constructor', this).apply(this, arguments);
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(TestExtendsClass).apply(this, arguments));
     }
 
     return TestExtendsClass;
@@ -1034,35 +1046,37 @@ var NumberExtendsClass = (function (_TestInterface3) {
     function NumberExtendsClass() {
         _classCallCheck(this, NumberExtendsClass);
 
-        _get(Object.getPrototypeOf(NumberExtendsClass.prototype), 'constructor', this).call(this);
-        this.x = 42;
-        this.y = 11;
-        this.z = 42;
-        this.k = 0xa5;
-        this.d1 = 0.0;
-        this.d2 = 34324.34;
-        this.d3 = 1.2e34;
-        this.f1 = 2.34E+22;
-        this.f2 = 1.0;
-        this.f3 = 0.0;
-        this.d11 = -0.0;
-        this.d22 = -34324.34;
-        this.d33 = -1.2e34;
-        this.f11 = -2.34E+22;
-        this.f22 = -1.0;
-        this.f33 = -0.0;
-        this.x1 = -42;
-        this.y1 = -11;
-        this.z1 = -42;
-        this.k1 = -0xa5;
-        this.x2 = +42;
-        this.y2 = +11;
-        this.z2 = +42;
-        this.k2 = +0xa5;
-        this.t1 = 0xDFFF;
-        this.t2 = 0xDFFF;
-        this.t3 = 0xDFFd;
-        this.t4 = 0xDFFD;
+        var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(NumberExtendsClass).call(this));
+
+        _this4.x = 42;
+        _this4.y = 11;
+        _this4.z = 42;
+        _this4.k = 0xa5;
+        _this4.d1 = 0.0;
+        _this4.d2 = 34324.34;
+        _this4.d3 = 1.2e34;
+        _this4.f1 = 2.34E+22;
+        _this4.f2 = 1.0;
+        _this4.f3 = 0.0;
+        _this4.d11 = -0.0;
+        _this4.d22 = -34324.34;
+        _this4.d33 = -1.2e34;
+        _this4.f11 = -2.34E+22;
+        _this4.f22 = -1.0;
+        _this4.f33 = -0.0;
+        _this4.x1 = -42;
+        _this4.y1 = -11;
+        _this4.z1 = -42;
+        _this4.k1 = -0xa5;
+        _this4.x2 = +42;
+        _this4.y2 = +11;
+        _this4.z2 = +42;
+        _this4.k2 = +0xa5;
+        _this4.t1 = 0xDFFF;
+        _this4.t2 = 0xDFFF;
+        _this4.t3 = 0xDFFd;
+        _this4.t4 = 0xDFFD;
+        return _this4;
     }
 
     return NumberExtendsClass;
@@ -1152,7 +1166,7 @@ var Snake = (function (_Animal) {
     function Snake(name) {
         _classCallCheck(this, Snake);
 
-        _get(Object.getPrototypeOf(Snake.prototype), 'constructor', this).call(this, name);
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Snake).call(this, name));
     }
 
     _createClass(Snake, [{
@@ -1172,7 +1186,7 @@ var Horse = (function (_Animal2) {
     function Horse(name) {
         _classCallCheck(this, Horse);
 
-        _get(Object.getPrototypeOf(Horse.prototype), 'constructor', this).call(this, name);
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Horse).call(this, name));
     }
 
     _createClass(Horse, [{
