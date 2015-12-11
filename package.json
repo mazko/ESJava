@@ -10,7 +10,7 @@
     "coffee-script": "latest"
   },
   "scripts": {
-    "prepublish": "coffee -o bin/ -c src/ && sed -i '1i#!/usr/bin/env node' bin/cmd.js"
+    "prepublish": "test/test.sh && coffee -o bin/ -c src/ && sed -i '1i#!/usr/bin/env node' bin/cmd.js"
   },
   "repository": {
     "type": "git",
