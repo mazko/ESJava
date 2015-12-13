@@ -64,10 +64,9 @@ class Snake extends Animal {
         super(name);
     }
     @Override
-    void move$0() {
-        // TODO: auto resolve super binding
-        Animal.MessageBox(&quot;Slithering \u2621 ...&quot;);
-        super.move$1(3);
+    void move() {
+        MessageBox(&quot;Slithering \u2621 ...&quot;);
+        super.move(3);
     }
 }
 
@@ -76,10 +75,9 @@ class Horse extends Animal {
         super(name);
     }
     @Override
-    void move$0() {
-        // TODO: auto resolve super binding
+    void move() {
         Horse.MessageBox(&quot;Galloping \041\u0021!&quot;);
-        super.move$1(-052l);
+        super.move(-052l);
     }
 }
 
@@ -90,12 +88,11 @@ public class BabelEvaluate {
             new Horse(Animal.U_YIN_YANG + &quot;Tommy the Palomino&quot;)
         };
         for (int i = 0; i &lt; animals.length; i++) {
-            // TODO: auto resolve binding
-            animals[i].move$0();
+            animals[i].move();
         }
     }
 }
-/* BabelEvaluate.main(); */
+/* BabelEvaluate.main(42); */
       </pre>
       <div id="info" class="alert-box secondary">Ready.</div>
     </div>
