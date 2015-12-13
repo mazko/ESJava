@@ -4,7 +4,7 @@
 ###
 
 {GenericVisitor} = require './GenericVisitor'
-ClassBinding     = require './binding/ClassBinding'
+CUBinding        = require './binding/CUNaiveBinding'
 estypes          = require 'ast-types'
 
 
@@ -25,8 +25,12 @@ class BindingVisitor extends GenericVisitor
   flatten = (array_of_array) ->
     [].concat.apply [], array_of_array
 
+  visitCompilationUnit: (node, args...) ->
+    binding = new CUBinding node
+    super node, binding, args...
+
   visitTypeDeclaration: (node, binding, args...) ->
-    binding = new ClassBinding node
+    binding.checkout_type node
     su = super node, binding, args...
     (lazy) =>
       su (id, decls, su) =>

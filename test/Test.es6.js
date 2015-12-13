@@ -251,7 +251,7 @@ class ClassicTokenizerImpl {
         delete ClassicTokenizerImpl.TOKEN_TYPES;
         return ClassicTokenizerImpl.TOKEN_TYPES = StandardTokenizer.TOKEN_TYPES;
     }
-    yychar$fixed() {
+    yychar_fix() {
         return this.yychar;
     }
     getText(t) {
@@ -769,13 +769,13 @@ class Test {
         delete Test.static_long_init_test;
         Test.static_long_init_test = value;
     }
-    testyychar$fixed() {
+    testyychar1() {
         return this.testyychar;
     }
-    testyycharover$0() {
+    testyycharover1$0() {
         return this.testyycharover;
     }
-    testyycharover$1(x) {
+    testyycharover1$1(x) {
         return this.testyycharover;
     }
     test_abstract() {
@@ -917,5 +917,95 @@ class BabelEvaluate {
         let i1, i2;
         for (i1 = 42, i2 = codePointOffset;;) {
         }
+    }
+}
+class Horse1 extends I.AM.NOT.IN.COMPILATION_UNIT.Animal {
+}
+class I_AM_IN_COMPILATION_UNIT_Animal {
+    hello() {
+        this.test++;
+        this.horse_p = null;
+        this.hello_p();
+        I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+    }
+    static hello_s() {
+        this.test++;
+        this.horse_p = null;
+    }
+    hello_p() {
+        this.test++;
+        this.horse_p = null;
+    }
+    constructor() {
+        this.test = 0;
+        this.horse_p = null;
+    }
+}
+class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
+    hello1() {
+        this.hello();
+        Horse2.hello_s();
+        this.test++;
+        horse_p = null;
+        Horse2.test3_s++;
+        Horse2.test4_p++;
+        this.test5++;
+        hello_p();
+        this.hello_p1();
+        Horse2.hello_s2();
+    }
+    hello_p1() {
+    }
+    static hello_s2() {
+    }
+    static get test3_s() {
+        delete Horse2.test3_s;
+        return Horse2.test3_s = 'a';
+    }
+    static set test3_s(value) {
+        delete Horse2.test3_s;
+        Horse2.test3_s = value;
+    }
+    static get test4_p() {
+        delete Horse2.test4_p;
+        return Horse2.test4_p = 0;
+    }
+    static set test4_p(value) {
+        delete Horse2.test4_p;
+        Horse2.test4_p = value;
+    }
+    constructor() {
+        super();
+        this.test5 = 0;
+    }
+}
+class Horse3 extends Horse2 {
+    hello1() {
+        this.hello();
+        this.hello1();
+        this.test++;
+        Horse3.test3_s++;
+        test4_p++;
+        this.test5++;
+        this.horse_p = null;
+        Horse3.hello_s();
+        hello_p();
+        hello_p1();
+        Horse3.hello_s2();
+    }
+    hello_self() {
+        this.hello();
+        this.hello1();
+        this.test++;
+        I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
+        I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
+        this.test5++;
+        this.horse_p = null;
+        I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+        this.hello_p();
+    }
+    constructor() {
+        super();
+        this.horse_p = null;
     }
 }

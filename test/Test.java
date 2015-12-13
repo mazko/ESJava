@@ -445,7 +445,7 @@ public static final int ACRONYM_DEP       = StandardTokenizer.ACRONYM_DEP;
 
 public static final String [] TOKEN_TYPES = StandardTokenizer.TOKEN_TYPES;
 
-public final int yychar()
+public final int yychar_fix()
 {
     return yychar;
 }
@@ -1054,19 +1054,19 @@ class Test {
 
   private int testyychar;
 
-public final int testyychar()
+public final int testyychar1()
 {
     return testyychar;
 }
 
 private int testyycharover;
 
-public final int testyycharover()
+public final int testyycharover1()
 {
     return testyycharover;
 }
 
-public final int testyycharover(int x)
+public final int testyycharover1(int x)
 {
     return testyycharover;
 }
@@ -1165,3 +1165,79 @@ public class BabelEvaluate {
     }
 }
 /* BabelEvaluate.main(); */
+
+class Horse1 extends I.AM.NOT.IN.COMPILATION_UNIT.Animal {
+}
+
+class I_AM_IN_COMPILATION_UNIT_Animal {
+  int test;
+
+  void hello() {
+    test++;
+    horse_p = null;
+    hello_p();
+    hello_s();
+  }
+  static void hello_s() {
+    test++;
+    horse_p = null;
+  }
+
+  private void hello_p() {
+    test++;
+    horse_p = null;
+  }
+
+  private Horse1 horse_p;
+}
+
+class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
+  public void hello1() {
+    hello();
+    hello_s();
+    test++;
+    horse_p = null;
+    test3_s++;
+    test4_p++;
+    test5++;
+    hello_p();
+    hello_p1();
+    hello_s2();
+  }
+
+  private void hello_p1() {}
+  static void hello_s2() {}
+
+  int test5;
+  static protected char test3_s = 'a';
+  static private int test4_p;
+}
+
+class Horse3 extends Horse2 {
+  private Horse1 horse_p;
+  void hello1() {
+    hello();
+    hello1();
+    test++;
+    test3_s++;
+    test4_p++;
+    test5++;
+    horse_p = null;
+    hello_s();
+    hello_p();
+    hello_p1();
+    hello_s2();
+  }
+
+  void hello_self() {
+    this.hello();
+    this.hello1();
+    this.test++;
+    I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
+    I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
+    this.test5++;
+    this.horse_p = null;
+    I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+    this.hello_p();
+  }
+}

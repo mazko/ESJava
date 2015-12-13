@@ -22,6 +22,12 @@ class Dict
     @each = (fn) ->
       fn key, value for own key, value of _locals
 
+    @values = ->
+      value for own key, value of _locals
+
+    @keys = ->
+      key for own key, value of _locals
+
     for own key, value of locals
       @.set_value key, value
 

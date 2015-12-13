@@ -14,13 +14,20 @@ builders = estypes.builders
 class VarScope
 
   class VarModel
-    constructor: (@type, @static) ->
+    constructor: (@type, @static=no, @private=no, @super=no) ->
 
   constructor: (src=null, {_vars}={_vars:new Dict}) ->
     @contains = _vars.contains
     @get_type = (name, def=null) -> _vars.get_value(name)?.type or def
     @is_static = (name) -> !!_vars.get_value(name)?.static
     @clone = -> new @constructor null, _vars:_vars.clone()
+    @clone_super = ->
+      vars = new Dict
+      _vars.each (k, v) ->
+        if not v.private
+          model = new VarModel v.type, v.static, no, yes
+          vars.set_value k, model 
+      new @constructor null, _vars:vars
     _unique_var_validator = []
     @collect_from = (src) ->
       safe_vars_set = (nm, args...) ->
@@ -32,7 +39,7 @@ class VarScope
         visitSingleVariableDeclaration: (node, args...) ->
           decl = @visit node.name, args...
           type = @visit node.type, args...
-          model = new VarModel type, no
+          model = new VarModel type
           safe_vars_set decl.name, model
         visitVariableDeclarationStatement: (node, args...) ->
           decls = @visit node.fragments, args...
@@ -40,8 +47,10 @@ class VarScope
           has_static = @constructor.has_modifier node, 'static'
           model = new VarModel type, has_static
           safe_vars_set decl.id.name, model for decl in decls
+          model
         visitFieldDeclaration: (node, args...) ->
-          @visitVariableDeclarationStatement node, args...
+          model = @visitVariableDeclarationStatement node, args...
+          model.private = @constructor.has_modifier node, 'private'
         visitCatchClause: (node, args...) ->
           @visit node.exception, args... 
         visitVariableDeclarationFragment: (node, args...) ->
@@ -106,11 +115,17 @@ class FieldScope extends VarScope
 class MemberScope
 
   class MethodModel
-    constructor: (@type, @overload, @static) ->
+    constructor: (@type, @overload, @static=no, @private=no, @super=no) ->
 
-  constructor: (ndcls) ->
-    _fields  = new FieldScope
-    _methods = new Dict
+  constructor: (cls_node, {_fields,_methods}={_fields:new FieldScope, _methods:new Dict}) ->
+
+    @clone_super = (cls_node) ->
+      methods = new Dict
+      _methods.each (k, v) ->
+        model = for m in v when not m.private
+          new MethodModel m.type, m.overload, m.static, no, yes
+        methods.set_value k, model if model.length
+      new @constructor cls_node, _fields:_fields.clone_super(), _methods:methods
 
     class MembersCollector extends MicroVisitor
       visitFieldDeclaration: (node, args...) ->
@@ -120,17 +135,18 @@ class MemberScope
         retype = @visit node.returnType2, args...
         models = _methods.get_value id.name, []
         overload = node.parameters.length
-        for model in models when overload is model.overload
+        for model in models when overload is model.overload and not model.super
           throw 'NotImpl: Overload by argumens type ' + id.name
         has_static = @constructor.has_modifier node, 'static'
-        models.push new MethodModel retype, overload, has_static
+        has_private = @constructor.has_modifier node, 'private'
+        models.push new MethodModel retype, overload, has_static, has_private
         _methods.set_value id.name, models
       visitTypeDeclaration: (node, args...) ->
-        throw 'NotImpl: Nested | Inner classes ?' if node isnt ndcls 
+        throw 'NotImpl: Nested | Inner classes ?' if node isnt cls_node 
         @visit node.bodyDeclarations, args...
         @visit node.name, args...
 
-    @scope_id = new MembersCollector().visit ndcls
+    @scope_id = new MembersCollector().visit cls_node
 
     @fields = ['get_type', 'get_raw_inits', 'contains', 'is_static'].reduce (left, right) ->
         GenericVisitor.set_prop obj:left, prop:right, value:_fields[right]
@@ -151,19 +167,20 @@ class MemberScope
         no
 
       overload: (name, params) ->
-        if _methods.get_value(name)?.length > 1
+        methods = _methods.get_value name
+        if methods?.length > 1 and (v for v in methods when not v.super).length > 1
           name + '$' + params.length
         else
           if _fields.contains name
-            name + '$fixed'
+            throw "NotImpl: Same Field & Method name < #{name} > agnostic for JS Classes :("
           else
             name
 
 
 class ScopeVisitor extends GenericVisitor
 
-  visitTypeDeclaration: (node, args...) ->
-    members = new MemberScope node
+  visitTypeDeclaration: (node, members, args...) ->
+    members or= new MemberScope node
     su = super node, members, args...
     (lazy) ->
       su (id, decls, su, inits) ->

@@ -1,4 +1,5 @@
 unit testing + rewrite binding impl
+imports
 enhanced for loop
 try-with-resources
 multiple interfaces inheritance (mixins?)
@@ -11,7 +12,16 @@ java class [methods, fields?] names may conflict ws js keywords
 parser: add line, pos for ASSERT details
 constructor super before this ?
 ---------------------------------------------------------------
-Current binding not include super as well as:
+Current binding is naive top -> bottom:
+
+  # CompilationUnit scope
+  public class t {}
+  # naive not impl but javac compatible
+  class A extends B {}
+  # ok
+  class B extends t {}
+
+  # Class scope
   class A {
     String[] i = {'hello'};
     i[0].charAt(); // field access -> charCodeAt

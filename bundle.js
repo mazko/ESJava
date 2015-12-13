@@ -18006,14 +18006,14 @@ module.exports = ASTVisitor;
 @author  Oleg Mazko <o.mazko@mail.ru>
 @license New BSD License <http://creativecommons.org/licenses/BSD/>
  */
-var BindingVisitor, ClassBinding, GenericVisitor, estypes,
+var BindingVisitor, CUBinding, GenericVisitor, estypes,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   slice = [].slice;
 
 GenericVisitor = require('./GenericVisitor').GenericVisitor;
 
-ClassBinding = require('./binding/ClassBinding');
+CUBinding = require('./binding/CUNaiveBinding');
 
 estypes = require('ast-types');
 
@@ -18056,10 +18056,17 @@ BindingVisitor = (function(superClass) {
     return [].concat.apply([], array_of_array);
   };
 
+  BindingVisitor.prototype.visitCompilationUnit = function() {
+    var args, binding, node;
+    node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    binding = new CUBinding(node);
+    return BindingVisitor.__super__.visitCompilationUnit.apply(this, [node, binding].concat(slice.call(args)));
+  };
+
   BindingVisitor.prototype.visitTypeDeclaration = function() {
     var args, binding, node, su;
     node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
-    binding = new ClassBinding(node);
+    binding.checkout_type(node);
     su = BindingVisitor.__super__.visitTypeDeclaration.apply(this, [node, binding].concat(slice.call(args)));
     return (function(_this) {
       return function(lazy) {
@@ -18151,7 +18158,7 @@ BindingVisitor = (function(superClass) {
 module.exports = BindingVisitor;
 
 
-},{"./GenericVisitor":21,"./binding/ClassBinding":26,"ast-types":17}],20:[function(require,module,exports){
+},{"./GenericVisitor":21,"./binding/CUNaiveBinding":26,"ast-types":17}],20:[function(require,module,exports){
 
 /*
 @author  Oleg Mazko <o.mazko@mail.ru>
@@ -18324,7 +18331,7 @@ module.exports = function(src) {
 };
 
 
-},{"../lib/javaparser7":1,"./OverloadVisitor":23,"./binding/BindingScope":25,"ast-types":17,"escodegen":30}],21:[function(require,module,exports){
+},{"../lib/javaparser7":1,"./OverloadVisitor":23,"./binding/BindingScope":25,"ast-types":17,"escodegen":31}],21:[function(require,module,exports){
 
 /*
 @author  Oleg Mazko <o.mazko@mail.ru>
@@ -19367,6 +19374,104 @@ module.exports = BindingScope;
 @author  Oleg Mazko <o.mazko@mail.ru>
 @license New BSD License <http://creativecommons.org/licenses/BSD/>
  */
+var CUBindingTypesVisitor, CUNaiveBinding, ClassBinding, Dict, MicroVisitor,
+  extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+  hasProp = {}.hasOwnProperty,
+  slice = [].slice;
+
+MicroVisitor = require('../GenericVisitor').MicroVisitor;
+
+ClassBinding = require('./ClassBinding');
+
+Dict = require('../collections/Dict');
+
+CUBindingTypesVisitor = (function(superClass) {
+  extend(CUBindingTypesVisitor, superClass);
+
+  function CUBindingTypesVisitor() {
+    return CUBindingTypesVisitor.__super__.constructor.apply(this, arguments);
+  }
+
+  CUBindingTypesVisitor.prototype.visitCompilationUnit = function() {
+    var args, bind, dict, node;
+    node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    dict = new Dict;
+    this.visit.apply(this, [node.types, dict].concat(slice.call(args)));
+    bind = new Dict;
+    dict.each(function(k, v) {
+      if ((v != null ? v.name : void 0) && dict.contains(v.name)) {
+        return bind.set_value(k, v.name);
+      }
+    });
+    return bind;
+  };
+
+  CUBindingTypesVisitor.prototype.visitTypeDeclaration = function() {
+    var args, dict, id, interfaces, node, su;
+    node = arguments[0], dict = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+    id = this.visit.apply(this, [node.name].concat(slice.call(args)));
+    su = this.visit.apply(this, [node.superclassType].concat(slice.call(args)));
+    interfaces = this.visit.apply(this, [node.superInterfaceTypes].concat(slice.call(args)));
+    if (su) {
+      interfaces = [su].concat(slice.call(interfaces));
+    }
+    su = (function() {
+      switch (interfaces.length) {
+        case 0:
+          return null;
+        case 1:
+          return interfaces[0];
+        default:
+          throw 'NotImpl: Multiple Inheritance';
+      }
+    })();
+    return dict.set_value(id.name, su);
+  };
+
+  return CUBindingTypesVisitor;
+
+})(MicroVisitor);
+
+CUNaiveBinding = (function() {
+  function CUNaiveBinding(cu_node) {
+    var bindings, types, visitor;
+    if (cu_node.node !== 'CompilationUnit') {
+      throw 'ASSERT: CompilationUnit node expected';
+    }
+    visitor = new CUBindingTypesVisitor;
+    types = visitor.visit(cu_node);
+    bindings = new Dict;
+    this.resolve_id = function() {
+      return null;
+    };
+    this.bind = function() {};
+    this.checkout_type = function(cls_node) {
+      var binding, key, nm, ref, results, su;
+      nm = (ref = cls_node.name) != null ? ref.identifier : void 0;
+      su = types.get_value(nm);
+      binding = su ? (binding = bindings.get_value(su), binding.clone_super(cls_node)) : new ClassBinding(cls_node);
+      bindings.set_value(nm, binding);
+      results = [];
+      for (key in binding) {
+        results.push(this[key] = binding[key]);
+      }
+      return results;
+    };
+  }
+
+  return CUNaiveBinding;
+
+})();
+
+module.exports = CUNaiveBinding;
+
+
+},{"../GenericVisitor":21,"../collections/Dict":29,"./ClassBinding":27}],27:[function(require,module,exports){
+
+/*
+@author  Oleg Mazko <o.mazko@mail.ru>
+@license New BSD License <http://creativecommons.org/licenses/BSD/>
+ */
 var BindingResolverVisitor, BindingScope, ClassBinding, Map, ScopeVisitor, estypes,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
@@ -19392,24 +19497,23 @@ BindingResolverVisitor = (function(superClass) {
   }
 
   BindingResolverVisitor.prototype.visitTypeDeclaration = function() {
-    var args, class_id, node, overload, raw_inits, ref, su;
-    node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-    su = BindingResolverVisitor.__super__.visitTypeDeclaration.apply(this, [node].concat(slice.call(args)));
-    ref = [], raw_inits = ref[0], overload = ref[1], class_id = ref[2];
+    var args, members, node, r_members, su;
+    node = arguments[0], members = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+    su = BindingResolverVisitor.__super__.visitTypeDeclaration.apply(this, [node, members].concat(slice.call(args)));
+    r_members = null;
     su((function(_this) {
       return function(id, decls, su, inits, members) {
-        var i, init, len;
-        raw_inits = members.fields.get_raw_inits();
-        overload = members.methods.overload;
-        class_id = members.scope_id;
-        for (i = 0, len = raw_inits.length; i < len; i++) {
-          init = raw_inits[i];
+        var i, init, len, ref;
+        r_members = members;
+        ref = members.fields.get_raw_inits();
+        for (i = 0, len = ref.length; i < len; i++) {
+          init = ref[i];
           _this.visit.apply(_this, [init, members].concat(slice.call(args)));
         }
         return [id, decls, su, []];
       };
     })(this));
-    return [raw_inits, overload, class_id];
+    return r_members;
   };
 
   BindingResolverVisitor.prototype.visitQualifiedName = function() {
@@ -19575,23 +19679,36 @@ BindingResolverVisitor = (function(superClass) {
 })(ScopeVisitor);
 
 ClassBinding = (function() {
-  function ClassBinding(clsnd) {
-    var _bindMap, _joinMap, _visitor, ref;
-    if (clsnd.node !== 'TypeDeclaration') {
-      throw 'TypeDeclaration node expected';
+  function ClassBinding(cls_node, arg) {
+    var _bindMap, _joinMap, _members, _visitor;
+    _members = (arg != null ? arg : {
+      _members: null
+    })._members;
+    this.clone_super = function(cls_node) {
+      var members;
+      members = _members.clone_super(cls_node);
+      return new this.constructor(cls_node, {
+        _members: members
+      });
+    };
+    if (cls_node.node !== 'TypeDeclaration') {
+      throw 'ASSERT: TypeDeclaration node expected';
     }
     _joinMap = new Map;
     _visitor = new BindingResolverVisitor(_joinMap);
-    ref = _visitor.visit(clsnd), this.ctor_raw_field_inits = ref[0], this.overload = ref[1], this.class_id = ref[2];
+    _members = _visitor.visit(cls_node, _members);
+    this.ctor_raw_field_inits = _members.fields.get_raw_inits();
+    this.overload = _members.methods.overload;
+    this.class_id = _members.scope_id;
     _bindMap = new Map;
     this.resolve_id = function(idnd) {
       var foreign;
       foreign = _bindMap.get(idnd);
       return _joinMap.get(foreign);
     };
-    this.bind = function(arg) {
+    this.bind = function(arg1) {
       var curr, foreign, id;
-      id = arg.id, foreign = arg.foreign;
+      id = arg1.id, foreign = arg1.foreign;
       curr = _bindMap.get(id);
       if (curr) {
         throw "ASSERT: es one to one expected " + (dump(id)) + ", " + (dump(curr)) + " => " + (dump(foreign));
@@ -19614,7 +19731,7 @@ ClassBinding = (function() {
 module.exports = ClassBinding;
 
 
-},{"../collections/Map":29,"./BindingScope":25,"./ScopeVisitor":27,"ast-types":17}],27:[function(require,module,exports){
+},{"../collections/Map":30,"./BindingScope":25,"./ScopeVisitor":28,"ast-types":17}],28:[function(require,module,exports){
 
 /*
 @author  Oleg Mazko <o.mazko@mail.ru>
@@ -19638,9 +19755,11 @@ VarScope = (function() {
   var VarModel;
 
   VarModel = (function() {
-    function VarModel(type1, _static) {
+    function VarModel(type1, _static, _private, _super) {
       this.type = type1;
-      this["static"] = _static;
+      this["static"] = _static != null ? _static : false;
+      this["private"] = _private != null ? _private : false;
+      this["super"] = _super != null ? _super : false;
     }
 
     return VarModel;
@@ -19672,6 +19791,20 @@ VarScope = (function() {
         _vars: _vars.clone()
       });
     };
+    this.clone_super = function() {
+      var vars;
+      vars = new Dict;
+      _vars.each(function(k, v) {
+        var model;
+        if (!v["private"]) {
+          model = new VarModel(v.type, v["static"], false, true);
+          return vars.set_value(k, model);
+        }
+      });
+      return new this.constructor(null, {
+        _vars: vars
+      });
+    };
     _unique_var_validator = [];
     this.collect_from = function(src) {
       var VarCollector, safe_vars_set;
@@ -19696,29 +19829,29 @@ VarScope = (function() {
           node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
           decl = this.visit.apply(this, [node.name].concat(slice.call(args)));
           type = this.visit.apply(this, [node.type].concat(slice.call(args)));
-          model = new VarModel(type, false);
+          model = new VarModel(type);
           return safe_vars_set(decl.name, model);
         };
 
         VarCollector.prototype.visitVariableDeclarationStatement = function() {
-          var args, decl, decls, has_static, i, len, model, node, results, type;
+          var args, decl, decls, has_static, i, len, model, node, type;
           node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
           decls = this.visit.apply(this, [node.fragments].concat(slice.call(args)));
           type = this.visit.apply(this, [node.type].concat(slice.call(args)));
           has_static = this.constructor.has_modifier(node, 'static');
           model = new VarModel(type, has_static);
-          results = [];
           for (i = 0, len = decls.length; i < len; i++) {
             decl = decls[i];
-            results.push(safe_vars_set(decl.id.name, model));
+            safe_vars_set(decl.id.name, model);
           }
-          return results;
+          return model;
         };
 
         VarCollector.prototype.visitFieldDeclaration = function() {
-          var args, node;
+          var args, model, node;
           node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-          return this.visitVariableDeclarationStatement.apply(this, [node].concat(slice.call(args)));
+          model = this.visitVariableDeclarationStatement.apply(this, [node].concat(slice.call(args)));
+          return model["private"] = this.constructor.has_modifier(node, 'private');
         };
 
         VarCollector.prototype.visitCatchClause = function() {
@@ -19851,20 +19984,49 @@ MemberScope = (function() {
   var MethodModel;
 
   MethodModel = (function() {
-    function MethodModel(type1, overload1, _static) {
+    function MethodModel(type1, overload1, _static, _private, _super) {
       this.type = type1;
       this.overload = overload1;
-      this["static"] = _static;
+      this["static"] = _static != null ? _static : false;
+      this["private"] = _private != null ? _private : false;
+      this["super"] = _super != null ? _super : false;
     }
 
     return MethodModel;
 
   })();
 
-  function MemberScope(ndcls) {
-    var MembersCollector, _fields, _methods;
-    _fields = new FieldScope;
-    _methods = new Dict;
+  function MemberScope(cls_node, arg) {
+    var MembersCollector, _fields, _methods, ref1;
+    ref1 = arg != null ? arg : {
+      _fields: new FieldScope,
+      _methods: new Dict
+    }, _fields = ref1._fields, _methods = ref1._methods;
+    this.clone_super = function(cls_node) {
+      var methods;
+      methods = new Dict;
+      _methods.each(function(k, v) {
+        var m, model;
+        model = (function() {
+          var i, len, results;
+          results = [];
+          for (i = 0, len = v.length; i < len; i++) {
+            m = v[i];
+            if (!m["private"]) {
+              results.push(new MethodModel(m.type, m.overload, m["static"], false, true));
+            }
+          }
+          return results;
+        })();
+        if (model.length) {
+          return methods.set_value(k, model);
+        }
+      });
+      return new this.constructor(cls_node, {
+        _fields: _fields.clone_super(),
+        _methods: methods
+      });
+    };
     MembersCollector = (function(superClass) {
       extend(MembersCollector, superClass);
 
@@ -19879,7 +20041,7 @@ MemberScope = (function() {
       };
 
       MembersCollector.prototype.visitMethodDeclaration = function() {
-        var args, has_static, i, id, len, model, models, node, overload, retype;
+        var args, has_private, has_static, i, id, len, model, models, node, overload, retype;
         node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
         id = this.visit.apply(this, [node.name].concat(slice.call(args)));
         retype = this.visit.apply(this, [node.returnType2].concat(slice.call(args)));
@@ -19887,19 +20049,20 @@ MemberScope = (function() {
         overload = node.parameters.length;
         for (i = 0, len = models.length; i < len; i++) {
           model = models[i];
-          if (overload === model.overload) {
+          if (overload === model.overload && !model["super"]) {
             throw 'NotImpl: Overload by argumens type ' + id.name;
           }
         }
         has_static = this.constructor.has_modifier(node, 'static');
-        models.push(new MethodModel(retype, overload, has_static));
+        has_private = this.constructor.has_modifier(node, 'private');
+        models.push(new MethodModel(retype, overload, has_static, has_private));
         return _methods.set_value(id.name, models);
       };
 
       MembersCollector.prototype.visitTypeDeclaration = function() {
         var args, node;
         node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-        if (node !== ndcls) {
+        if (node !== cls_node) {
           throw 'NotImpl: Nested | Inner classes ?';
         }
         this.visit.apply(this, [node.bodyDeclarations].concat(slice.call(args)));
@@ -19909,7 +20072,7 @@ MemberScope = (function() {
       return MembersCollector;
 
     })(MicroVisitor);
-    this.scope_id = new MembersCollector().visit(ndcls);
+    this.scope_id = new MembersCollector().visit(cls_node);
     this.fields = ['get_type', 'get_raw_inits', 'contains', 'is_static'].reduce(function(left, right) {
       return GenericVisitor.set_prop({
         obj: left,
@@ -19920,16 +20083,16 @@ MemberScope = (function() {
     this.methods = {
       contains: (function(_this) {
         return function() {
-          var args, ref1;
+          var args, ref2;
           args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-          return null !== (ref1 = _this.methods).get_type.apply(ref1, args);
+          return null !== (ref2 = _this.methods).get_type.apply(ref2, args);
         };
       })(this),
       get_type: function(name, params) {
-        var i, len, model, ref1;
-        ref1 = _methods.get_value(name, []);
-        for (i = 0, len = ref1.length; i < len; i++) {
-          model = ref1[i];
+        var i, len, model, ref2;
+        ref2 = _methods.get_value(name, []);
+        for (i = 0, len = ref2.length; i < len; i++) {
+          model = ref2[i];
           if (params.length === model.overload) {
             return model.type;
           }
@@ -19937,10 +20100,10 @@ MemberScope = (function() {
         return null;
       },
       is_static: function(name, params) {
-        var i, len, model, ref1;
-        ref1 = _methods.get_value(name, []);
-        for (i = 0, len = ref1.length; i < len; i++) {
-          model = ref1[i];
+        var i, len, model, ref2;
+        ref2 = _methods.get_value(name, []);
+        for (i = 0, len = ref2.length; i < len; i++) {
+          model = ref2[i];
           if (params.length === model.overload) {
             return !!model["static"];
           }
@@ -19948,12 +20111,23 @@ MemberScope = (function() {
         return false;
       },
       overload: function(name, params) {
-        var ref1;
-        if (((ref1 = _methods.get_value(name)) != null ? ref1.length : void 0) > 1) {
+        var methods, v;
+        methods = _methods.get_value(name);
+        if ((methods != null ? methods.length : void 0) > 1 && ((function() {
+          var i, len, results;
+          results = [];
+          for (i = 0, len = methods.length; i < len; i++) {
+            v = methods[i];
+            if (!v["super"]) {
+              results.push(v);
+            }
+          }
+          return results;
+        })()).length > 1) {
           return name + '$' + params.length;
         } else {
           if (_fields.contains(name)) {
-            return name + '$fixed';
+            throw "NotImpl: Same Field & Method name < " + name + " > agnostic for JS Classes :(";
           } else {
             return name;
           }
@@ -19975,8 +20149,8 @@ ScopeVisitor = (function(superClass) {
 
   ScopeVisitor.prototype.visitTypeDeclaration = function() {
     var args, members, node, su;
-    node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-    members = new MemberScope(node);
+    node = arguments[0], members = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+    members || (members = new MemberScope(node));
     su = ScopeVisitor.__super__.visitTypeDeclaration.apply(this, [node, members].concat(slice.call(args)));
     return function(lazy) {
       return su(function(id, decls, su, inits) {
@@ -20033,7 +20207,7 @@ ScopeVisitor = (function(superClass) {
 module.exports = ScopeVisitor;
 
 
-},{"../GenericVisitor":21,"../collections/Dict":28,"ast-types":17}],28:[function(require,module,exports){
+},{"../GenericVisitor":21,"../collections/Dict":29,"ast-types":17}],29:[function(require,module,exports){
 
 /*
 @author  Oleg Mazko <o.mazko@mail.ru>
@@ -20079,6 +20253,26 @@ Dict = (function() {
       }
       return results;
     };
+    this.values = function() {
+      var key, results, value;
+      results = [];
+      for (key in _locals) {
+        if (!hasProp.call(_locals, key)) continue;
+        value = _locals[key];
+        results.push(value);
+      }
+      return results;
+    };
+    this.keys = function() {
+      var key, results, value;
+      results = [];
+      for (key in _locals) {
+        if (!hasProp.call(_locals, key)) continue;
+        value = _locals[key];
+        results.push(key);
+      }
+      return results;
+    };
     for (key in locals) {
       if (!hasProp.call(locals, key)) continue;
       value = locals[key];
@@ -20093,7 +20287,7 @@ Dict = (function() {
 module.exports = Dict;
 
 
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 
 /*
 @author  Oleg Mazko <o.mazko@mail.ru>
@@ -20146,7 +20340,7 @@ Map = (function() {
 module.exports = Map;
 
 
-},{}],30:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function (global){
 /*
   Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
@@ -22728,7 +22922,7 @@ module.exports = Map;
 /* vim: set sw=4 ts=4 et tw=80 : */
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./package.json":49,"estraverse":31,"esutils":35,"source-map":36}],31:[function(require,module,exports){
+},{"./package.json":50,"estraverse":32,"esutils":36,"source-map":37}],32:[function(require,module,exports){
 /*
   Copyright (C) 2012-2013 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2012 Ariya Hidayat <ariya.hidayat@gmail.com>
@@ -23575,7 +23769,7 @@ module.exports = Map;
 }));
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -23721,7 +23915,7 @@ module.exports = Map;
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /*
   Copyright (C) 2013-2014 Yusuke Suzuki <utatane.tea@gmail.com>
   Copyright (C) 2014 Ivan Nikulin <ifaaan@gmail.com>
@@ -23858,7 +24052,7 @@ module.exports = Map;
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -24025,7 +24219,7 @@ module.exports = Map;
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./code":33}],35:[function(require,module,exports){
+},{"./code":34}],36:[function(require,module,exports){
 /*
   Copyright (C) 2013 Yusuke Suzuki <utatane.tea@gmail.com>
 
@@ -24060,7 +24254,7 @@ module.exports = Map;
 }());
 /* vim: set sw=4 ts=4 et tw=80 : */
 
-},{"./ast":32,"./code":33,"./keyword":34}],36:[function(require,module,exports){
+},{"./ast":33,"./code":34,"./keyword":35}],37:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -24070,7 +24264,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":44,"./source-map/source-map-generator":45,"./source-map/source-node":46}],37:[function(require,module,exports){
+},{"./source-map/source-map-consumer":45,"./source-map/source-map-generator":46,"./source-map/source-node":47}],38:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -24169,7 +24363,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":47,"amdefine":48}],38:[function(require,module,exports){
+},{"./util":48,"amdefine":49}],39:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -24313,7 +24507,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":39,"amdefine":48}],39:[function(require,module,exports){
+},{"./base64":40,"amdefine":49}],40:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -24357,7 +24551,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":48}],40:[function(require,module,exports){
+},{"amdefine":49}],41:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -24779,7 +24973,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":37,"./base64-vlq":38,"./binary-search":41,"./source-map-consumer":44,"./util":47,"amdefine":48}],41:[function(require,module,exports){
+},{"./array-set":38,"./base64-vlq":39,"./binary-search":42,"./source-map-consumer":45,"./util":48,"amdefine":49}],42:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -24861,7 +25055,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":48}],42:[function(require,module,exports){
+},{"amdefine":49}],43:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -25166,7 +25360,7 @@ define(function (require, exports, module) {
   exports.IndexedSourceMapConsumer = IndexedSourceMapConsumer;
 });
 
-},{"./basic-source-map-consumer":40,"./binary-search":41,"./source-map-consumer":44,"./util":47,"amdefine":48}],43:[function(require,module,exports){
+},{"./basic-source-map-consumer":41,"./binary-search":42,"./source-map-consumer":45,"./util":48,"amdefine":49}],44:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2014 Mozilla Foundation and contributors
@@ -25254,7 +25448,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":47,"amdefine":48}],44:[function(require,module,exports){
+},{"./util":48,"amdefine":49}],45:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -25478,7 +25672,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./basic-source-map-consumer":40,"./indexed-source-map-consumer":42,"./util":47,"amdefine":48}],45:[function(require,module,exports){
+},{"./basic-source-map-consumer":41,"./indexed-source-map-consumer":43,"./util":48,"amdefine":49}],46:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -25880,7 +26074,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":37,"./base64-vlq":38,"./mapping-list":43,"./util":47,"amdefine":48}],46:[function(require,module,exports){
+},{"./array-set":38,"./base64-vlq":39,"./mapping-list":44,"./util":48,"amdefine":49}],47:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -26296,7 +26490,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":45,"./util":47,"amdefine":48}],47:[function(require,module,exports){
+},{"./source-map-generator":46,"./util":48,"amdefine":49}],48:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -26617,7 +26811,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":48}],48:[function(require,module,exports){
+},{"amdefine":49}],49:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 1.0.0 Copyright (c) 2011-2015, The Dojo Foundation All Rights Reserved.
@@ -26922,7 +27116,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/../../../usr/lib/node_modules/escodegen/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":51,"path":50}],49:[function(require,module,exports){
+},{"_process":52,"path":51}],50:[function(require,module,exports){
 module.exports={
   "name": "escodegen",
   "description": "ECMAScript code generator",
@@ -27010,7 +27204,7 @@ module.exports={
   "readme": "ERROR: No README data found!"
 }
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -27238,7 +27432,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":51}],51:[function(require,module,exports){
+},{"_process":52}],52:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};

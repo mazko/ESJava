@@ -126,8 +126,8 @@ var StandardTokenizer = (function (_Tokenizer) {
 
 var ClassicTokenizerImpl = (function () {
     _createClass(ClassicTokenizerImpl, [{
-        key: 'yychar$fixed',
-        value: function yychar$fixed() {
+        key: 'yychar_fix',
+        value: function yychar_fix() {
             return this.yychar;
         }
     }, {
@@ -767,18 +767,18 @@ var Test = (function () {
             ZZ_CMAP_PACKED = 42;
         }
     }, {
-        key: 'testyychar$fixed',
-        value: function testyychar$fixed() {
+        key: 'testyychar1',
+        value: function testyychar1() {
             return this.testyychar;
         }
     }, {
-        key: 'testyycharover$0',
-        value: function testyycharover$0() {
+        key: 'testyycharover1$0',
+        value: function testyycharover1$0() {
             return this.testyycharover;
         }
     }, {
-        key: 'testyycharover$1',
-        value: function testyycharover$1(x) {
+        key: 'testyycharover1$1',
+        value: function testyycharover1$1(x) {
             return this.testyycharover;
         }
     }, {
@@ -1220,4 +1220,151 @@ var BabelEvaluate = (function () {
 
     return BabelEvaluate;
 })();
+
+var Horse1 = (function (_I$AM$NOT$IN$COMPILAT) {
+    _inherits(Horse1, _I$AM$NOT$IN$COMPILAT);
+
+    function Horse1() {
+        _classCallCheck(this, Horse1);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Horse1).apply(this, arguments));
+    }
+
+    return Horse1;
+})(I.AM.NOT.IN.COMPILATION_UNIT.Animal);
+
+var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
+    _createClass(I_AM_IN_COMPILATION_UNIT_Animal, [{
+        key: 'hello',
+        value: function hello() {
+            this.test++;
+            this.horse_p = null;
+            this.hello_p();
+            I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+        }
+    }, {
+        key: 'hello_p',
+        value: function hello_p() {
+            this.test++;
+            this.horse_p = null;
+        }
+    }], [{
+        key: 'hello_s',
+        value: function hello_s() {
+            this.test++;
+            this.horse_p = null;
+        }
+    }]);
+
+    function I_AM_IN_COMPILATION_UNIT_Animal() {
+        _classCallCheck(this, I_AM_IN_COMPILATION_UNIT_Animal);
+
+        this.test = 0;
+        this.horse_p = null;
+    }
+
+    return I_AM_IN_COMPILATION_UNIT_Animal;
+})();
+
+var Horse2 = (function (_I_AM_IN_COMPILATION_) {
+    _inherits(Horse2, _I_AM_IN_COMPILATION_);
+
+    _createClass(Horse2, [{
+        key: 'hello1',
+        value: function hello1() {
+            this.hello();
+            Horse2.hello_s();
+            this.test++;
+            horse_p = null;
+            Horse2.test3_s++;
+            Horse2.test4_p++;
+            this.test5++;
+            hello_p();
+            this.hello_p1();
+            Horse2.hello_s2();
+        }
+    }, {
+        key: 'hello_p1',
+        value: function hello_p1() {}
+    }], [{
+        key: 'hello_s2',
+        value: function hello_s2() {}
+    }, {
+        key: 'test3_s',
+        get: function get() {
+            delete Horse2.test3_s;
+            return Horse2.test3_s = 'a';
+        },
+        set: function set(value) {
+            delete Horse2.test3_s;
+            Horse2.test3_s = value;
+        }
+    }, {
+        key: 'test4_p',
+        get: function get() {
+            delete Horse2.test4_p;
+            return Horse2.test4_p = 0;
+        },
+        set: function set(value) {
+            delete Horse2.test4_p;
+            Horse2.test4_p = value;
+        }
+    }]);
+
+    function Horse2() {
+        _classCallCheck(this, Horse2);
+
+        var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(Horse2).call(this));
+
+        _this8.test5 = 0;
+        return _this8;
+    }
+
+    return Horse2;
+})(I_AM_IN_COMPILATION_UNIT_Animal);
+
+var Horse3 = (function (_Horse) {
+    _inherits(Horse3, _Horse);
+
+    _createClass(Horse3, [{
+        key: 'hello1',
+        value: function hello1() {
+            this.hello();
+            this.hello1();
+            this.test++;
+            Horse3.test3_s++;
+            test4_p++;
+            this.test5++;
+            this.horse_p = null;
+            Horse3.hello_s();
+            hello_p();
+            hello_p1();
+            Horse3.hello_s2();
+        }
+    }, {
+        key: 'hello_self',
+        value: function hello_self() {
+            this.hello();
+            this.hello1();
+            this.test++;
+            I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
+            I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
+            this.test5++;
+            this.horse_p = null;
+            I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+            this.hello_p();
+        }
+    }]);
+
+    function Horse3() {
+        _classCallCheck(this, Horse3);
+
+        var _this9 = _possibleConstructorReturn(this, Object.getPrototypeOf(Horse3).call(this));
+
+        _this9.horse_p = null;
+        return _this9;
+    }
+
+    return Horse3;
+})(Horse2);
 

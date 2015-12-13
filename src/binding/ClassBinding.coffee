@@ -17,18 +17,16 @@ class BindingResolverVisitor extends ScopeVisitor
 
   #TODO: remove double revisit logic
 
-  visitTypeDeclaration: (node, args...) ->
-    su = super node, args...
-    [raw_inits, overload, class_id] = []
+  visitTypeDeclaration: (node, members, args...) ->
+    su = super node, members, args...
+    r_members = null
     su (id, decls, su, inits, members) =>
-      raw_inits = members.fields.get_raw_inits()
-      overload = members.methods.overload
-      class_id = members.scope_id
+      r_members = members
       # TODO id is class_id
-      for init in raw_inits 
+      for init in members.fields.get_raw_inits() 
         @visit init, members, args...
       [id, decls, su, []]
-    [raw_inits, overload, class_id]
+    r_members
 
   visitQualifiedName: (node, members, locals, resolve, args...) ->
     su = super node, members, locals, no, args...
@@ -117,15 +115,23 @@ class BindingResolverVisitor extends ScopeVisitor
 
 class ClassBinding
 
-  constructor: (clsnd) ->
-    if clsnd.node isnt 'TypeDeclaration'
-      throw 'TypeDeclaration node expected'
+  constructor: (cls_node, {_members}={_members:null}) ->
+
+    @clone_super = (cls_node) ->
+      members = _members.clone_super cls_node
+      new @constructor cls_node, _members:members
+
+    if cls_node.node isnt 'TypeDeclaration'
+      throw 'ASSERT: TypeDeclaration node expected'
 
     _joinMap = new Map
 
     _visitor = new BindingResolverVisitor _joinMap
-    # TODO: @oveload_id instead ugly name, params func
-    [@ctor_raw_field_inits, @overload, @class_id] = _visitor.visit clsnd
+      
+    _members = _visitor.visit cls_node, _members
+    @ctor_raw_field_inits = _members.fields.get_raw_inits()
+    @overload = _members.methods.overload
+    @class_id = _members.scope_id
 
     _bindMap = new Map
 
