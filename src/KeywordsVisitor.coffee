@@ -13,7 +13,7 @@ class KeywordsVisitor extends SuperVisitor
   #TODO: also for class members (or methods only)
   RESERVED = ['in', 'var', 'function', 'constructor', 'delete', 'eval', 'arguments', 'let', 'with', 'yield']
 
-  rename_id = (id)-> id.name += '$' if id.name in RESERVED
+  rename_id = (id)-> id.name += '$esjava' if id.name in RESERVED
 
   visitSimpleName: (node, binding, args...) ->
     su = super node, binding, args...

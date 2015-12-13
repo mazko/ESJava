@@ -115,7 +115,7 @@ class FieldScope extends VarScope
 class MemberScope
 
   class MethodModel
-    constructor: (@type, @overload, @static=no, @private=no, @super=no) ->
+    constructor: (@type, @overload, @static=no, @private=no, @super=no, @ctor=no) ->
 
   constructor: (cls_node, {_fields,_methods}={_fields:new FieldScope, _methods:new Dict}) ->
 
@@ -123,7 +123,7 @@ class MemberScope
       methods = new Dict
       _methods.each (k, v) ->
         model = for m in v when not m.private
-          new MethodModel m.type, m.overload, m.static, no, yes
+          new MethodModel m.type, m.overload, m.static, no, yes, m.ctor
         methods.set_value k, model if model.length
       new @constructor cls_node, _fields:_fields.clone_super(), _methods:methods
 
@@ -139,7 +139,7 @@ class MemberScope
           throw 'NotImpl: Overload by argumens type ' + id.name
         has_static = @constructor.has_modifier node, 'static'
         has_private = @constructor.has_modifier node, 'private'
-        models.push new MethodModel retype, overload, has_static, has_private
+        models.push new MethodModel retype, overload, has_static, has_private, no, node.constructor
         _methods.set_value id.name, models
       visitTypeDeclaration: (node, args...) ->
         throw 'NotImpl: Nested | Inner classes ?' if node isnt cls_node 
@@ -166,15 +166,23 @@ class MemberScope
           return !!model.static if params.length is model.overload
         no
 
-      overload: (name, params) ->
+      ls_potential_overloads: ->
+        ls = []
+        _methods.each (k,v) ->
+          o = (c for c in v when not c.super and not c.private and not c.ctor)
+          ls.push name:k, static:yes, pattern:'$esjava$' if (c for c in o when c.static).length
+          ls.push name:k, static:no, pattern:'$esjava$' if (c for c in o when not c.static).length
+        ls
+
+      overload: (name, params) => 
+        if _fields.contains(name) and (_fields.is_static(name) is @methods.is_static(name, params))
+          throw "NotImpl: Same Field & Method name < #{name} > agnostic for JS Classes :("
         methods = _methods.get_value name
-        if methods?.length > 1 and (v for v in methods when not v.super).length > 1
-          name + '$' + params.length
-        else
-          if _fields.contains name
-            throw "NotImpl: Same Field & Method name < #{name} > agnostic for JS Classes :("
-          else
-            name
+        if methods?.length
+          name + '$esjava$' + params.length
+        else 
+          name
+
 
 
 class ScopeVisitor extends GenericVisitor

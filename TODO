@@ -1,15 +1,18 @@
 unit testing + rewrite binding impl
-imports
+exports/imports
 enhanced for loop
 try-with-resources
 multiple interfaces inheritance (mixins?)
-inner classes
+inner classes/anonymous + super binding
 enums
 generics
 varargs
 Threads(web workers)?
 java class [methods, fields?] names may conflict ws js keywords
 parser: add line, pos for ASSERT details
+typed method overload
+constructor overload
+reflection ?
 constructor super before this ?
 ---------------------------------------------------------------
 Current binding is naive top -> bottom:

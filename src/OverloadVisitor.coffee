@@ -4,9 +4,37 @@
 ###
 
 SuperVisitor = require './ResolveSelfVisitor'
+estypes      = require 'ast-types'
 
 
 class OverloadVisitor extends SuperVisitor
+
+  builders = estypes.builders
+
+  make_method = (id, params, body, is_static=no, kind='method') ->
+    fn = builders.functionDeclaration id, params, body
+    builders.methodDefinition kind, id, fn, is_static
+
+  visitTypeDeclaration: (node, binding, args...) ->
+    su = super node, binding, args...
+    (lazy) ->
+      su (id, decls, args..., binding) ->
+        for overload in binding.ls_potential_overloads()
+          lit = builders.literal overload.name + overload.pattern
+          rest = builders.identifier 'args'
+          prop = builders.memberExpression rest, builders.identifier 'length'
+          prop = builders.binaryExpression '+', lit, prop
+          expr = if overload.static
+            binding.class_id
+          else
+            builders.thisExpression()
+          mem = builders.memberExpression expr, prop, yes
+          call = builders.callExpression mem, [builders.spreadElement rest]
+          statement = builders.expressionStatement call
+          body = builders.blockStatement [statement]
+          meth = builders.identifier overload.name
+          decls.push make_method meth, [builders.restElement rest], body, overload.static
+        lazy id, decls, args..., binding
 
   visitMethodDeclaration: (node, binding, args...) ->
     su = super node, binding, args...

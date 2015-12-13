@@ -126,31 +126,31 @@ var StandardTokenizer = (function (_Tokenizer) {
 
 var ClassicTokenizerImpl = (function () {
     _createClass(ClassicTokenizerImpl, [{
-        key: 'yychar_fix',
-        value: function yychar_fix() {
+        key: 'yychar_fix$esjava$0',
+        value: function yychar_fix$esjava$0() {
             return this.yychar;
         }
     }, {
-        key: 'getText',
-        value: function getText(t) {
+        key: 'getText$esjava$1',
+        value: function getText$esjava$1(t) {
             t.copyBuffer(this.zzBuffer, this.zzStartRead, this.zzMarkedPos - this.zzStartRead);
         }
     }, {
-        key: 'setBufferSize',
-        value: function setBufferSize(numChars) {
+        key: 'setBufferSize$esjava$1',
+        value: function setBufferSize$esjava$1(numChars) {
             throw new UnsupportedOperationException();
         }
     }], [{
-        key: 'zzUnpackAction$0',
-        value: function zzUnpackAction$0() {
+        key: 'zzUnpackAction$esjava$0',
+        value: function zzUnpackAction$esjava$0() {
             var result = new Array(50);
             var offset = 0;
-            offset = ClassicTokenizerImpl.zzUnpackAction$3(ClassicTokenizerImpl.ZZ_ACTION_PACKED_0, offset, result);
+            offset = ClassicTokenizerImpl.zzUnpackAction$esjava$3(ClassicTokenizerImpl.ZZ_ACTION_PACKED_0, offset, result);
             return result;
         }
     }, {
-        key: 'zzUnpackAction$3',
-        value: function zzUnpackAction$3(packed, offset, result) {
+        key: 'zzUnpackAction$esjava$3',
+        value: function zzUnpackAction$esjava$3(packed, offset, result) {
             var i = 0;
             var j = offset;
             var l = packed.length;
@@ -164,16 +164,16 @@ var ClassicTokenizerImpl = (function () {
             return j;
         }
     }, {
-        key: 'zzUnpackRowMap$0',
-        value: function zzUnpackRowMap$0() {
+        key: 'zzUnpackRowMap$esjava$0',
+        value: function zzUnpackRowMap$esjava$0() {
             var result = new Array(50);
             var offset = 0;
-            offset = ClassicTokenizerImpl.zzUnpackRowMap$3(ClassicTokenizerImpl.ZZ_ROWMAP_PACKED_0, offset, result);
+            offset = ClassicTokenizerImpl.zzUnpackRowMap$esjava$3(ClassicTokenizerImpl.ZZ_ROWMAP_PACKED_0, offset, result);
             return result;
         }
     }, {
-        key: 'zzUnpackRowMap$3',
-        value: function zzUnpackRowMap$3(packed, offset, result) {
+        key: 'zzUnpackRowMap$esjava$3',
+        value: function zzUnpackRowMap$esjava$3(packed, offset, result) {
             var i = 0;
             var j = offset;
             var l = packed.length;
@@ -184,16 +184,16 @@ var ClassicTokenizerImpl = (function () {
             return j;
         }
     }, {
-        key: 'zzUnpackTrans$0',
-        value: function zzUnpackTrans$0() {
+        key: 'zzUnpackTrans$esjava$0',
+        value: function zzUnpackTrans$esjava$0() {
             var result = new Array(552);
             var offset = 0;
-            offset = ClassicTokenizerImpl.zzUnpackTrans$3(ClassicTokenizerImpl.ZZ_TRANS_PACKED_0, offset, result);
+            offset = ClassicTokenizerImpl.zzUnpackTrans$esjava$3(ClassicTokenizerImpl.ZZ_TRANS_PACKED_0, offset, result);
             return result;
         }
     }, {
-        key: 'zzUnpackTrans$3',
-        value: function zzUnpackTrans$3(packed, offset, result) {
+        key: 'zzUnpackTrans$esjava$3',
+        value: function zzUnpackTrans$esjava$3(packed, offset, result) {
             var i = 0;
             var j = offset;
             var l = packed.length;
@@ -208,16 +208,16 @@ var ClassicTokenizerImpl = (function () {
             return j;
         }
     }, {
-        key: 'zzUnpackAttribute$0',
-        value: function zzUnpackAttribute$0() {
+        key: 'zzUnpackAttribute$esjava$0',
+        value: function zzUnpackAttribute$esjava$0() {
             var result = new Array(50);
             var offset = 0;
-            offset = ClassicTokenizerImpl.zzUnpackAttribute$3(ClassicTokenizerImpl.ZZ_ATTRIBUTE_PACKED_0, offset, result);
+            offset = ClassicTokenizerImpl.zzUnpackAttribute$esjava$3(ClassicTokenizerImpl.ZZ_ATTRIBUTE_PACKED_0, offset, result);
             return result;
         }
     }, {
-        key: 'zzUnpackAttribute$3',
-        value: function zzUnpackAttribute$3(packed, offset, result) {
+        key: 'zzUnpackAttribute$esjava$3',
+        value: function zzUnpackAttribute$esjava$3(packed, offset, result) {
             var i = 0;
             var j = offset;
             var l = packed.length;
@@ -260,13 +260,13 @@ var ClassicTokenizerImpl = (function () {
         key: 'ZZ_CMAP',
         get: function get() {
             delete ClassicTokenizerImpl.ZZ_CMAP;
-            return ClassicTokenizerImpl.ZZ_CMAP = ClassicTokenizerImpl.zzUnpackCMap(ClassicTokenizerImpl.ZZ_CMAP_PACKED);
+            return ClassicTokenizerImpl.ZZ_CMAP = ClassicTokenizerImpl.zzUnpackCMap$esjava$1(ClassicTokenizerImpl.ZZ_CMAP_PACKED);
         }
     }, {
         key: 'ZZ_ACTION',
         get: function get() {
             delete ClassicTokenizerImpl.ZZ_ACTION;
-            return ClassicTokenizerImpl.ZZ_ACTION = ClassicTokenizerImpl.zzUnpackAction$0();
+            return ClassicTokenizerImpl.ZZ_ACTION = ClassicTokenizerImpl.zzUnpackAction$esjava$0();
         }
     }, {
         key: 'ZZ_ACTION_PACKED_0',
@@ -277,7 +277,7 @@ var ClassicTokenizerImpl = (function () {
         key: 'ZZ_ROWMAP',
         get: function get() {
             delete ClassicTokenizerImpl.ZZ_ROWMAP;
-            return ClassicTokenizerImpl.ZZ_ROWMAP = ClassicTokenizerImpl.zzUnpackRowMap$0();
+            return ClassicTokenizerImpl.ZZ_ROWMAP = ClassicTokenizerImpl.zzUnpackRowMap$esjava$0();
         }
     }, {
         key: 'ZZ_ROWMAP_PACKED_0',
@@ -288,7 +288,7 @@ var ClassicTokenizerImpl = (function () {
         key: 'ZZ_TRANS',
         get: function get() {
             delete ClassicTokenizerImpl.ZZ_TRANS;
-            return ClassicTokenizerImpl.ZZ_TRANS = ClassicTokenizerImpl.zzUnpackTrans$0();
+            return ClassicTokenizerImpl.ZZ_TRANS = ClassicTokenizerImpl.zzUnpackTrans$esjava$0();
         }
     }, {
         key: 'ZZ_TRANS_PACKED_0',
@@ -320,7 +320,7 @@ var ClassicTokenizerImpl = (function () {
         key: 'ZZ_ATTRIBUTE',
         get: function get() {
             delete ClassicTokenizerImpl.ZZ_ATTRIBUTE;
-            return ClassicTokenizerImpl.ZZ_ATTRIBUTE = ClassicTokenizerImpl.zzUnpackAttribute$0();
+            return ClassicTokenizerImpl.ZZ_ATTRIBUTE = ClassicTokenizerImpl.zzUnpackAttribute$esjava$0();
         }
     }, {
         key: 'ZZ_ATTRIBUTE_PACKED_0',
@@ -380,7 +380,7 @@ var ClassicTokenizerImpl = (function () {
         }
     }]);
 
-    function ClassicTokenizerImpl(in$) {
+    function ClassicTokenizerImpl(in$esjava) {
         _classCallCheck(this, ClassicTokenizerImpl);
 
         this.zzReader = null;
@@ -400,13 +400,13 @@ var ClassicTokenizerImpl = (function () {
         this.zzFinalHighSurrogate = 0;
         this.uuuuuuu = null;
         this.zzzzzzzzz = null;
-        this.zzReader = in$;
+        this.zzReader = in$esjava;
         var x = 42;
     }
 
     _createClass(ClassicTokenizerImpl, [{
-        key: 'zzRefill',
-        value: function zzRefill() {
+        key: 'zzRefill$esjava$0',
+        value: function zzRefill$esjava$0() {
             if (this.zzStartRead > 0) {
                 this.zzEndRead += this.zzFinalHighSurrogate;
                 this.zzFinalHighSurrogate = 0;
@@ -445,15 +445,15 @@ var ClassicTokenizerImpl = (function () {
             return true;
         }
     }, {
-        key: 'yyclose',
-        value: function yyclose() {
+        key: 'yyclose$esjava$0',
+        value: function yyclose$esjava$0() {
             this.zzAtEOF = true;
             this.zzEndRead = this.zzStartRead;
             if (this.zzReader !== null) this.zzReader.close();
         }
     }, {
-        key: 'yyreset',
-        value: function yyreset(reader) {
+        key: 'yyreset$esjava$1',
+        value: function yyreset$esjava$1(reader) {
             this.zzReader = reader;
             this.zzAtBOL = true;
             this.zzAtEOF = false;
@@ -466,33 +466,33 @@ var ClassicTokenizerImpl = (function () {
             if (this.zzBuffer.length > ClassicTokenizerImpl.ZZ_BUFFERSIZE) this.zzBuffer = new Array(ClassicTokenizerImpl.ZZ_BUFFERSIZE);
         }
     }, {
-        key: 'yystate',
-        value: function yystate() {
+        key: 'yystate$esjava$0',
+        value: function yystate$esjava$0() {
             return this.zzLexicalState;
         }
     }, {
-        key: 'yybegin',
-        value: function yybegin(newState) {
+        key: 'yybegin$esjava$1',
+        value: function yybegin$esjava$1(newState) {
             this.zzLexicalState = newState;
         }
     }, {
-        key: 'yytext',
-        value: function yytext() {
+        key: 'yytext$esjava$0',
+        value: function yytext$esjava$0() {
             return new String(this.zzBuffer, this.zzStartRead, this.zzMarkedPos - this.zzStartRead);
         }
     }, {
-        key: 'yycharat',
-        value: function yycharat(pos) {
+        key: 'yycharat$esjava$1',
+        value: function yycharat$esjava$1(pos) {
             return this.zzBuffer[this.zzStartRead + pos];
         }
     }, {
-        key: 'yylength',
-        value: function yylength() {
+        key: 'yylength$esjava$0',
+        value: function yylength$esjava$0() {
             return this.zzMarkedPos - this.zzStartRead;
         }
     }, {
-        key: 'zzScanError',
-        value: function zzScanError(errorCode) {
+        key: 'zzScanError$esjava$1',
+        value: function zzScanError$esjava$1(errorCode) {
             var message = undefined;
             try {
                 message = ClassicTokenizerImpl.ZZ_ERROR_MSG[errorCode];
@@ -504,14 +504,14 @@ var ClassicTokenizerImpl = (function () {
             throw new Error(message);
         }
     }, {
-        key: 'yypushback',
-        value: function yypushback(number) {
-            if (number > this.yylength()) this.zzScanError(ClassicTokenizerImpl.ZZ_PUSHBACK_2BIG);
+        key: 'yypushback$esjava$1',
+        value: function yypushback$esjava$1(number) {
+            if (number > this.yylength$esjava$0()) this.zzScanError$esjava$1(ClassicTokenizerImpl.ZZ_PUSHBACK_2BIG);
             this.zzMarkedPos -= number;
         }
     }, {
-        key: 'getNextToken',
-        value: function getNextToken() {
+        key: 'getNextToken$esjava$0',
+        value: function getNextToken$esjava$0() {
             var zzInput = undefined;
             var zzAction = undefined;
             var zzCurrentPosL = undefined;
@@ -543,7 +543,7 @@ var ClassicTokenizerImpl = (function () {
                         } else {
                             this.zzCurrentPos = zzCurrentPosL;
                             this.zzMarkedPos = zzMarkedPosL;
-                            var eof = this.zzRefill();
+                            var eof = this.zzRefill$esjava$0();
                             zzCurrentPosL = this.zzCurrentPos;
                             zzMarkedPosL = this.zzMarkedPos;
                             zzBufferL = this.zzBuffer;
@@ -634,20 +634,137 @@ var ClassicTokenizerImpl = (function () {
                             this.zzAtEOF = true;
                             return ClassicTokenizerImpl.YYEOF;
                         } else {
-                            this.zzScanError(ClassicTokenizerImpl.ZZ_NO_MATCH);
+                            this.zzScanError$esjava$1(ClassicTokenizerImpl.ZZ_NO_MATCH);
                         }
                 }
             }
         }
     }, {
-        key: 'ddd$0',
-        value: function ddd$0() {}
+        key: 'ddd$esjava$0',
+        value: function ddd$esjava$0() {}
     }, {
-        key: 'ddd$1',
-        value: function ddd$1(a) {}
+        key: 'ddd$esjava$1',
+        value: function ddd$esjava$1(a) {}
+    }, {
+        key: 'yychar_fix',
+        value: function yychar_fix() {
+            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key];
+            }
+
+            this['yychar_fix$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'getText',
+        value: function getText() {
+            for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+                args[_key2] = arguments[_key2];
+            }
+
+            this['getText$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'setBufferSize',
+        value: function setBufferSize() {
+            for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                args[_key3] = arguments[_key3];
+            }
+
+            this['setBufferSize$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yyclose',
+        value: function yyclose() {
+            for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+                args[_key4] = arguments[_key4];
+            }
+
+            this['yyclose$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yyreset',
+        value: function yyreset() {
+            for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+                args[_key5] = arguments[_key5];
+            }
+
+            this['yyreset$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yystate',
+        value: function yystate() {
+            for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+                args[_key6] = arguments[_key6];
+            }
+
+            this['yystate$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yybegin',
+        value: function yybegin() {
+            for (var _len7 = arguments.length, args = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+                args[_key7] = arguments[_key7];
+            }
+
+            this['yybegin$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yytext',
+        value: function yytext() {
+            for (var _len8 = arguments.length, args = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+                args[_key8] = arguments[_key8];
+            }
+
+            this['yytext$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yycharat',
+        value: function yycharat() {
+            for (var _len9 = arguments.length, args = Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+                args[_key9] = arguments[_key9];
+            }
+
+            this['yycharat$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yylength',
+        value: function yylength() {
+            for (var _len10 = arguments.length, args = Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+                args[_key10] = arguments[_key10];
+            }
+
+            this['yylength$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'yypushback',
+        value: function yypushback() {
+            for (var _len11 = arguments.length, args = Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+                args[_key11] = arguments[_key11];
+            }
+
+            this['yypushback$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'getNextToken',
+        value: function getNextToken() {
+            for (var _len12 = arguments.length, args = Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+                args[_key12] = arguments[_key12];
+            }
+
+            this['getNextToken$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'ddd',
+        value: function ddd() {
+            for (var _len13 = arguments.length, args = Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+                args[_key13] = arguments[_key13];
+            }
+
+            this['ddd$esjava$' + args.length].apply(this, args);
+        }
     }], [{
-        key: 'zzUnpackCMap',
-        value: function zzUnpackCMap(packed) {
+        key: 'zzUnpackCMap$esjava$1',
+        value: function zzUnpackCMap$esjava$1(packed) {
             var map = new Array(0x110000);
             var i = 0;
             var j = 0;
@@ -661,17 +778,17 @@ var ClassicTokenizerImpl = (function () {
             return map;
         }
     }, {
-        key: 'dddstatic',
-        value: function dddstatic(a) {}
+        key: 'dddstatic$esjava$1',
+        value: function dddstatic$esjava$1(a) {}
     }, {
-        key: 'overstatic$1',
-        value: function overstatic$1(a) {}
+        key: 'overstatic$esjava$1',
+        value: function overstatic$esjava$1(a) {}
     }, {
-        key: 'overstatic$0',
-        value: function overstatic$0() {}
+        key: 'overstatic$esjava$0',
+        value: function overstatic$esjava$0() {}
     }, {
-        key: 'zzUnpackAction$2',
-        value: function zzUnpackAction$2(packed1, offset) {
+        key: 'zzUnpackAction$esjava$2',
+        value: function zzUnpackAction$esjava$2(packed1, offset) {
             var i = 0;
             var j = offset;
             var l = packed1.charCodeAt(1);
@@ -680,8 +797,8 @@ var ClassicTokenizerImpl = (function () {
             l.charAt();
             this.uuuuuuu.charCodeAt(42);
             packed.x.length();
-            l = this.ddd$1(1).ff.ddd().length();
-            this.ddd$0().length.charAt(42);
+            l = this.ddd$esjava$1(1).ff.ddd().length();
+            this.ddd$esjava$0().length.charAt(42);
             l = ddd(4, 5).charAt(1);
             l = ["aaa"][0].length();
             while (i < l) {
@@ -702,9 +819,9 @@ var ClassicTokenizerImpl = (function () {
             ClassicTokenizerImpl.zzzzzzzzzstatic.charCodeAt(42);
             ClassicTokenizerImpl.zzzzzzzzzstatic.x.charAt(42);
             ClassicTokenizerImpl.zzzzzzzzzstatic.x.charAt(42);
-            ClassicTokenizerImpl.dddstatic(1).ff.dddstatic().length();
-            ClassicTokenizerImpl.dddstatic(42).length.charAt(42);
-            ClassicTokenizerImpl.dddstatic().length().charAt(42);
+            ClassicTokenizerImpl.dddstatic$esjava$1(1).ff.dddstatic().length();
+            ClassicTokenizerImpl.dddstatic$esjava$1(42).length.charAt(42);
+            ClassicTokenizerImpl.dddstatic$esjava$0().length().charAt(42);
             ClassicTokenizerImpl.uuuuuuustatic.uuuuuuustatic(42);
             ClassicTokenizerImpl.uuuuuuustatic.uuuuuuustatic(42);
             ClassicTokenizerImpl.uuuuuuustatic.ClassicTokenizerImpl.uuuuuuustatic(42);
@@ -713,9 +830,9 @@ var ClassicTokenizerImpl = (function () {
             ClassicTokenizerImpl.zzzzzzzzzstatic.dddstatic(42);
             ClassicTokenizerImpl.zzzzzzzzzstatic.x.dddstatic(42);
             ClassicTokenizerImpl.zzzzzzzzzstatic.dddstatic.uuuuuuustatic(42);
-            ClassicTokenizerImpl.dddstatic(1).ff.dddstatic().charAt();
-            ClassicTokenizerImpl.dddstatic(42).charCodeAt().ClassicTokenizerImpl(42).dddstatic();
-            ClassicTokenizerImpl.dddstatic().length().charAt(42).dddstatic();
+            ClassicTokenizerImpl.dddstatic$esjava$1(1).ff.dddstatic().charAt();
+            ClassicTokenizerImpl.dddstatic$esjava$1(42).charCodeAt().ClassicTokenizerImpl(42).dddstatic();
+            ClassicTokenizerImpl.dddstatic$esjava$0().length().charAt(42).dddstatic();
             ClassicTokenizerImpl.uuuuuuustatic.uuuuuuustatic(42);
             this.uuuuuuustatic.uuuuuuustatic(42);
             ClassicTokenizerImpl.uuuuuuustatic.x.uuuuuuustatic(42);
@@ -724,14 +841,32 @@ var ClassicTokenizerImpl = (function () {
             this.zzzzzzzzzstatic.dddstatic(42).length();
             ClassicTokenizerImpl.zzzzzzzzzstatic.x.dddstatic(42).length();
             this.zzzzzzzzzstatic.dddstatic.uuuuuuustatic(42);
-            ClassicTokenizerImpl.dddstatic(1).length.length();
-            this.dddstatic(42).length.charAt(42).dddstatic();
-            this.dddstatic().length().charAt(42).dddstatic();
-            ClassicTokenizerImpl.overstatic$0().charCodeAt(42);
-            ClassicTokenizerImpl.overstatic$1(42).length;
+            ClassicTokenizerImpl.dddstatic$esjava$1(1).length.length();
+            this.dddstatic$esjava$1(42).length.charAt(42).dddstatic();
+            this.dddstatic$esjava$0().length().charAt(42).dddstatic();
+            ClassicTokenizerImpl.overstatic$esjava$0().charCodeAt(42);
+            ClassicTokenizerImpl.overstatic$esjava$1(42).length;
             this.aaaaaa = 0;
             this.zzzzzzzzzstatic = 0;
             return j;
+        }
+    }, {
+        key: 'dddstatic',
+        value: function dddstatic() {
+            for (var _len14 = arguments.length, args = Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+                args[_key14] = arguments[_key14];
+            }
+
+            ClassicTokenizerImpl['dddstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
+        }
+    }, {
+        key: 'overstatic',
+        value: function overstatic() {
+            for (var _len15 = arguments.length, args = Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+                args[_key15] = arguments[_key15];
+            }
+
+            ClassicTokenizerImpl['overstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
         }
     }, {
         key: 'zzzzzzzzzstatic',
@@ -756,8 +891,8 @@ var ClassicTokenizerImpl = (function () {
 
 var Test = (function () {
     _createClass(Test, [{
-        key: 'test_instanceof',
-        value: function test_instanceof() {
+        key: 'test_instanceof$esjava$0',
+        value: function test_instanceof$esjava$0() {
             x instanceof ZZ_CMAP_PACKED;
             x instanceof rwggbdhdfhjukgjsdgfsagdhjdjh;
             if (Test.ZZ_CMAP_PACKED++) {}
@@ -767,51 +902,87 @@ var Test = (function () {
             ZZ_CMAP_PACKED = 42;
         }
     }, {
-        key: 'testyychar1',
-        value: function testyychar1() {
+        key: 'testyychar1$esjava$0',
+        value: function testyychar1$esjava$0() {
             return this.testyychar;
         }
     }, {
-        key: 'testyycharover1$0',
-        value: function testyycharover1$0() {
+        key: 'testyycharover1$esjava$0',
+        value: function testyycharover1$esjava$0() {
             return this.testyycharover;
         }
     }, {
-        key: 'testyycharover1$1',
-        value: function testyycharover1$1(x) {
+        key: 'testyycharover1$esjava$1',
+        value: function testyycharover1$esjava$1(x) {
             return this.testyycharover;
+        }
+    }, {
+        key: 'test_abstract$esjava$0',
+        value: function test_abstract$esjava$0() {
+            throw 'NotImpl < test_abstract$esjava$0 >';
+        }
+    }, {
+        key: 'test_instanceof',
+        value: function test_instanceof() {
+            for (var _len16 = arguments.length, args = Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+                args[_key16] = arguments[_key16];
+            }
+
+            this['test_instanceof$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'testyychar1',
+        value: function testyychar1() {
+            for (var _len17 = arguments.length, args = Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+                args[_key17] = arguments[_key17];
+            }
+
+            this['testyychar1$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'testyycharover1',
+        value: function testyycharover1() {
+            for (var _len18 = arguments.length, args = Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+                args[_key18] = arguments[_key18];
+            }
+
+            this['testyycharover1$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'test_abstract',
         value: function test_abstract() {
-            throw 'NotImpl < test_abstract >';
+            for (var _len19 = arguments.length, args = Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
+                args[_key19] = arguments[_key19];
+            }
+
+            this['test_abstract$esjava$' + args.length].apply(this, args);
         }
     }], [{
-        key: 'kewords_scope',
-        value: function kewords_scope(x, var$) {
-            var in$ = 42;
-            x += var$++;
-            in$++;
-            in$[in$++] = 42;
-            test(in$[in$++], in$, var$);
+        key: 'kewords_scope$esjava$2',
+        value: function kewords_scope$esjava$2(x, var$esjava) {
+            var in$esjava = 42;
+            x += var$esjava++;
+            in$esjava++;
+            in$esjava[in$esjava++] = 42;
+            test(in$esjava[in$esjava++], in$esjava, var$esjava);
         }
     }, {
-        key: 'test_scope',
-        value: function test_scope() {
+        key: 'test_scope$esjava$0',
+        value: function test_scope$esjava$0() {
             Test.ZZ_CMAP_PACKED = 42;
             var ZZ_CMAP_PACKED = 0;
             ZZ_CMAP_PACKED = 42;
         }
     }, {
-        key: 'test_params_scope',
-        value: function test_params_scope(ZZ_CMAP_PACKED, x) {
+        key: 'test_params_scope$esjava$2',
+        value: function test_params_scope$esjava$2(ZZ_CMAP_PACKED, x) {
             ZZ_CMAP_PACKED = 42;
             ZZ_CMAP_PACKED.charAt();
             x.charCodeAt();
         }
     }, {
-        key: 'test_while_scope',
-        value: function test_while_scope() {
+        key: 'test_while_scope$esjava$0',
+        value: function test_while_scope$esjava$0() {
             while (true) {
                 Test.ZZ_CMAP_PACKED = 42;
                 var _ZZ_CMAP_PACKED = 0;
@@ -820,24 +991,24 @@ var Test = (function () {
             Test.ZZ_CMAP_PACKED = 42;
         }
     }, {
-        key: 'test_catch_scope',
-        value: function test_catch_scope() {
+        key: 'test_catch_scope$esjava$0',
+        value: function test_catch_scope$esjava$0() {
             Test.ZZ_CMAP_PACKED = 42;
             try {
                 Test.ZZ_CMAP_PACKED = 42;
                 var _ZZ_CMAP_PACKED2 = 0;
                 _ZZ_CMAP_PACKED2 = 42;
-            } catch (var$) {
-                if (var$ instanceof String) {
-                    var _x2 = var$;
+            } catch (var$esjava) {
+                if (var$esjava instanceof String) {
+                    var _x2 = var$esjava;
                     Test.ZZ_CMAP_PACKED.charAt();
                     _x2.charCodeAt();
-                } else if (var$ instanceof Ex) {
+                } else if (var$esjava instanceof Ex) {
                     Test.ZZ_CMAP_PACKED = 42;
                     var _ZZ_CMAP_PACKED3 = 0;
                     _ZZ_CMAP_PACKED3 = 42;
-                    var$++;
-                } else throw var$;
+                    var$esjava++;
+                } else throw var$esjava;
             }
             Test.ZZ_CMAP_PACKED = 42;
             try {
@@ -864,8 +1035,8 @@ var Test = (function () {
             ZZ_CMAP_PACKED = 42;
         }
     }, {
-        key: 'test_for_scope',
-        value: function test_for_scope() {
+        key: 'test_for_scope$esjava$0',
+        value: function test_for_scope$esjava$0() {
             Test.ZZ_CMAP_PACKED = 42;
             ;
             for (; x < 1; x++) {
@@ -886,7 +1057,7 @@ var Test = (function () {
             for (var _ZZ_CMAP_PACKED8 = 1; _ZZ_CMAP_PACKED8 < 1; _ZZ_CMAP_PACKED8++) {
                 _ZZ_CMAP_PACKED8 = 42;
             }
-            for (var _x4 = YYEOF, var$ = 42; var$ > 0 && _x4 < 1; _x4++, var$++) {}
+            for (var _x4 = YYEOF, var$esjava = 42; var$esjava > 0 && _x4 < 1; _x4++, var$esjava++) {}
             Test.ZZ_CMAP_PACKED = 42;
             var ZZ_CMAP_PACKED = 0;
             ZZ_CMAP_PACKED = 42;
@@ -1007,9 +1178,18 @@ var TestInterface = (function () {
     }
 
     _createClass(TestInterface, [{
+        key: 'test$esjava$0',
+        value: function test$esjava$0() {
+            throw 'NotImpl < test$esjava$0 >';
+        }
+    }, {
         key: 'test',
         value: function test() {
-            throw 'NotImpl < test >';
+            for (var _len20 = arguments.length, args = Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
+                args[_key20] = arguments[_key20];
+            }
+
+            this['test$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1091,19 +1271,37 @@ var Animal = (function () {
     }
 
     _createClass(Animal, [{
-        key: 'move$1',
-        value: function move$1(meters) {
-            Animal.MessageBox(this.name + ' #moved ' + meters + "m.");
+        key: 'move$esjava$1',
+        value: function move$esjava$1(meters) {
+            Animal.MessageBox$esjava$1(this.name + ' #moved ' + meters + "m.");
         }
     }, {
-        key: 'move$0',
-        value: function move$0() {
-            throw 'NotImpl < move$0 >';
+        key: 'move$esjava$0',
+        value: function move$esjava$0() {
+            throw 'NotImpl < move$esjava$0 >';
+        }
+    }, {
+        key: 'move',
+        value: function move() {
+            for (var _len21 = arguments.length, args = Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
+                args[_key21] = arguments[_key21];
+            }
+
+            this['move$esjava$' + args.length].apply(this, args);
         }
     }], [{
-        key: 'MessageBox',
-        value: function MessageBox(msg) {
+        key: 'MessageBox$esjava$1',
+        value: function MessageBox$esjava$1(msg) {
             alert(msg);
+        }
+    }, {
+        key: 'MessageBox',
+        value: function MessageBox() {
+            for (var _len22 = arguments.length, args = Array(_len22), _key22 = 0; _key22 < _len22; _key22++) {
+                args[_key22] = arguments[_key22];
+            }
+
+            Animal['MessageBox$esjava$' + args.length].apply(Animal, args);
         }
     }, {
         key: 'U_YIN_YANG',
@@ -1170,10 +1368,19 @@ var Snake = (function (_Animal) {
     }
 
     _createClass(Snake, [{
-        key: 'move$0',
-        value: function move$0() {
+        key: 'move$0$esjava$0',
+        value: function move$0$esjava$0() {
             Animal.MessageBox("Slithering...");
             _get(Object.getPrototypeOf(Snake.prototype), 'move$1', this).call(this, 3);
+        }
+    }, {
+        key: 'move$0',
+        value: function move$0() {
+            for (var _len23 = arguments.length, args = Array(_len23), _key23 = 0; _key23 < _len23; _key23++) {
+                args[_key23] = arguments[_key23];
+            }
+
+            this['move$0$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1190,10 +1397,19 @@ var Horse = (function (_Animal2) {
     }
 
     _createClass(Horse, [{
+        key: 'move$0$esjava$0',
+        value: function move$0$esjava$0() {
+            Horse.MessageBox$esjava$1("Galloping...");
+            _get(Object.getPrototypeOf(Horse.prototype), 'move$1', this).call(this, -0x2a);
+        }
+    }, {
         key: 'move$0',
         value: function move$0() {
-            Horse.MessageBox("Galloping...");
-            _get(Object.getPrototypeOf(Horse.prototype), 'move$1', this).call(this, -0x2a);
+            for (var _len24 = arguments.length, args = Array(_len24), _key24 = 0; _key24 < _len24; _key24++) {
+                args[_key24] = arguments[_key24];
+            }
+
+            this['move$0$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1206,8 +1422,8 @@ var BabelEvaluate = (function () {
     }
 
     _createClass(BabelEvaluate, null, [{
-        key: 'main',
-        value: function main(args) {
+        key: 'main$esjava$1',
+        value: function main$esjava$1(args) {
             var animals = [new Snake(Animal.U_CAUTION_SIGN + 'Sammy the Python\u0001Z\n䌡'), new Horse(Animal.U_YIN_YANG + "Tommy the Palomino")];
             for (var i = 0; i < animals.length; i++) {
                 animals[i].move$0();
@@ -1215,6 +1431,15 @@ var BabelEvaluate = (function () {
             var i1 = undefined,
                 i2 = undefined;
             for (i1 = 42, i2 = codePointOffset;;) {}
+        }
+    }, {
+        key: 'main',
+        value: function main() {
+            for (var _len25 = arguments.length, args = Array(_len25), _key25 = 0; _key25 < _len25; _key25++) {
+                args[_key25] = arguments[_key25];
+            }
+
+            BabelEvaluate['main$esjava$' + args.length].apply(BabelEvaluate, args);
         }
     }]);
 
@@ -1235,24 +1460,42 @@ var Horse1 = (function (_I$AM$NOT$IN$COMPILAT) {
 
 var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
     _createClass(I_AM_IN_COMPILATION_UNIT_Animal, [{
-        key: 'hello',
-        value: function hello() {
+        key: 'hello$esjava$0',
+        value: function hello$esjava$0() {
             this.test++;
             this.horse_p = null;
-            this.hello_p();
-            I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+            this.hello_p$esjava$0();
+            I_AM_IN_COMPILATION_UNIT_Animal.hello_s$esjava$0();
         }
     }, {
-        key: 'hello_p',
-        value: function hello_p() {
+        key: 'hello_p$esjava$0',
+        value: function hello_p$esjava$0() {
             this.test++;
             this.horse_p = null;
         }
+    }, {
+        key: 'hello',
+        value: function hello() {
+            for (var _len26 = arguments.length, args = Array(_len26), _key26 = 0; _key26 < _len26; _key26++) {
+                args[_key26] = arguments[_key26];
+            }
+
+            this['hello$esjava$' + args.length].apply(this, args);
+        }
     }], [{
-        key: 'hello_s',
-        value: function hello_s() {
+        key: 'hello_s$esjava$0',
+        value: function hello_s$esjava$0() {
             this.test++;
             this.horse_p = null;
+        }
+    }, {
+        key: 'hello_s',
+        value: function hello_s() {
+            for (var _len27 = arguments.length, args = Array(_len27), _key27 = 0; _key27 < _len27; _key27++) {
+                args[_key27] = arguments[_key27];
+            }
+
+            I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length].apply(I_AM_IN_COMPILATION_UNIT_Animal, args);
         }
     }]);
 
@@ -1270,25 +1513,43 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
     _inherits(Horse2, _I_AM_IN_COMPILATION_);
 
     _createClass(Horse2, [{
-        key: 'hello1',
-        value: function hello1() {
-            this.hello();
-            Horse2.hello_s();
+        key: 'hello1$esjava$0',
+        value: function hello1$esjava$0() {
+            this.hello$esjava$0();
+            Horse2.hello_s$esjava$0();
             this.test++;
             horse_p = null;
             Horse2.test3_s++;
             Horse2.test4_p++;
-            this.test5++;
+            this.test5.charCodeAt(0);
             hello_p();
-            this.hello_p1();
-            Horse2.hello_s2();
+            this.hello_p1$esjava$0();
+            Horse2.hello_s2$esjava$0();
         }
     }, {
-        key: 'hello_p1',
-        value: function hello_p1() {}
+        key: 'hello_p1$esjava$0',
+        value: function hello_p1$esjava$0() {}
+    }, {
+        key: 'hello1',
+        value: function hello1() {
+            for (var _len28 = arguments.length, args = Array(_len28), _key28 = 0; _key28 < _len28; _key28++) {
+                args[_key28] = arguments[_key28];
+            }
+
+            this['hello1$esjava$' + args.length].apply(this, args);
+        }
     }], [{
+        key: 'hello_s2$esjava$0',
+        value: function hello_s2$esjava$0() {}
+    }, {
         key: 'hello_s2',
-        value: function hello_s2() {}
+        value: function hello_s2() {
+            for (var _len29 = arguments.length, args = Array(_len29), _key29 = 0; _key29 < _len29; _key29++) {
+                args[_key29] = arguments[_key29];
+            }
+
+            Horse2['hello_s2$esjava$' + args.length].apply(Horse2, args);
+        }
     }, {
         key: 'test3_s',
         get: function get() {
@@ -1316,7 +1577,7 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
 
         var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(Horse2).call(this));
 
-        _this8.test5 = 0;
+        _this8.test5 = null;
         return _this8;
     }
 
@@ -1327,32 +1588,50 @@ var Horse3 = (function (_Horse) {
     _inherits(Horse3, _Horse);
 
     _createClass(Horse3, [{
-        key: 'hello1',
-        value: function hello1() {
-            this.hello();
-            this.hello1();
+        key: 'hello1$esjava$0',
+        value: function hello1$esjava$0() {
+            this.hello$esjava$0();
+            this.hello1$esjava$0();
             this.test++;
             Horse3.test3_s++;
             test4_p++;
-            this.test5++;
+            this.test5.charCodeAt(0);
             this.horse_p = null;
-            Horse3.hello_s();
+            Horse3.hello_s$esjava$0();
             hello_p();
             hello_p1();
-            Horse3.hello_s2();
+            Horse3.hello_s2$esjava$0();
+        }
+    }, {
+        key: 'hello_self$esjava$0',
+        value: function hello_self$esjava$0() {
+            this.hello$esjava$0();
+            this.hello1$esjava$0();
+            this.test++;
+            I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
+            I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
+            this.test5.charCodeAt(0);
+            this.horse_p = null;
+            I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+            this.hello_p();
+        }
+    }, {
+        key: 'hello1',
+        value: function hello1() {
+            for (var _len30 = arguments.length, args = Array(_len30), _key30 = 0; _key30 < _len30; _key30++) {
+                args[_key30] = arguments[_key30];
+            }
+
+            this['hello1$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'hello_self',
         value: function hello_self() {
-            this.hello();
-            this.hello1();
-            this.test++;
-            I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
-            I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
-            this.test5++;
-            this.horse_p = null;
-            I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
-            this.hello_p();
+            for (var _len31 = arguments.length, args = Array(_len31), _key31 = 0; _key31 < _len31; _key31++) {
+                args[_key31] = arguments[_key31];
+            }
+
+            this['hello_self$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1367,4 +1646,73 @@ var Horse3 = (function (_Horse) {
 
     return Horse3;
 })(Horse2);
+
+var AnimalOverload = (function () {
+    function AnimalOverload() {
+        _classCallCheck(this, AnimalOverload);
+    }
+
+    _createClass(AnimalOverload, [{
+        key: 'move_p_has_ho_route$esjava$1',
+        value: function move_p_has_ho_route$esjava$1(meters) {}
+    }, {
+        key: 'move$esjava$1',
+        value: function move$esjava$1(meters) {
+            MessageBox(name + " moved " + meters + "m.");
+            this.move$esjava$0();
+            AnimalOverload.move_ps_has_ho_route$esjava$0();
+            this.move_p_has_ho_route$esjava$1(42);
+        }
+    }, {
+        key: 'move$esjava$0',
+        value: function move$esjava$0() {
+            MessageBox(name + " moved " + meters + "m.");
+            this.move$esjava$1(1);
+        }
+    }, {
+        key: 'move',
+        value: function move() {
+            for (var _len32 = arguments.length, args = Array(_len32), _key32 = 0; _key32 < _len32; _key32++) {
+                args[_key32] = arguments[_key32];
+            }
+
+            this['move$esjava$' + args.length].apply(this, args);
+        }
+    }], [{
+        key: 'move_ps_has_ho_route$esjava$0',
+        value: function move_ps_has_ho_route$esjava$0() {}
+    }, {
+        key: 'move$esjava$2',
+        value: function move$esjava$2(a, b) {}
+    }, {
+        key: 'move2$esjava$0',
+        value: function move2$esjava$0() {
+            MessageBox(name + " moved " + meters + "m.");
+            this.move$esjava$1(1);
+        }
+    }, {
+        key: 'move2$esjava$2',
+        value: function move2$esjava$2(a, b) {}
+    }, {
+        key: 'move',
+        value: function move() {
+            for (var _len33 = arguments.length, args = Array(_len33), _key33 = 0; _key33 < _len33; _key33++) {
+                args[_key33] = arguments[_key33];
+            }
+
+            AnimalOverload['move$esjava$' + args.length].apply(AnimalOverload, args);
+        }
+    }, {
+        key: 'move2',
+        value: function move2() {
+            for (var _len34 = arguments.length, args = Array(_len34), _key34 = 0; _key34 < _len34; _key34++) {
+                args[_key34] = arguments[_key34];
+            }
+
+            AnimalOverload['move2$esjava$' + args.length].apply(AnimalOverload, args);
+        }
+    }]);
+
+    return AnimalOverload;
+})();
 

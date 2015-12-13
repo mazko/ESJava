@@ -131,6 +131,7 @@ class ClassBinding
     _members = _visitor.visit cls_node, _members
     @ctor_raw_field_inits = _members.fields.get_raw_inits()
     @overload = _members.methods.overload
+    @ls_potential_overloads = _members.methods.ls_potential_overloads
     @class_id = _members.scope_id
 
     _bindMap = new Map

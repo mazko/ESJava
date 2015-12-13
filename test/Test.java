@@ -1199,7 +1199,7 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
     horse_p = null;
     test3_s++;
     test4_p++;
-    test5++;
+    test5.charAt(0);
     hello_p();
     hello_p1();
     hello_s2();
@@ -1208,7 +1208,7 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
   private void hello_p1() {}
   static void hello_s2() {}
 
-  int test5;
+  String test5;
   static protected char test3_s = 'a';
   static private int test4_p;
 }
@@ -1221,7 +1221,7 @@ class Horse3 extends Horse2 {
     test++;
     test3_s++;
     test4_p++;
-    test5++;
+    test5.charAt(0);
     horse_p = null;
     hello_s();
     hello_p();
@@ -1235,9 +1235,42 @@ class Horse3 extends Horse2 {
     this.test++;
     I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
     I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
-    this.test5++;
+    this.test5.charAt(0);
     this.horse_p = null;
     I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
     this.hello_p();
   }
+}
+
+class AnimalOverload {
+
+    private void move_p_has_ho_route(int meters) {
+    }
+
+    private static int move_ps_has_ho_route() {
+    }
+
+    void move(int meters) {
+        MessageBox(name + " moved " + meters + "m.");
+        move();
+        move_ps_has_ho_route();
+        move_p_has_ho_route(42);
+    }
+
+    protected void move() {
+        MessageBox(name + " moved " + meters + "m.");
+        move(1);
+    }
+
+    public static void move(int a, int b) {
+    }
+
+    protected static void move2() {
+        MessageBox(name + " moved " + meters + "m.");
+        move(1);
+    }
+
+    public static void move2(int a, int b) {
+    }
+
 }

@@ -99,22 +99,22 @@ class ClassicTokenizerImpl {
     }
     static get ZZ_CMAP() {
         delete ClassicTokenizerImpl.ZZ_CMAP;
-        return ClassicTokenizerImpl.ZZ_CMAP = ClassicTokenizerImpl.zzUnpackCMap(ClassicTokenizerImpl.ZZ_CMAP_PACKED);
+        return ClassicTokenizerImpl.ZZ_CMAP = ClassicTokenizerImpl.zzUnpackCMap$esjava$1(ClassicTokenizerImpl.ZZ_CMAP_PACKED);
     }
     static get ZZ_ACTION() {
         delete ClassicTokenizerImpl.ZZ_ACTION;
-        return ClassicTokenizerImpl.ZZ_ACTION = ClassicTokenizerImpl.zzUnpackAction$0();
+        return ClassicTokenizerImpl.ZZ_ACTION = ClassicTokenizerImpl.zzUnpackAction$esjava$0();
     }
     static get ZZ_ACTION_PACKED_0() {
         return "\u0001\0\u0001\u0001\u0003\u0002\u0001\u0003\u000b\0\u0001\u0002\u0003\u0004\u0002\0" + "\u0001\u0005\u0001\0\u0001\u0005\u0003\u0004\u0006\u0005\u0001\u0006\u0001\u0004\u0002\u0007" + "\u0001\u0008\u0001\0\u0001\u0008\u0003\0\u0002\u0008\u0001\u0009\u0001\u000a\u0001\u0004";
     }
-    static zzUnpackAction$0() {
+    static zzUnpackAction$esjava$0() {
         let result = new Array(50);
         let offset = 0;
-        offset = ClassicTokenizerImpl.zzUnpackAction$3(ClassicTokenizerImpl.ZZ_ACTION_PACKED_0, offset, result);
+        offset = ClassicTokenizerImpl.zzUnpackAction$esjava$3(ClassicTokenizerImpl.ZZ_ACTION_PACKED_0, offset, result);
         return result;
     }
-    static zzUnpackAction$3(packed, offset, result) {
+    static zzUnpackAction$esjava$3(packed, offset, result) {
         let i = 0;
         let j = offset;
         let l = packed.length;
@@ -129,18 +129,18 @@ class ClassicTokenizerImpl {
     }
     static get ZZ_ROWMAP() {
         delete ClassicTokenizerImpl.ZZ_ROWMAP;
-        return ClassicTokenizerImpl.ZZ_ROWMAP = ClassicTokenizerImpl.zzUnpackRowMap$0();
+        return ClassicTokenizerImpl.ZZ_ROWMAP = ClassicTokenizerImpl.zzUnpackRowMap$esjava$0();
     }
     static get ZZ_ROWMAP_PACKED_0() {
         return "\0\0\0\u000c\0\u0018\0\u0024\0\u0030\0\u000c\0\u003c\0\u0048" + "\0\u0054\0\u0060\0\u006c\0\u0078\0\u0084\0\u0090\0\u009c\0\u00a8" + "\0\u00b4\0\u00c0\0\u00cc\0\u00d8\0\u00e4\0\u00f0\0\u00fc\0\u0108" + "\0\u0114\0\u0120\0\u012c\0\u0138\0\u0144\0\u0150\0\u015c\0\u0168" + "\0\u0174\0\u0180\0\u018c\0\u0198\0\u01a4\0\u00a8\0\u01b0\0\u01bc" + "\0\u01c8\0\u01d4\0\u01e0\0\u01ec\0\u01f8\0\u003c\0\u006c\0\u0204" + "\0\u0210\0\u021c";
     }
-    static zzUnpackRowMap$0() {
+    static zzUnpackRowMap$esjava$0() {
         let result = new Array(50);
         let offset = 0;
-        offset = ClassicTokenizerImpl.zzUnpackRowMap$3(ClassicTokenizerImpl.ZZ_ROWMAP_PACKED_0, offset, result);
+        offset = ClassicTokenizerImpl.zzUnpackRowMap$esjava$3(ClassicTokenizerImpl.ZZ_ROWMAP_PACKED_0, offset, result);
         return result;
     }
-    static zzUnpackRowMap$3(packed, offset, result) {
+    static zzUnpackRowMap$esjava$3(packed, offset, result) {
         let i = 0;
         let j = offset;
         let l = packed.length;
@@ -152,18 +152,18 @@ class ClassicTokenizerImpl {
     }
     static get ZZ_TRANS() {
         delete ClassicTokenizerImpl.ZZ_TRANS;
-        return ClassicTokenizerImpl.ZZ_TRANS = ClassicTokenizerImpl.zzUnpackTrans$0();
+        return ClassicTokenizerImpl.ZZ_TRANS = ClassicTokenizerImpl.zzUnpackTrans$esjava$0();
     }
     static get ZZ_TRANS_PACKED_0() {
         return "\u0001\u0002\u0001\u0003\u0001\u0004\u0007\u0002\u0001\u0005\u0001\u0006\u000d\0\u0002\u0003" + "\u0001\0\u0001\u0007\u0001\0\u0001\u0008\u0002\u0009\u0001\u000a\u0001\u0003\u0002\0" + "\u0001\u0003\u0001\u0004\u0001\0\u0001\u000b\u0001\0\u0001\u0008\u0002\u000c\u0001\u000d" + "\u0001\u0004\u0002\0\u0001\u0003\u0001\u0004\u0001\u000e\u0001\u000f\u0001\u0010\u0001\u0011" + "\u0002\u0009\u0001\u000a\u0001\u0012\u0002\0\u0001\u0013\u0001\u0014\u0007\0\u0001\u0015" + "\u0002\0\u0002\u0016\u0007\0\u0001\u0016\u0002\0\u0001\u0017\u0001\u0018\u0007\0" + "\u0001\u0019\u0003\0\u0001\u001a\u0007\0\u0001\u000a\u0002\0\u0001\u001b\u0001\u001c" + "\u0007\0\u0001\u001d\u0002\0\u0001\u001e\u0001\u001f\u0007\0\u0001\u0020\u0002\0" + "\u0001\u0021\u0001\u0022\u0007\0\u0001\u0023\u000b\0\u0001\u0024\u0002\0\u0001\u0013" + "\u0001\u0014\u0007\0\u0001\u0025\u000b\0\u0001\u0026\u0002\0\u0002\u0016\u0007\0" + "\u0001\u0027\u0002\0\u0001\u0003\u0001\u0004\u0001\u000e\u0001\u0007\u0001\u0010\u0001\u0011" + "\u0002\u0009\u0001\u000a\u0001\u0012\u0002\0\u0002\u0013\u0001\0\u0001\u0028\u0001\0" + "\u0001\u0008\u0002\u0029\u0001\0\u0001\u0013\u0002\0\u0001\u0013\u0001\u0014\u0001\0" + "\u0001\u002a\u0001\0\u0001\u0008\u0002\u002b\u0001\u002c\u0001\u0014\u0002\0\u0001\u0013" + "\u0001\u0014\u0001\0\u0001\u0028\u0001\0\u0001\u0008\u0002\u0029\u0001\0\u0001\u0015" + "\u0002\0\u0002\u0016\u0001\0\u0001\u002d\u0002\0\u0001\u002d\u0002\0\u0001\u0016" + "\u0002\0\u0002\u0017\u0001\0\u0001\u0029\u0001\0\u0001\u0008\u0002\u0029\u0001\0" + "\u0001\u0017\u0002\0\u0001\u0017\u0001\u0018\u0001\0\u0001\u002b\u0001\0\u0001\u0008" + "\u0002\u002b\u0001\u002c\u0001\u0018\u0002\0\u0001\u0017\u0001\u0018\u0001\0\u0001\u0029" + "\u0001\0\u0001\u0008\u0002\u0029\u0001\0\u0001\u0019\u0003\0\u0001\u001a\u0001\0" + "\u0001\u002c\u0002\0\u0003\u002c\u0001\u001a\u0002\0\u0002\u001b\u0001\0\u0001\u002e" + "\u0001\0\u0001\u0008\u0002\u0009\u0001\u000a\u0001\u001b\u0002\0\u0001\u001b\u0001\u001c" + "\u0001\0\u0001\u002f\u0001\0\u0001\u0008\u0002\u000c\u0001\u000d\u0001\u001c\u0002\0" + "\u0001\u001b\u0001\u001c\u0001\0\u0001\u002e\u0001\0\u0001\u0008\u0002\u0009\u0001\u000a" + "\u0001\u001d\u0002\0\u0002\u001e\u0001\0\u0001\u0009\u0001\0\u0001\u0008\u0002\u0009" + "\u0001\u000a\u0001\u001e\u0002\0\u0001\u001e\u0001\u001f\u0001\0\u0001\u000c\u0001\0" + "\u0001\u0008\u0002\u000c\u0001\u000d\u0001\u001f\u0002\0\u0001\u001e\u0001\u001f\u0001\0" + "\u0001\u0009\u0001\0\u0001\u0008\u0002\u0009\u0001\u000a\u0001\u0020\u0002\0\u0002\u0021" + "\u0001\0\u0001\u000a\u0002\0\u0003\u000a\u0001\u0021\u0002\0\u0001\u0021\u0001\u0022" + "\u0001\0\u0001\u000d\u0002\0\u0003\u000d\u0001\u0022\u0002\0\u0001\u0021\u0001\u0022" + "\u0001\0\u0001\u000a\u0002\0\u0003\u000a\u0001\u0023\u0004\0\u0001\u000e\u0006\0" + "\u0001\u0024\u0002\0\u0001\u0013\u0001\u0014\u0001\0\u0001\u0030\u0001\0\u0001\u0008" + "\u0002\u0029\u0001\0\u0001\u0015\u0002\0\u0002\u0016\u0001\0\u0001\u002d\u0002\0" + "\u0001\u002d\u0002\0\u0001\u0027\u0002\0\u0002\u0013\u0007\0\u0001\u0013\u0002\0" + "\u0002\u0017\u0007\0\u0001\u0017\u0002\0\u0002\u001b\u0007\0\u0001\u001b\u0002\0" + "\u0002\u001e\u0007\0\u0001\u001e\u0002\0\u0002\u0021\u0007\0\u0001\u0021\u0002\0" + "\u0002\u0031\u0007\0\u0001\u0031\u0002\0\u0002\u0013\u0007\0\u0001\u0032\u0002\0" + "\u0002\u0031\u0001\0\u0001\u002d\u0002\0\u0001\u002d\u0002\0\u0001\u0031\u0002\0" + "\u0002\u0013\u0001\0\u0001\u0030\u0001\0\u0001\u0008\u0002\u0029\u0001\0\u0001\u0013" + "\u0001\0";
     }
-    static zzUnpackTrans$0() {
+    static zzUnpackTrans$esjava$0() {
         let result = new Array(552);
         let offset = 0;
-        offset = ClassicTokenizerImpl.zzUnpackTrans$3(ClassicTokenizerImpl.ZZ_TRANS_PACKED_0, offset, result);
+        offset = ClassicTokenizerImpl.zzUnpackTrans$esjava$3(ClassicTokenizerImpl.ZZ_TRANS_PACKED_0, offset, result);
         return result;
     }
-    static zzUnpackTrans$3(packed, offset, result) {
+    static zzUnpackTrans$esjava$3(packed, offset, result) {
         let i = 0;
         let j = offset;
         let l = packed.length;
@@ -196,18 +196,18 @@ class ClassicTokenizerImpl {
     }
     static get ZZ_ATTRIBUTE() {
         delete ClassicTokenizerImpl.ZZ_ATTRIBUTE;
-        return ClassicTokenizerImpl.ZZ_ATTRIBUTE = ClassicTokenizerImpl.zzUnpackAttribute$0();
+        return ClassicTokenizerImpl.ZZ_ATTRIBUTE = ClassicTokenizerImpl.zzUnpackAttribute$esjava$0();
     }
     static get ZZ_ATTRIBUTE_PACKED_0() {
         return "\u0001\0\u0001\u0009\u0003\u0001\u0001\u0009\u000b\0\u0004\u0001\u0002\0\u0001\u0001" + "\u0001\0\u000f\u0001\u0001\0\u0001\u0001\u0003\0\u0005\u0001";
     }
-    static zzUnpackAttribute$0() {
+    static zzUnpackAttribute$esjava$0() {
         let result = new Array(50);
         let offset = 0;
-        offset = ClassicTokenizerImpl.zzUnpackAttribute$3(ClassicTokenizerImpl.ZZ_ATTRIBUTE_PACKED_0, offset, result);
+        offset = ClassicTokenizerImpl.zzUnpackAttribute$esjava$3(ClassicTokenizerImpl.ZZ_ATTRIBUTE_PACKED_0, offset, result);
         return result;
     }
-    static zzUnpackAttribute$3(packed, offset, result) {
+    static zzUnpackAttribute$esjava$3(packed, offset, result) {
         let i = 0;
         let j = offset;
         let l = packed.length;
@@ -251,16 +251,16 @@ class ClassicTokenizerImpl {
         delete ClassicTokenizerImpl.TOKEN_TYPES;
         return ClassicTokenizerImpl.TOKEN_TYPES = StandardTokenizer.TOKEN_TYPES;
     }
-    yychar_fix() {
+    yychar_fix$esjava$0() {
         return this.yychar;
     }
-    getText(t) {
+    getText$esjava$1(t) {
         t.copyBuffer(this.zzBuffer, this.zzStartRead, this.zzMarkedPos - this.zzStartRead);
     }
-    setBufferSize(numChars) {
+    setBufferSize$esjava$1(numChars) {
         throw new UnsupportedOperationException();
     }
-    constructor(in$) {
+    constructor(in$esjava) {
         this.zzReader = null;
         this.zzState = 0;
         this.zzLexicalState = ClassicTokenizerImpl.YYINITIAL;
@@ -278,10 +278,10 @@ class ClassicTokenizerImpl {
         this.zzFinalHighSurrogate = 0;
         this.uuuuuuu = null;
         this.zzzzzzzzz = null;
-        this.zzReader = in$;
+        this.zzReader = in$esjava;
         let x = 42;
     }
-    static zzUnpackCMap(packed) {
+    static zzUnpackCMap$esjava$1(packed) {
         let map = new Array(0x110000);
         let i = 0;
         let j = 0;
@@ -294,7 +294,7 @@ class ClassicTokenizerImpl {
         }
         return map;
     }
-    zzRefill() {
+    zzRefill$esjava$0() {
         if (this.zzStartRead > 0) {
             this.zzEndRead += this.zzFinalHighSurrogate;
             this.zzFinalHighSurrogate = 0;
@@ -332,13 +332,13 @@ class ClassicTokenizerImpl {
         }
         return true;
     }
-    yyclose() {
+    yyclose$esjava$0() {
         this.zzAtEOF = true;
         this.zzEndRead = this.zzStartRead;
         if (this.zzReader !== null)
             this.zzReader.close();
     }
-    yyreset(reader) {
+    yyreset$esjava$1(reader) {
         this.zzReader = reader;
         this.zzAtBOL = true;
         this.zzAtEOF = false;
@@ -351,22 +351,22 @@ class ClassicTokenizerImpl {
         if (this.zzBuffer.length > ClassicTokenizerImpl.ZZ_BUFFERSIZE)
             this.zzBuffer = new Array(ClassicTokenizerImpl.ZZ_BUFFERSIZE);
     }
-    yystate() {
+    yystate$esjava$0() {
         return this.zzLexicalState;
     }
-    yybegin(newState) {
+    yybegin$esjava$1(newState) {
         this.zzLexicalState = newState;
     }
-    yytext() {
+    yytext$esjava$0() {
         return new String(this.zzBuffer, this.zzStartRead, this.zzMarkedPos - this.zzStartRead);
     }
-    yycharat(pos) {
+    yycharat$esjava$1(pos) {
         return this.zzBuffer[this.zzStartRead + pos];
     }
-    yylength() {
+    yylength$esjava$0() {
         return this.zzMarkedPos - this.zzStartRead;
     }
-    zzScanError(errorCode) {
+    zzScanError$esjava$1(errorCode) {
         let message;
         try {
             message = ClassicTokenizerImpl.ZZ_ERROR_MSG[errorCode];
@@ -378,12 +378,12 @@ class ClassicTokenizerImpl {
         }
         throw new Error(message);
     }
-    yypushback(number) {
-        if (number > this.yylength())
-            this.zzScanError(ClassicTokenizerImpl.ZZ_PUSHBACK_2BIG);
+    yypushback$esjava$1(number) {
+        if (number > this.yylength$esjava$0())
+            this.zzScanError$esjava$1(ClassicTokenizerImpl.ZZ_PUSHBACK_2BIG);
         this.zzMarkedPos -= number;
     }
-    getNextToken() {
+    getNextToken$esjava$0() {
         let zzInput;
         let zzAction;
         let zzCurrentPosL;
@@ -415,7 +415,7 @@ class ClassicTokenizerImpl {
                     } else {
                         this.zzCurrentPos = zzCurrentPosL;
                         this.zzMarkedPos = zzMarkedPosL;
-                        let eof = this.zzRefill();
+                        let eof = this.zzRefill$esjava$0();
                         zzCurrentPosL = this.zzCurrentPos;
                         zzMarkedPosL = this.zzMarkedPos;
                         zzBufferL = this.zzBuffer;
@@ -498,14 +498,14 @@ class ClassicTokenizerImpl {
                     this.zzAtEOF = true;
                     return ClassicTokenizerImpl.YYEOF;
                 } else {
-                    this.zzScanError(ClassicTokenizerImpl.ZZ_NO_MATCH);
+                    this.zzScanError$esjava$1(ClassicTokenizerImpl.ZZ_NO_MATCH);
                 }
             }
         }
     }
-    ddd$0() {
+    ddd$esjava$0() {
     }
-    ddd$1(a) {
+    ddd$esjava$1(a) {
     }
     static get zzzzzzzzzstatic() {
         delete ClassicTokenizerImpl.zzzzzzzzzstatic;
@@ -519,13 +519,13 @@ class ClassicTokenizerImpl {
         delete ClassicTokenizerImpl.uuuuuuustatic;
         ClassicTokenizerImpl.uuuuuuustatic = value;
     }
-    static dddstatic(a) {
+    static dddstatic$esjava$1(a) {
     }
-    static overstatic$1(a) {
+    static overstatic$esjava$1(a) {
     }
-    static overstatic$0() {
+    static overstatic$esjava$0() {
     }
-    static zzUnpackAction$2(packed1, offset) {
+    static zzUnpackAction$esjava$2(packed1, offset) {
         let i = 0;
         let j = offset;
         let l = packed1.charCodeAt(1);
@@ -534,8 +534,8 @@ class ClassicTokenizerImpl {
         l.charAt();
         this.uuuuuuu.charCodeAt(42);
         packed.x.length();
-        l = this.ddd$1(1).ff.ddd().length();
-        this.ddd$0().length.charAt(42);
+        l = this.ddd$esjava$1(1).ff.ddd().length();
+        this.ddd$esjava$0().length.charAt(42);
         l = ddd(4, 5).charAt(1);
         l = ["aaa"][0].length();
         while (i < l) {
@@ -556,9 +556,9 @@ class ClassicTokenizerImpl {
         ClassicTokenizerImpl.zzzzzzzzzstatic.charCodeAt(42);
         ClassicTokenizerImpl.zzzzzzzzzstatic.x.charAt(42);
         ClassicTokenizerImpl.zzzzzzzzzstatic.x.charAt(42);
-        ClassicTokenizerImpl.dddstatic(1).ff.dddstatic().length();
-        ClassicTokenizerImpl.dddstatic(42).length.charAt(42);
-        ClassicTokenizerImpl.dddstatic().length().charAt(42);
+        ClassicTokenizerImpl.dddstatic$esjava$1(1).ff.dddstatic().length();
+        ClassicTokenizerImpl.dddstatic$esjava$1(42).length.charAt(42);
+        ClassicTokenizerImpl.dddstatic$esjava$0().length().charAt(42);
         ClassicTokenizerImpl.uuuuuuustatic.uuuuuuustatic(42);
         ClassicTokenizerImpl.uuuuuuustatic.uuuuuuustatic(42);
         ClassicTokenizerImpl.uuuuuuustatic.ClassicTokenizerImpl.uuuuuuustatic(42);
@@ -567,9 +567,9 @@ class ClassicTokenizerImpl {
         ClassicTokenizerImpl.zzzzzzzzzstatic.dddstatic(42);
         ClassicTokenizerImpl.zzzzzzzzzstatic.x.dddstatic(42);
         ClassicTokenizerImpl.zzzzzzzzzstatic.dddstatic.uuuuuuustatic(42);
-        ClassicTokenizerImpl.dddstatic(1).ff.dddstatic().charAt();
-        ClassicTokenizerImpl.dddstatic(42).charCodeAt().ClassicTokenizerImpl(42).dddstatic();
-        ClassicTokenizerImpl.dddstatic().length().charAt(42).dddstatic();
+        ClassicTokenizerImpl.dddstatic$esjava$1(1).ff.dddstatic().charAt();
+        ClassicTokenizerImpl.dddstatic$esjava$1(42).charCodeAt().ClassicTokenizerImpl(42).dddstatic();
+        ClassicTokenizerImpl.dddstatic$esjava$0().length().charAt(42).dddstatic();
         ClassicTokenizerImpl.uuuuuuustatic.uuuuuuustatic(42);
         this.uuuuuuustatic.uuuuuuustatic(42);
         ClassicTokenizerImpl.uuuuuuustatic.x.uuuuuuustatic(42);
@@ -578,23 +578,68 @@ class ClassicTokenizerImpl {
         this.zzzzzzzzzstatic.dddstatic(42).length();
         ClassicTokenizerImpl.zzzzzzzzzstatic.x.dddstatic(42).length();
         this.zzzzzzzzzstatic.dddstatic.uuuuuuustatic(42);
-        ClassicTokenizerImpl.dddstatic(1).length.length();
-        this.dddstatic(42).length.charAt(42).dddstatic();
-        this.dddstatic().length().charAt(42).dddstatic();
-        ClassicTokenizerImpl.overstatic$0().charCodeAt(42);
-        ClassicTokenizerImpl.overstatic$1(42).length;
+        ClassicTokenizerImpl.dddstatic$esjava$1(1).length.length();
+        this.dddstatic$esjava$1(42).length.charAt(42).dddstatic();
+        this.dddstatic$esjava$0().length().charAt(42).dddstatic();
+        ClassicTokenizerImpl.overstatic$esjava$0().charCodeAt(42);
+        ClassicTokenizerImpl.overstatic$esjava$1(42).length;
         this.aaaaaa = 0;
         this.zzzzzzzzzstatic = 0;
         return j;
     }
+    yychar_fix(...args) {
+        this['yychar_fix$esjava$' + args.length](...args);
+    }
+    getText(...args) {
+        this['getText$esjava$' + args.length](...args);
+    }
+    setBufferSize(...args) {
+        this['setBufferSize$esjava$' + args.length](...args);
+    }
+    yyclose(...args) {
+        this['yyclose$esjava$' + args.length](...args);
+    }
+    yyreset(...args) {
+        this['yyreset$esjava$' + args.length](...args);
+    }
+    yystate(...args) {
+        this['yystate$esjava$' + args.length](...args);
+    }
+    yybegin(...args) {
+        this['yybegin$esjava$' + args.length](...args);
+    }
+    yytext(...args) {
+        this['yytext$esjava$' + args.length](...args);
+    }
+    yycharat(...args) {
+        this['yycharat$esjava$' + args.length](...args);
+    }
+    yylength(...args) {
+        this['yylength$esjava$' + args.length](...args);
+    }
+    yypushback(...args) {
+        this['yypushback$esjava$' + args.length](...args);
+    }
+    getNextToken(...args) {
+        this['getNextToken$esjava$' + args.length](...args);
+    }
+    ddd(...args) {
+        this['ddd$esjava$' + args.length](...args);
+    }
+    static dddstatic(...args) {
+        ClassicTokenizerImpl['dddstatic$esjava$' + args.length](...args);
+    }
+    static overstatic(...args) {
+        ClassicTokenizerImpl['overstatic$esjava$' + args.length](...args);
+    }
 }
 class Test {
-    static kewords_scope(x, var$) {
-        let in$ = 42;
-        x += var$++;
-        in$++;
-        in$[in$++] = 42;
-        test(in$[in$++], in$, var$);
+    static kewords_scope$esjava$2(x, var$esjava) {
+        let in$esjava = 42;
+        x += var$esjava++;
+        in$esjava++;
+        in$esjava[in$esjava++] = 42;
+        test(in$esjava[in$esjava++], in$esjava, var$esjava);
     }
     static get ZZ_CMAP_PACKED() {
         delete Test.ZZ_CMAP_PACKED;
@@ -604,17 +649,17 @@ class Test {
         delete Test.ZZ_CMAP_PACKED;
         Test.ZZ_CMAP_PACKED = value;
     }
-    static test_scope() {
+    static test_scope$esjava$0() {
         Test.ZZ_CMAP_PACKED = 42;
         let ZZ_CMAP_PACKED = 0;
         ZZ_CMAP_PACKED = 42;
     }
-    static test_params_scope(ZZ_CMAP_PACKED, x) {
+    static test_params_scope$esjava$2(ZZ_CMAP_PACKED, x) {
         ZZ_CMAP_PACKED = 42;
         ZZ_CMAP_PACKED.charAt();
         x.charCodeAt();
     }
-    static test_while_scope() {
+    static test_while_scope$esjava$0() {
         while (true) {
             Test.ZZ_CMAP_PACKED = 42;
             let ZZ_CMAP_PACKED = 0;
@@ -622,24 +667,24 @@ class Test {
         }
         Test.ZZ_CMAP_PACKED = 42;
     }
-    static test_catch_scope() {
+    static test_catch_scope$esjava$0() {
         Test.ZZ_CMAP_PACKED = 42;
         try {
             Test.ZZ_CMAP_PACKED = 42;
             let ZZ_CMAP_PACKED = 0;
             ZZ_CMAP_PACKED = 42;
-        } catch (var$) {
-            if (var$ instanceof String) {
-                let x = var$;
+        } catch (var$esjava) {
+            if (var$esjava instanceof String) {
+                let x = var$esjava;
                 Test.ZZ_CMAP_PACKED.charAt();
                 x.charCodeAt();
-            } else if (var$ instanceof Ex) {
+            } else if (var$esjava instanceof Ex) {
                 Test.ZZ_CMAP_PACKED = 42;
                 let ZZ_CMAP_PACKED = 0;
                 ZZ_CMAP_PACKED = 42;
-                var$++;
+                var$esjava++;
             } else
-                throw var$;
+                throw var$esjava;
         }
         Test.ZZ_CMAP_PACKED = 42;
         try {
@@ -667,7 +712,7 @@ class Test {
         let ZZ_CMAP_PACKED = 0;
         ZZ_CMAP_PACKED = 42;
     }
-    static test_for_scope() {
+    static test_for_scope$esjava$0() {
         Test.ZZ_CMAP_PACKED = 42;
         ;
         for (; x < 1; x++) {
@@ -688,13 +733,13 @@ class Test {
         for (let ZZ_CMAP_PACKED = 1; ZZ_CMAP_PACKED < 1; ZZ_CMAP_PACKED++) {
             ZZ_CMAP_PACKED = 42;
         }
-        for (let x = YYEOF, var$ = 42; var$ > 0 && x < 1; x++, var$++) {
+        for (let x = YYEOF, var$esjava = 42; var$esjava > 0 && x < 1; x++, var$esjava++) {
         }
         Test.ZZ_CMAP_PACKED = 42;
         let ZZ_CMAP_PACKED = 0;
         ZZ_CMAP_PACKED = 42;
     }
-    test_instanceof() {
+    test_instanceof$esjava$0() {
         x instanceof ZZ_CMAP_PACKED;
         x instanceof rwggbdhdfhjukgjsdgfsagdhjdjh;
         if (Test.ZZ_CMAP_PACKED++) {
@@ -769,17 +814,29 @@ class Test {
         delete Test.static_long_init_test;
         Test.static_long_init_test = value;
     }
-    testyychar1() {
+    testyychar1$esjava$0() {
         return this.testyychar;
     }
-    testyycharover1$0() {
+    testyycharover1$esjava$0() {
         return this.testyycharover;
     }
-    testyycharover1$1(x) {
+    testyycharover1$esjava$1(x) {
         return this.testyycharover;
     }
-    test_abstract() {
-        throw 'NotImpl < test_abstract >';
+    test_abstract$esjava$0() {
+        throw 'NotImpl < test_abstract$esjava$0 >';
+    }
+    test_instanceof(...args) {
+        this['test_instanceof$esjava$' + args.length](...args);
+    }
+    testyychar1(...args) {
+        this['testyychar1$esjava$' + args.length](...args);
+    }
+    testyycharover1(...args) {
+        this['testyycharover1$esjava$' + args.length](...args);
+    }
+    test_abstract(...args) {
+        this['test_abstract$esjava$' + args.length](...args);
     }
     constructor() {
         this.double_init_test = 0.0;
@@ -795,8 +852,11 @@ class Test {
     }
 }
 class TestInterface {
-    test() {
-        throw 'NotImpl < test >';
+    test$esjava$0() {
+        throw 'NotImpl < test$esjava$0 >';
+    }
+    test(...args) {
+        this['test$esjava$' + args.length](...args);
     }
 }
 class TestInterfaceClass extends TestInterface {
@@ -841,14 +901,14 @@ class Animal {
         this.name = null;
         this.name = name;
     }
-    static MessageBox(msg) {
+    static MessageBox$esjava$1(msg) {
         alert(msg);
     }
-    move$1(meters) {
-        Animal.MessageBox(this.name + " \u0023moved " + meters + "m.");
+    move$esjava$1(meters) {
+        Animal.MessageBox$esjava$1(this.name + " \u0023moved " + meters + "m.");
     }
-    move$0() {
-        throw 'NotImpl < move$0 >';
+    move$esjava$0() {
+        throw 'NotImpl < move$esjava$0 >';
     }
     static get U_YIN_YANG() {
         return '\u262F';
@@ -886,27 +946,39 @@ class Animal {
         delete Animal.test_not_final_not_literal;
         Animal.test_not_final_not_literal = value;
     }
+    static MessageBox(...args) {
+        Animal['MessageBox$esjava$' + args.length](...args);
+    }
+    move(...args) {
+        this['move$esjava$' + args.length](...args);
+    }
 }
 class Snake extends Animal {
     constructor(name) {
         super(name);
     }
-    move$0() {
+    move$0$esjava$0() {
         Animal.MessageBox("Slithering...");
         super.move$1(3);
+    }
+    move$0(...args) {
+        this['move$0$esjava$' + args.length](...args);
     }
 }
 class Horse extends Animal {
     constructor(name) {
         super(name);
     }
-    move$0() {
-        Horse.MessageBox("Galloping...");
+    move$0$esjava$0() {
+        Horse.MessageBox$esjava$1("Galloping...");
         super.move$1(-0x2a);
+    }
+    move$0(...args) {
+        this['move$0$esjava$' + args.length](...args);
     }
 }
 class BabelEvaluate {
-    static main(args) {
+    static main$esjava$1(args) {
         let animals = [
             new Snake(Animal.U_CAUTION_SIGN + "Sammy the Python\u0001\u005a\n\u4321"),
             new Horse(Animal.U_YIN_YANG + "Tommy the Palomino")
@@ -918,23 +990,32 @@ class BabelEvaluate {
         for (i1 = 42, i2 = codePointOffset;;) {
         }
     }
+    static main(...args) {
+        BabelEvaluate['main$esjava$' + args.length](...args);
+    }
 }
 class Horse1 extends I.AM.NOT.IN.COMPILATION_UNIT.Animal {
 }
 class I_AM_IN_COMPILATION_UNIT_Animal {
-    hello() {
+    hello$esjava$0() {
         this.test++;
         this.horse_p = null;
-        this.hello_p();
-        I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
+        this.hello_p$esjava$0();
+        I_AM_IN_COMPILATION_UNIT_Animal.hello_s$esjava$0();
     }
-    static hello_s() {
+    static hello_s$esjava$0() {
         this.test++;
         this.horse_p = null;
     }
-    hello_p() {
+    hello_p$esjava$0() {
         this.test++;
         this.horse_p = null;
+    }
+    hello(...args) {
+        this['hello$esjava$' + args.length](...args);
+    }
+    static hello_s(...args) {
+        I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length](...args);
     }
     constructor() {
         this.test = 0;
@@ -942,21 +1023,21 @@ class I_AM_IN_COMPILATION_UNIT_Animal {
     }
 }
 class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
-    hello1() {
-        this.hello();
-        Horse2.hello_s();
+    hello1$esjava$0() {
+        this.hello$esjava$0();
+        Horse2.hello_s$esjava$0();
         this.test++;
         horse_p = null;
         Horse2.test3_s++;
         Horse2.test4_p++;
-        this.test5++;
+        this.test5.charCodeAt(0);
         hello_p();
-        this.hello_p1();
-        Horse2.hello_s2();
+        this.hello_p1$esjava$0();
+        Horse2.hello_s2$esjava$0();
     }
-    hello_p1() {
+    hello_p1$esjava$0() {
     }
-    static hello_s2() {
+    static hello_s2$esjava$0() {
     }
     static get test3_s() {
         delete Horse2.test3_s;
@@ -974,38 +1055,83 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
         delete Horse2.test4_p;
         Horse2.test4_p = value;
     }
+    hello1(...args) {
+        this['hello1$esjava$' + args.length](...args);
+    }
+    static hello_s2(...args) {
+        Horse2['hello_s2$esjava$' + args.length](...args);
+    }
     constructor() {
         super();
-        this.test5 = 0;
+        this.test5 = null;
     }
 }
 class Horse3 extends Horse2 {
-    hello1() {
-        this.hello();
-        this.hello1();
+    hello1$esjava$0() {
+        this.hello$esjava$0();
+        this.hello1$esjava$0();
         this.test++;
         Horse3.test3_s++;
         test4_p++;
-        this.test5++;
+        this.test5.charCodeAt(0);
         this.horse_p = null;
-        Horse3.hello_s();
+        Horse3.hello_s$esjava$0();
         hello_p();
         hello_p1();
-        Horse3.hello_s2();
+        Horse3.hello_s2$esjava$0();
     }
-    hello_self() {
-        this.hello();
-        this.hello1();
+    hello_self$esjava$0() {
+        this.hello$esjava$0();
+        this.hello1$esjava$0();
         this.test++;
         I_AM_IN_COMPILATION_UNIT_Animal.test3_s++;
         I_AM_IN_COMPILATION_UNIT_Animal.test4_p++;
-        this.test5++;
+        this.test5.charCodeAt(0);
         this.horse_p = null;
         I_AM_IN_COMPILATION_UNIT_Animal.hello_s();
         this.hello_p();
     }
+    hello1(...args) {
+        this['hello1$esjava$' + args.length](...args);
+    }
+    hello_self(...args) {
+        this['hello_self$esjava$' + args.length](...args);
+    }
     constructor() {
         super();
         this.horse_p = null;
+    }
+}
+class AnimalOverload {
+    move_p_has_ho_route$esjava$1(meters) {
+    }
+    static move_ps_has_ho_route$esjava$0() {
+    }
+    move$esjava$1(meters) {
+        MessageBox(name + " moved " + meters + "m.");
+        this.move$esjava$0();
+        AnimalOverload.move_ps_has_ho_route$esjava$0();
+        this.move_p_has_ho_route$esjava$1(42);
+    }
+    move$esjava$0() {
+        MessageBox(name + " moved " + meters + "m.");
+        this.move$esjava$1(1);
+    }
+    static move$esjava$2(a, b) {
+    }
+    static move2$esjava$0() {
+        MessageBox(name + " moved " + meters + "m.");
+        this.move$esjava$1(1);
+    }
+    static move2$esjava$2(a, b) {
+    }
+    static move(...args) {
+        AnimalOverload['move$esjava$' + args.length](...args);
+    }
+    move(...args) {
+        this['move$esjava$' + args.length](...args);
+    }
+    static move2(...args) {
+        AnimalOverload['move2$esjava$' + args.length](...args);
     }
 }
