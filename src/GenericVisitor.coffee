@@ -196,23 +196,7 @@ class GenericVisitor extends MicroVisitor
             when 1 then interfaces[0]
             else throw 'NotImpl: Multiple Inheritance'
     (lazy) ->
-      [id, decls, su, inits] = lazy id, decls, su, []
-      is_ctor = (decl) -> decl.kind is 'constructor'
-      if inits.length
-        if not decls.some is_ctor
-          if su
-            sucall = builders.callExpression builders.super(), []
-            statement = builders.expressionStatement sucall
-            decls.push make_ctor [], builders.blockStatement [statement, inits...]
-          else 
-            decls.push make_ctor [], builders.blockStatement inits
-        else
-          decls = for decl in decls
-            if is_ctor decl
-              block = builders.blockStatement [inits..., decl.value.body.body...]
-              make_ctor decl.value.params, block
-            else
-              decl
+      [id, decls, su] = lazy id, decls, su
       body = builders.classBody decls
       builders.classDeclaration id, body, su
 

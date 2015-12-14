@@ -18018,7 +18018,7 @@ CUBinding = require('./binding/CUNaiveBinding');
 estypes = require('ast-types');
 
 BindingVisitor = (function(superClass) {
-  var builders, flatten, make_method, make_static_get, make_static_set;
+  var builders, flatten, make_method, make_static_get, make_static_set, make_this_get, make_this_set;
 
   extend(BindingVisitor, superClass);
 
@@ -18052,6 +18052,18 @@ BindingVisitor = (function(superClass) {
     return make_method.apply(null, slice.call(args).concat([true], ['set']));
   };
 
+  make_this_get = function() {
+    var args;
+    args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    return make_method.apply(null, slice.call(args).concat([false], ['get']));
+  };
+
+  make_this_set = function() {
+    var args;
+    args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
+    return make_method.apply(null, slice.call(args).concat([false], ['set']));
+  };
+
   flatten = function(array_of_array) {
     return [].concat.apply([], array_of_array);
   };
@@ -18068,47 +18080,30 @@ BindingVisitor = (function(superClass) {
     node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
     binding.checkout_type(node);
     su = BindingVisitor.__super__.visitTypeDeclaration.apply(this, [node, binding].concat(slice.call(args)));
-    return (function(_this) {
-      return function(lazy) {
-        return su(function(id, decls, su) {
-          var ctor_inits, expr, init;
-          decls = flatten(decls);
-          ctor_inits = (function() {
-            var i, len, ref, results;
-            ref = binding.ctor_raw_field_inits;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              init = ref[i];
-              init = this.visit.apply(this, [init, binding].concat(slice.call(args)));
-              init.id = builders.memberExpression(builders.thisExpression(), init.id, false);
-              expr = builders.assignmentExpression('=', init.id, init.init);
-              results.push(builders.expressionStatement(expr));
-            }
-            return results;
-          }).call(_this);
-          delete binding.ctor_raw_field_inits;
-          return lazy(id, decls, su, ctor_inits, binding);
-        });
-      };
-    })(this);
+    return function(lazy) {
+      return su(function(id, decls, su) {
+        decls = flatten(decls);
+        return lazy(id, decls, su, binding);
+      });
+    };
   };
 
   BindingVisitor.prototype.visitFieldDeclaration = function() {
-    var args, binding, body, body_set, decl, del, expr, fragment, frags, getter, is_prim, node, operand, param, ref, type;
+    var args, binding, body, body_set, decl, del, esid, expr, fragment, frags, getter, is_prim, node, operand, param, type;
     node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
-    if (this.constructor.has_modifier(node, 'static')) {
-      type = this.visit.apply(this, [node.type, binding].concat(slice.call(args)));
-      is_prim = (ref = type.name) === 'long' || ref === 'byte' || ref === 'int' || ref === 'short' || ref === 'double' || ref === 'float' || ref === 'boolean' || ref === 'String' || ref === 'char';
-      frags = (function() {
-        var i, len, ref1, results;
-        ref1 = node.fragments;
-        results = [];
-        for (i = 0, len = ref1.length; i < len; i++) {
-          fragment = ref1[i];
-          decl = this.visit.apply(this, [fragment, binding].concat(slice.call(args)));
-          if (decl.init == null) {
-            decl.init = this.visit.apply(this, [this.constructor.make_def_field_init(node), binding].concat(slice.call(args)));
-          }
+    type = this.visit.apply(this, [node.type, binding].concat(slice.call(args)));
+    frags = (function() {
+      var i, len, ref, ref1, results;
+      ref = node.fragments;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        fragment = ref[i];
+        decl = this.visit.apply(this, [fragment, binding].concat(slice.call(args)));
+        if (decl.init == null) {
+          decl.init = this.visit.apply(this, [this.constructor.make_def_field_init(node), binding].concat(slice.call(args)));
+        }
+        if (this.constructor.has_modifier(node, 'static')) {
+          is_prim = (ref1 = type.name) === 'long' || ref1 === 'byte' || ref1 === 'int' || ref1 === 'short' || ref1 === 'double' || ref1 === 'float' || ref1 === 'boolean' || ref1 === 'String' || ref1 === 'char';
           if (is_prim && !fragment.extraDimensions && this.constructor.has_modifier(node, 'final')) {
             body = builders.blockStatement([builders.returnStatement(decl.init)]);
             results.push(make_static_get(decl.id, [], body));
@@ -18129,13 +18124,24 @@ BindingVisitor = (function(superClass) {
               results.push(getter);
             }
           }
+        } else {
+          esid = builders.identifier("_$esjava$" + decl.id.name);
+          operand = builders.memberExpression(builders.thisExpression(), esid, false);
+          expr = builders.identifier('Object.prototype.hasOwnProperty.call');
+          expr = builders.callExpression(expr, [builders.thisExpression(), builders.literal(esid.name)]);
+          expr = builders.conditionalExpression(expr, operand, decl.init);
+          body = builders.blockStatement([builders.returnStatement(expr)]);
+          getter = make_this_get(decl.id, [], body);
+          param = builders.identifier('value');
+          expr = builders.assignmentExpression('=', operand, param);
+          expr = builders.expressionStatement(expr);
+          body_set = builders.blockStatement([expr]);
+          results.push([getter, make_this_set(decl.id, [param], body_set)]);
         }
-        return results;
-      }).call(this);
-      return flatten(frags);
-    } else {
-      return this.constructor.IGNORE_ME;
-    }
+      }
+      return results;
+    }).call(this);
+    return flatten(frags);
   };
 
   BindingVisitor.prototype.visitSimpleName = function() {
@@ -18709,37 +18715,8 @@ GenericVisitor = (function(superClass) {
       }
     })();
     return function(lazy) {
-      var block, body, decl, inits, is_ctor, ref, statement, sucall;
-      ref = lazy(id, decls, su, []), id = ref[0], decls = ref[1], su = ref[2], inits = ref[3];
-      is_ctor = function(decl) {
-        return decl.kind === 'constructor';
-      };
-      if (inits.length) {
-        if (!decls.some(is_ctor)) {
-          if (su) {
-            sucall = builders.callExpression(builders["super"](), []);
-            statement = builders.expressionStatement(sucall);
-            decls.push(make_ctor([], builders.blockStatement([statement].concat(slice.call(inits)))));
-          } else {
-            decls.push(make_ctor([], builders.blockStatement(inits)));
-          }
-        } else {
-          decls = (function() {
-            var i, len, results;
-            results = [];
-            for (i = 0, len = decls.length; i < len; i++) {
-              decl = decls[i];
-              if (is_ctor(decl)) {
-                block = builders.blockStatement(slice.call(inits).concat(slice.call(decl.value.body.body)));
-                results.push(make_ctor(decl.value.params, block));
-              } else {
-                results.push(decl);
-              }
-            }
-            return results;
-          })();
-        }
-      }
+      var body, ref;
+      ref = lazy(id, decls, su), id = ref[0], decls = ref[1], su = ref[2];
       body = builders.classBody(decls);
       return builders.classDeclaration(id, body, su);
     };
@@ -19547,18 +19524,10 @@ BindingResolverVisitor = (function(superClass) {
     node = arguments[0], members = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
     su = BindingResolverVisitor.__super__.visitTypeDeclaration.apply(this, [node, members].concat(slice.call(args)));
     r_members = null;
-    su((function(_this) {
-      return function(id, decls, su, inits, members) {
-        var i, init, len, ref;
-        r_members = members;
-        ref = members.fields.get_raw_inits();
-        for (i = 0, len = ref.length; i < len; i++) {
-          init = ref[i];
-          _this.visit.apply(_this, [init, members].concat(slice.call(args)));
-        }
-        return [id, decls, su, []];
-      };
-    })(this));
+    su(function(id, decls, su, members) {
+      r_members = members;
+      return [id, decls, su];
+    });
     return r_members;
   };
 
@@ -19743,7 +19712,6 @@ ClassBinding = (function() {
     _joinMap = new Map;
     _visitor = new BindingResolverVisitor(_joinMap);
     _members = _visitor.visit(cls_node, _members);
-    this.ctor_raw_field_inits = _members.fields.get_raw_inits();
     this.overload = _members.methods.overload;
     this.ls_potential_overloads = _members.methods.ls_potential_overloads;
     this.class_id = _members.scope_id;
@@ -19784,7 +19752,7 @@ module.exports = ClassBinding;
 @author  Oleg Mazko <o.mazko@mail.ru>
 @license New BSD License <http://creativecommons.org/licenses/BSD/>
  */
-var Dict, FieldScope, GenericVisitor, MemberScope, MicroVisitor, ScopeVisitor, VarScope, builders, estypes, ref,
+var Dict, GenericVisitor, MemberScope, MicroVisitor, ScopeVisitor, VarScope, builders, estypes, ref,
   slice = [].slice,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -19952,81 +19920,6 @@ VarScope = (function() {
 
 })();
 
-FieldScope = (function(superClass) {
-  var clone, has_static, make_def_init;
-
-  extend(FieldScope, superClass);
-
-  clone = function(obj) {
-    var flags, key, newInstance;
-    if ((obj == null) || typeof obj !== 'object') {
-      return obj;
-    }
-    if (obj instanceof Date) {
-      return new Date(obj.getTime());
-    }
-    if (obj instanceof RegExp) {
-      flags = '';
-      if (obj.global != null) {
-        flags += 'g';
-      }
-      if (obj.ignoreCase != null) {
-        flags += 'i';
-      }
-      if (obj.multiline != null) {
-        flags += 'm';
-      }
-      if (obj.sticky != null) {
-        flags += 'y';
-      }
-      return new RegExp(obj.source, flags);
-    }
-    newInstance = new obj.constructor();
-    for (key in obj) {
-      newInstance[key] = clone(obj[key]);
-    }
-    return newInstance;
-  };
-
-  has_static = function(node) {
-    return MicroVisitor.has_modifier(node, 'static');
-  };
-
-  make_def_init = MicroVisitor.make_def_field_init;
-
-  function FieldScope() {
-    var _collect_from, _raw_inits, args;
-    args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-    FieldScope.__super__.constructor.apply(this, args);
-    _raw_inits = [];
-    this.get_raw_inits = function() {
-      return slice.call(_raw_inits);
-    };
-    _collect_from = this.collect_from;
-    this.collect_from = function(node) {
-      var fragment, i, len, ref1;
-      if (node.node !== 'FieldDeclaration') {
-        throw "ASSERT: FieldDeclaration expected instead " + node.node;
-      }
-      if (!has_static(node)) {
-        ref1 = node.fragments;
-        for (i = 0, len = ref1.length; i < len; i++) {
-          fragment = ref1[i];
-          if (!fragment.initializer) {
-            fragment = clone(fragment);
-            fragment.initializer = make_def_init(node);
-          }
-          _raw_inits.push(fragment);
-        }
-      }
-      return _collect_from(node);
-    };
-  }
-
-  return FieldScope;
-
-})(VarScope);
-
 MemberScope = (function() {
   var MethodModel;
 
@@ -20047,7 +19940,7 @@ MemberScope = (function() {
   function MemberScope(cls_node, arg) {
     var MembersCollector, _fields, _methods, ref1;
     ref1 = arg != null ? arg : {
-      _fields: new FieldScope,
+      _fields: new VarScope,
       _methods: new Dict
     }, _fields = ref1._fields, _methods = ref1._methods;
     this.clone_super = function(cls_node) {
@@ -20121,7 +20014,7 @@ MemberScope = (function() {
 
     })(MicroVisitor);
     this.scope_id = new MembersCollector().visit(cls_node);
-    this.fields = ['get_type', 'get_raw_inits', 'contains', 'is_static'].reduce(function(left, right) {
+    this.fields = ['get_type', 'contains', 'is_static'].reduce(function(left, right) {
       return GenericVisitor.set_prop({
         obj: left,
         prop: right,
@@ -20245,8 +20138,8 @@ ScopeVisitor = (function(superClass) {
     members || (members = new MemberScope(node));
     su = ScopeVisitor.__super__.visitTypeDeclaration.apply(this, [node, members].concat(slice.call(args)));
     return function(lazy) {
-      return su(function(id, decls, su, inits) {
-        return lazy(id, decls, su, inits, members);
+      return su(function(id, decls, su) {
+        return lazy(id, decls, su, members);
       });
     };
   };

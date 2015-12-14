@@ -22,6 +22,12 @@ class BindingVisitor extends GenericVisitor
   make_static_set = (args...) ->
     make_method args..., yes, 'set'
 
+  make_this_get = (args...) ->
+    make_method args..., no, 'get'
+
+  make_this_set = (args...) ->
+    make_method args..., no, 'set'
+
   flatten = (array_of_array) ->
     [].concat.apply [], array_of_array
 
@@ -32,25 +38,19 @@ class BindingVisitor extends GenericVisitor
   visitTypeDeclaration: (node, binding, args...) ->
     binding.checkout_type node
     su = super node, binding, args...
-    (lazy) =>
-      su (id, decls, su) =>
+    (lazy) ->
+      su (id, decls, su) ->
         decls = flatten decls
-        ctor_inits = for init in binding.ctor_raw_field_inits
-          init = @visit init, binding, args...
-          init.id = builders.memberExpression builders.thisExpression(), init.id, no
-          expr = builders.assignmentExpression '=', init.id, init.init
-          builders.expressionStatement expr
-        delete binding.ctor_raw_field_inits
-        lazy id, decls, su, ctor_inits, binding
+        lazy id, decls, su, binding
 
   visitFieldDeclaration: (node, binding, args...) ->
-    if @constructor.has_modifier node, 'static' 
-      type = @visit node.type, binding, args...
-      is_prim = type.name in ['long', 'byte', 'int', 'short', 
-                  'double', 'float', 'boolean', 'String', 'char']
-      frags = for fragment in node.fragments
-        decl = @visit fragment, binding, args...
-        decl.init ?= @visit @constructor.make_def_field_init(node), binding, args...
+    type = @visit node.type, binding, args...
+    frags = for fragment in node.fragments
+      decl = @visit fragment, binding, args...
+      decl.init ?= @visit @constructor.make_def_field_init(node), binding, args...
+      if @constructor.has_modifier node, 'static'
+        is_prim = type.name in ['long', 'byte', 'int', 'short', 
+                'double', 'float', 'boolean', 'String', 'char']
         if is_prim and not fragment.extraDimensions and
             @constructor.has_modifier node, 'final'
           body = builders.blockStatement [builders.returnStatement decl.init]
@@ -70,10 +70,21 @@ class BindingVisitor extends GenericVisitor
             [getter, make_static_set decl.id, [param], body_set]
           else
             getter
-            
-      flatten frags
-    else
-      @constructor.IGNORE_ME
+      else
+        esid = builders.identifier "_$esjava$#{decl.id.name}" 
+        operand = builders.memberExpression builders.thisExpression(), esid, no
+        expr = builders.identifier 'Object.prototype.hasOwnProperty.call'
+        expr = builders.callExpression expr, [builders.thisExpression(), builders.literal esid.name]
+        expr = builders.conditionalExpression expr, operand, decl.init 
+        body = builders.blockStatement [builders.returnStatement expr]
+        getter = make_this_get decl.id, [], body
+        param = builders.identifier 'value'
+        expr = builders.assignmentExpression '=', operand, param
+        expr = builders.expressionStatement expr
+        body_set = builders.blockStatement [expr]
+        [getter, make_this_set decl.id, [param], body_set]
+
+    flatten frags
 
   visitSimpleName: (node, binding, args...) ->
     su = super node, binding, args...

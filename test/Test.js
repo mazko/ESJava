@@ -29,7 +29,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var StandardTokenizer = (function (_Tokenizer) {
     _inherits(StandardTokenizer, _Tokenizer);
 
-    _createClass(StandardTokenizer, null, [{
+    function StandardTokenizer() {
+        _classCallCheck(this, StandardTokenizer);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(StandardTokenizer).apply(this, arguments));
+    }
+
+    _createClass(StandardTokenizer, [{
+        key: 'scanner',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$scanner') ? this._$esjava$scanner : null;
+        },
+        set: function set(value) {
+            this._$esjava$scanner = value;
+        }
+    }], [{
         key: 'ALPHANUM',
         get: function get() {
             return 0;
@@ -112,15 +126,6 @@ var StandardTokenizer = (function (_Tokenizer) {
         }
     }]);
 
-    function StandardTokenizer() {
-        _classCallCheck(this, StandardTokenizer);
-
-        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StandardTokenizer).call(this));
-
-        _this.scanner = null;
-        return _this;
-    }
-
     return StandardTokenizer;
 })(Tokenizer);
 
@@ -139,6 +144,126 @@ var ClassicTokenizerImpl = (function () {
         key: 'setBufferSize$esjava$1',
         value: function setBufferSize$esjava$1(numChars) {
             throw new UnsupportedOperationException();
+        }
+    }, {
+        key: 'zzReader',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzReader') ? this._$esjava$zzReader : null;
+        },
+        set: function set(value) {
+            this._$esjava$zzReader = value;
+        }
+    }, {
+        key: 'zzState',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzState') ? this._$esjava$zzState : 0;
+        },
+        set: function set(value) {
+            this._$esjava$zzState = value;
+        }
+    }, {
+        key: 'zzLexicalState',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzLexicalState') ? this._$esjava$zzLexicalState : ClassicTokenizerImpl.YYINITIAL;
+        },
+        set: function set(value) {
+            this._$esjava$zzLexicalState = value;
+        }
+    }, {
+        key: 'zzBuffer',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzBuffer') ? this._$esjava$zzBuffer : new Array(ClassicTokenizerImpl.ZZ_BUFFERSIZE);
+        },
+        set: function set(value) {
+            this._$esjava$zzBuffer = value;
+        }
+    }, {
+        key: 'zzMarkedPos',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzMarkedPos') ? this._$esjava$zzMarkedPos : 0;
+        },
+        set: function set(value) {
+            this._$esjava$zzMarkedPos = value;
+        }
+    }, {
+        key: 'zzCurrentPos',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzCurrentPos') ? this._$esjava$zzCurrentPos : 0;
+        },
+        set: function set(value) {
+            this._$esjava$zzCurrentPos = value;
+        }
+    }, {
+        key: 'zzStartRead',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzStartRead') ? this._$esjava$zzStartRead : 0;
+        },
+        set: function set(value) {
+            this._$esjava$zzStartRead = value;
+        }
+    }, {
+        key: 'zzEndRead',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzEndRead') ? this._$esjava$zzEndRead : 0;
+        },
+        set: function set(value) {
+            this._$esjava$zzEndRead = value;
+        }
+    }, {
+        key: 'yyline',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$yyline') ? this._$esjava$yyline : 0;
+        },
+        set: function set(value) {
+            this._$esjava$yyline = value;
+        }
+    }, {
+        key: 'yychar',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$yychar') ? this._$esjava$yychar : 0;
+        },
+        set: function set(value) {
+            this._$esjava$yychar = value;
+        }
+    }, {
+        key: 'yycolumn',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$yycolumn') ? this._$esjava$yycolumn : 0;
+        },
+        set: function set(value) {
+            this._$esjava$yycolumn = value;
+        }
+    }, {
+        key: 'zzAtBOL',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzAtBOL') ? this._$esjava$zzAtBOL : true;
+        },
+        set: function set(value) {
+            this._$esjava$zzAtBOL = value;
+        }
+    }, {
+        key: 'zzAtEOF',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzAtEOF') ? this._$esjava$zzAtEOF : false;
+        },
+        set: function set(value) {
+            this._$esjava$zzAtEOF = value;
+        }
+    }, {
+        key: 'zzEOFDone',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzEOFDone') ? this._$esjava$zzEOFDone : false;
+        },
+        set: function set(value) {
+            this._$esjava$zzEOFDone = value;
+        }
+    }, {
+        key: 'zzFinalHighSurrogate',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzFinalHighSurrogate') ? this._$esjava$zzFinalHighSurrogate : 0;
+        },
+        set: function set(value) {
+            this._$esjava$zzFinalHighSurrogate = value;
         }
     }], [{
         key: 'zzUnpackAction$esjava$0',
@@ -383,23 +508,6 @@ var ClassicTokenizerImpl = (function () {
     function ClassicTokenizerImpl(in$esjava) {
         _classCallCheck(this, ClassicTokenizerImpl);
 
-        this.zzReader = null;
-        this.zzState = 0;
-        this.zzLexicalState = ClassicTokenizerImpl.YYINITIAL;
-        this.zzBuffer = new Array(ClassicTokenizerImpl.ZZ_BUFFERSIZE);
-        this.zzMarkedPos = 0;
-        this.zzCurrentPos = 0;
-        this.zzStartRead = 0;
-        this.zzEndRead = 0;
-        this.yyline = 0;
-        this.yychar = 0;
-        this.yycolumn = 0;
-        this.zzAtBOL = true;
-        this.zzAtEOF = false;
-        this.zzEOFDone = false;
-        this.zzFinalHighSurrogate = 0;
-        this.uuuuuuu = null;
-        this.zzzzzzzzz = null;
         this.zzReader = in$esjava;
         var x = 42;
     }
@@ -762,6 +870,22 @@ var ClassicTokenizerImpl = (function () {
 
             this['ddd$esjava$' + args.length].apply(this, args);
         }
+    }, {
+        key: 'uuuuuuu',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$uuuuuuu') ? this._$esjava$uuuuuuu : null;
+        },
+        set: function set(value) {
+            this._$esjava$uuuuuuu = value;
+        }
+    }, {
+        key: 'zzzzzzzzz',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$zzzzzzzzz') ? this._$esjava$zzzzzzzzz : null;
+        },
+        set: function set(value) {
+            this._$esjava$zzzzzzzzz = value;
+        }
     }], [{
         key: 'zzUnpackCMap$esjava$1',
         value: function zzUnpackCMap$esjava$1(packed) {
@@ -890,6 +1014,10 @@ var ClassicTokenizerImpl = (function () {
 })();
 
 var Test = (function () {
+    function Test() {
+        _classCallCheck(this, Test);
+    }
+
     _createClass(Test, [{
         key: 'test_instanceof$esjava$0',
         value: function test_instanceof$esjava$0() {
@@ -956,6 +1084,86 @@ var Test = (function () {
             }
 
             this['test_abstract$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'double_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$double_init_test') ? this._$esjava$double_init_test : 0.0;
+        },
+        set: function set(value) {
+            this._$esjava$double_init_test = value;
+        }
+    }, {
+        key: 'float_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$float_init_test') ? this._$esjava$float_init_test : 0.0;
+        },
+        set: function set(value) {
+            this._$esjava$float_init_test = value;
+        }
+    }, {
+        key: 'char_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$char_init_test') ? this._$esjava$char_init_test : '\u0000';
+        },
+        set: function set(value) {
+            this._$esjava$char_init_test = value;
+        }
+    }, {
+        key: 'string_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$string_init_test') ? this._$esjava$string_init_test : null;
+        },
+        set: function set(value) {
+            this._$esjava$string_init_test = value;
+        }
+    }, {
+        key: 'boolean_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$boolean_init_test') ? this._$esjava$boolean_init_test : false;
+        },
+        set: function set(value) {
+            this._$esjava$boolean_init_test = value;
+        }
+    }, {
+        key: 'int_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$int_init_test') ? this._$esjava$int_init_test : 0;
+        },
+        set: function set(value) {
+            this._$esjava$int_init_test = value;
+        }
+    }, {
+        key: 'short_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$short_init_test') ? this._$esjava$short_init_test : 0;
+        },
+        set: function set(value) {
+            this._$esjava$short_init_test = value;
+        }
+    }, {
+        key: 'long_init_test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$long_init_test') ? this._$esjava$long_init_test : 0;
+        },
+        set: function set(value) {
+            this._$esjava$long_init_test = value;
+        }
+    }, {
+        key: 'testyychar',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$testyychar') ? this._$esjava$testyychar : 0;
+        },
+        set: function set(value) {
+            this._$esjava$testyychar = value;
+        }
+    }, {
+        key: 'testyycharover',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$testyycharover') ? this._$esjava$testyycharover : 0;
+        },
+        set: function set(value) {
+            this._$esjava$testyycharover = value;
         }
     }], [{
         key: 'kewords_scope$esjava$2',
@@ -1154,21 +1362,6 @@ var Test = (function () {
         }
     }]);
 
-    function Test() {
-        _classCallCheck(this, Test);
-
-        this.double_init_test = 0.0;
-        this.float_init_test = 0.0;
-        this.char_init_test = '\u0000';
-        this.string_init_test = null;
-        this.boolean_init_test = false;
-        this.int_init_test = 0;
-        this.short_init_test = 0;
-        this.long_init_test = 0;
-        this.testyychar = 0;
-        this.testyycharover = 0;
-    }
-
     return Test;
 })();
 
@@ -1226,47 +1419,252 @@ var NumberExtendsClass = (function (_TestInterface3) {
     function NumberExtendsClass() {
         _classCallCheck(this, NumberExtendsClass);
 
-        var _this4 = _possibleConstructorReturn(this, Object.getPrototypeOf(NumberExtendsClass).call(this));
-
-        _this4.x = 42;
-        _this4.y = 11;
-        _this4.z = 42;
-        _this4.k = 0xa5;
-        _this4.d1 = 0.0;
-        _this4.d2 = 34324.34;
-        _this4.d3 = 1.2e34;
-        _this4.f1 = 2.34E+22;
-        _this4.f2 = 1.0;
-        _this4.f3 = 0.0;
-        _this4.d11 = -0.0;
-        _this4.d22 = -34324.34;
-        _this4.d33 = -1.2e34;
-        _this4.f11 = -2.34E+22;
-        _this4.f22 = -1.0;
-        _this4.f33 = -0.0;
-        _this4.x1 = -42;
-        _this4.y1 = -11;
-        _this4.z1 = -42;
-        _this4.k1 = -0xa5;
-        _this4.x2 = +42;
-        _this4.y2 = +11;
-        _this4.z2 = +42;
-        _this4.k2 = +0xa5;
-        _this4.t1 = 0xDFFF;
-        _this4.t2 = 0xDFFF;
-        _this4.t3 = 0xDFFd;
-        _this4.t4 = 0xDFFD;
-        return _this4;
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(NumberExtendsClass).apply(this, arguments));
     }
+
+    _createClass(NumberExtendsClass, [{
+        key: 'x',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$x') ? this._$esjava$x : 42;
+        },
+        set: function set(value) {
+            this._$esjava$x = value;
+        }
+    }, {
+        key: 'y',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$y') ? this._$esjava$y : 11;
+        },
+        set: function set(value) {
+            this._$esjava$y = value;
+        }
+    }, {
+        key: 'z',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$z') ? this._$esjava$z : 42;
+        },
+        set: function set(value) {
+            this._$esjava$z = value;
+        }
+    }, {
+        key: 'k',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$k') ? this._$esjava$k : 0xa5;
+        },
+        set: function set(value) {
+            this._$esjava$k = value;
+        }
+    }, {
+        key: 'd1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$d1') ? this._$esjava$d1 : 0.0;
+        },
+        set: function set(value) {
+            this._$esjava$d1 = value;
+        }
+    }, {
+        key: 'd2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$d2') ? this._$esjava$d2 : 34324.34;
+        },
+        set: function set(value) {
+            this._$esjava$d2 = value;
+        }
+    }, {
+        key: 'd3',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$d3') ? this._$esjava$d3 : 1.2e34;
+        },
+        set: function set(value) {
+            this._$esjava$d3 = value;
+        }
+    }, {
+        key: 'f1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$f1') ? this._$esjava$f1 : 2.34E+22;
+        },
+        set: function set(value) {
+            this._$esjava$f1 = value;
+        }
+    }, {
+        key: 'f2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$f2') ? this._$esjava$f2 : 1.0;
+        },
+        set: function set(value) {
+            this._$esjava$f2 = value;
+        }
+    }, {
+        key: 'f3',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$f3') ? this._$esjava$f3 : 0.0;
+        },
+        set: function set(value) {
+            this._$esjava$f3 = value;
+        }
+    }, {
+        key: 'd11',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$d11') ? this._$esjava$d11 : -0.0;
+        },
+        set: function set(value) {
+            this._$esjava$d11 = value;
+        }
+    }, {
+        key: 'd22',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$d22') ? this._$esjava$d22 : -34324.34;
+        },
+        set: function set(value) {
+            this._$esjava$d22 = value;
+        }
+    }, {
+        key: 'd33',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$d33') ? this._$esjava$d33 : -1.2e34;
+        },
+        set: function set(value) {
+            this._$esjava$d33 = value;
+        }
+    }, {
+        key: 'f11',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$f11') ? this._$esjava$f11 : -2.34E+22;
+        },
+        set: function set(value) {
+            this._$esjava$f11 = value;
+        }
+    }, {
+        key: 'f22',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$f22') ? this._$esjava$f22 : -1.0;
+        },
+        set: function set(value) {
+            this._$esjava$f22 = value;
+        }
+    }, {
+        key: 'f33',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$f33') ? this._$esjava$f33 : -0.0;
+        },
+        set: function set(value) {
+            this._$esjava$f33 = value;
+        }
+    }, {
+        key: 'x1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$x1') ? this._$esjava$x1 : -42;
+        },
+        set: function set(value) {
+            this._$esjava$x1 = value;
+        }
+    }, {
+        key: 'y1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$y1') ? this._$esjava$y1 : -11;
+        },
+        set: function set(value) {
+            this._$esjava$y1 = value;
+        }
+    }, {
+        key: 'z1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$z1') ? this._$esjava$z1 : -42;
+        },
+        set: function set(value) {
+            this._$esjava$z1 = value;
+        }
+    }, {
+        key: 'k1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$k1') ? this._$esjava$k1 : -0xa5;
+        },
+        set: function set(value) {
+            this._$esjava$k1 = value;
+        }
+    }, {
+        key: 'x2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$x2') ? this._$esjava$x2 : +42;
+        },
+        set: function set(value) {
+            this._$esjava$x2 = value;
+        }
+    }, {
+        key: 'y2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$y2') ? this._$esjava$y2 : +11;
+        },
+        set: function set(value) {
+            this._$esjava$y2 = value;
+        }
+    }, {
+        key: 'z2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$z2') ? this._$esjava$z2 : +42;
+        },
+        set: function set(value) {
+            this._$esjava$z2 = value;
+        }
+    }, {
+        key: 'k2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$k2') ? this._$esjava$k2 : +0xa5;
+        },
+        set: function set(value) {
+            this._$esjava$k2 = value;
+        }
+    }, {
+        key: 't1',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$t1') ? this._$esjava$t1 : 0xDFFF;
+        },
+        set: function set(value) {
+            this._$esjava$t1 = value;
+        }
+    }, {
+        key: 't2',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$t2') ? this._$esjava$t2 : 0xDFFF;
+        },
+        set: function set(value) {
+            this._$esjava$t2 = value;
+        }
+    }, {
+        key: 't3',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$t3') ? this._$esjava$t3 : 0xDFFd;
+        },
+        set: function set(value) {
+            this._$esjava$t3 = value;
+        }
+    }, {
+        key: 't4',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$t4') ? this._$esjava$t4 : 0xDFFD;
+        },
+        set: function set(value) {
+            this._$esjava$t4 = value;
+        }
+    }]);
 
     return NumberExtendsClass;
 })(TestInterface);
 
 var Animal = (function () {
+    _createClass(Animal, [{
+        key: 'name',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$name') ? this._$esjava$name : null;
+        },
+        set: function set(value) {
+            this._$esjava$name = value;
+        }
+    }]);
+
     function Animal(name) {
         _classCallCheck(this, Animal);
 
-        this.name = null;
         this.name = name;
     }
 
@@ -1459,6 +1857,10 @@ var Horse1 = (function (_I$AM$NOT$IN$COMPILAT) {
 })(I.AM.NOT.IN.COMPILATION_UNIT.Animal);
 
 var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
+    function I_AM_IN_COMPILATION_UNIT_Animal() {
+        _classCallCheck(this, I_AM_IN_COMPILATION_UNIT_Animal);
+    }
+
     _createClass(I_AM_IN_COMPILATION_UNIT_Animal, [{
         key: 'hello$esjava$0',
         value: function hello$esjava$0() {
@@ -1482,6 +1884,22 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
 
             this['hello$esjava$' + args.length].apply(this, args);
         }
+    }, {
+        key: 'test',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$test') ? this._$esjava$test : 0;
+        },
+        set: function set(value) {
+            this._$esjava$test = value;
+        }
+    }, {
+        key: 'horse_p',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$horse_p') ? this._$esjava$horse_p : null;
+        },
+        set: function set(value) {
+            this._$esjava$horse_p = value;
+        }
     }], [{
         key: 'hello_s$esjava$0',
         value: function hello_s$esjava$0() {
@@ -1499,18 +1917,17 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
         }
     }]);
 
-    function I_AM_IN_COMPILATION_UNIT_Animal() {
-        _classCallCheck(this, I_AM_IN_COMPILATION_UNIT_Animal);
-
-        this.test = 0;
-        this.horse_p = null;
-    }
-
     return I_AM_IN_COMPILATION_UNIT_Animal;
 })();
 
 var Horse2 = (function (_I_AM_IN_COMPILATION_) {
     _inherits(Horse2, _I_AM_IN_COMPILATION_);
+
+    function Horse2() {
+        _classCallCheck(this, Horse2);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Horse2).apply(this, arguments));
+    }
 
     _createClass(Horse2, [{
         key: 'hello1$esjava$0',
@@ -1537,6 +1954,14 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
             }
 
             this['hello1$esjava$' + args.length].apply(this, args);
+        }
+    }, {
+        key: 'test5',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$test5') ? this._$esjava$test5 : null;
+        },
+        set: function set(value) {
+            this._$esjava$test5 = value;
         }
     }], [{
         key: 'hello_s2$esjava$0',
@@ -1572,20 +1997,17 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
         }
     }]);
 
-    function Horse2() {
-        _classCallCheck(this, Horse2);
-
-        var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(Horse2).call(this));
-
-        _this8.test5 = null;
-        return _this8;
-    }
-
     return Horse2;
 })(I_AM_IN_COMPILATION_UNIT_Animal);
 
 var Horse3 = (function (_Horse) {
     _inherits(Horse3, _Horse);
+
+    function Horse3() {
+        _classCallCheck(this, Horse3);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Horse3).apply(this, arguments));
+    }
 
     _createClass(Horse3, [{
         key: 'hello1$esjava$0',
@@ -1633,16 +2055,15 @@ var Horse3 = (function (_Horse) {
 
             this['hello_self$esjava$' + args.length].apply(this, args);
         }
+    }, {
+        key: 'horse_p',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$horse_p') ? this._$esjava$horse_p : null;
+        },
+        set: function set(value) {
+            this._$esjava$horse_p = value;
+        }
     }]);
-
-    function Horse3() {
-        _classCallCheck(this, Horse3);
-
-        var _this9 = _possibleConstructorReturn(this, Object.getPrototypeOf(Horse3).call(this));
-
-        _this9.horse_p = null;
-        return _this9;
-    }
 
     return Horse3;
 })(Horse2);

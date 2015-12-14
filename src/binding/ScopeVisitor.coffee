@@ -68,56 +68,12 @@ class VarScope
     @collect_from src if src
 
 
-class FieldScope extends VarScope
-    # https://coffeescript-cookbook.github.io/chapters/classes_and_objects/cloning
-    clone = (obj) ->
-      if not obj? or typeof obj isnt 'object'
-        return obj
-
-      if obj instanceof Date
-        return new Date(obj.getTime()) 
-
-      if obj instanceof RegExp
-        flags = ''
-        flags += 'g' if obj.global?
-        flags += 'i' if obj.ignoreCase?
-        flags += 'm' if obj.multiline?
-        flags += 'y' if obj.sticky?
-        return new RegExp(obj.source, flags) 
-
-      newInstance = new obj.constructor()
-
-      for key of obj
-        newInstance[key] = clone obj[key]
-
-      return newInstance
-
-    has_static = (node) -> MicroVisitor.has_modifier node, 'static'
-    make_def_init = MicroVisitor.make_def_field_init
-
-    constructor: (args...) ->
-      super args...
-      _raw_inits = []
-      @get_raw_inits = -> [_raw_inits...]
-      _collect_from = @collect_from
-      @collect_from = (node) ->
-        if node.node isnt 'FieldDeclaration'
-          throw "ASSERT: FieldDeclaration expected instead #{node.node}"
-        if not has_static node
-          for fragment in node.fragments
-            if not fragment.initializer
-              fragment = clone fragment
-              fragment.initializer = make_def_init node
-            _raw_inits.push fragment
-        _collect_from node
-
-
 class MemberScope
 
   class MethodModel
     constructor: (@type, @overload, @static=no, @private=no, @super=no, @ctor=no) ->
 
-  constructor: (cls_node, {_fields,_methods}={_fields:new FieldScope, _methods:new Dict}) ->
+  constructor: (cls_node, {_fields,_methods}={_fields:new VarScope, _methods:new Dict}) ->
 
     @clone_super = (cls_node) ->
       methods = new Dict
@@ -148,7 +104,7 @@ class MemberScope
 
     @scope_id = new MembersCollector().visit cls_node
 
-    @fields = ['get_type', 'get_raw_inits', 'contains', 'is_static'].reduce (left, right) ->
+    @fields = ['get_type', 'contains', 'is_static'].reduce (left, right) ->
         GenericVisitor.set_prop obj:left, prop:right, value:_fields[right]
       , {}
 
@@ -191,8 +147,8 @@ class ScopeVisitor extends GenericVisitor
     members or= new MemberScope node
     su = super node, members, args...
     (lazy) ->
-      su (id, decls, su, inits) ->
-        lazy id, decls, su, inits, members
+      su (id, decls, su) ->
+        lazy id, decls, su, members
 
   visitVariableDeclarationStatement: (node, members, locals, args...) ->
     locals.collect_from node

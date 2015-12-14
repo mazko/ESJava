@@ -20,12 +20,9 @@ class BindingResolverVisitor extends ScopeVisitor
   visitTypeDeclaration: (node, members, args...) ->
     su = super node, members, args...
     r_members = null
-    su (id, decls, su, inits, members) =>
+    su (id, decls, su, members) ->
       r_members = members
-      # TODO id is class_id
-      for init in members.fields.get_raw_inits() 
-        @visit init, members, args...
-      [id, decls, su, []]
+      [id, decls, su]
     r_members
 
   visitQualifiedName: (node, members, locals, resolve, args...) ->
@@ -129,7 +126,6 @@ class ClassBinding
     _visitor = new BindingResolverVisitor _joinMap
       
     _members = _visitor.visit cls_node, _members
-    @ctor_raw_field_inits = _members.fields.get_raw_inits()
     @overload = _members.methods.overload
     @ls_potential_overloads = _members.methods.ls_potential_overloads
     @class_id = _members.scope_id
