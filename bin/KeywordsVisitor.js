@@ -30,7 +30,7 @@
     rename_id = function(id) {
       var ref;
       if (ref = id.name, indexOf.call(RESERVED, ref) >= 0) {
-        return id.name += '$';
+        return id.name += '$esjava';
       }
     };
 

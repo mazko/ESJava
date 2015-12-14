@@ -46,6 +46,26 @@
         }
         return results;
       };
+      this.values = function() {
+        var key, results, value;
+        results = [];
+        for (key in _locals) {
+          if (!hasProp.call(_locals, key)) continue;
+          value = _locals[key];
+          results.push(value);
+        }
+        return results;
+      };
+      this.keys = function() {
+        var key, results, value;
+        results = [];
+        for (key in _locals) {
+          if (!hasProp.call(_locals, key)) continue;
+          value = _locals[key];
+          results.push(key);
+        }
+        return results;
+      };
       for (key in locals) {
         if (!hasProp.call(locals, key)) continue;
         value = locals[key];

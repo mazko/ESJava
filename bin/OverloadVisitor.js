@@ -6,19 +6,65 @@
  */
 
 (function() {
-  var OverloadVisitor, SuperVisitor,
+  var OverloadVisitor, SuperVisitor, estypes,
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty,
     slice = [].slice;
 
   SuperVisitor = require('./ResolveSelfVisitor');
 
+  estypes = require('ast-types');
+
   OverloadVisitor = (function(superClass) {
+    var builders, make_method;
+
     extend(OverloadVisitor, superClass);
 
     function OverloadVisitor() {
       return OverloadVisitor.__super__.constructor.apply(this, arguments);
     }
+
+    builders = estypes.builders;
+
+    make_method = function(id, params, body, is_static, kind) {
+      var fn;
+      if (is_static == null) {
+        is_static = false;
+      }
+      if (kind == null) {
+        kind = 'method';
+      }
+      fn = builders.functionDeclaration(id, params, body);
+      return builders.methodDefinition(kind, id, fn, is_static);
+    };
+
+    OverloadVisitor.prototype.visitTypeDeclaration = function() {
+      var args, binding, node, su;
+      node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+      su = OverloadVisitor.__super__.visitTypeDeclaration.apply(this, [node, binding].concat(slice.call(args)));
+      return function(lazy) {
+        return su(function() {
+          var args, binding, body, call, decls, expr, i, id, j, len, lit, mem, meth, overload, prop, ref, rest, statement;
+          id = arguments[0], decls = arguments[1], args = 4 <= arguments.length ? slice.call(arguments, 2, i = arguments.length - 1) : (i = 2, []), binding = arguments[i++];
+          ref = binding.ls_potential_overloads();
+          for (j = 0, len = ref.length; j < len; j++) {
+            overload = ref[j];
+            lit = builders.literal(overload.name + overload.pattern);
+            rest = builders.identifier('args');
+            prop = builders.memberExpression(rest, builders.identifier('length'));
+            prop = builders.binaryExpression('+', lit, prop);
+            expr = overload["static"] ? binding.class_id : builders.thisExpression();
+            mem = builders.memberExpression(expr, prop, true);
+            call = builders.callExpression(mem, [builders.spreadElement(rest)]);
+            statement = builders.expressionStatement(call);
+            body = builders.blockStatement([statement]);
+            meth = builders.identifier(overload.name);
+            decls.push(make_method(meth, [builders.restElement(rest)], body, overload["static"]));
+          }
+          return lazy.apply(null, [id, decls].concat(slice.call(args), [binding]));
+        });
+      };
+    };
 
     OverloadVisitor.prototype.visitMethodDeclaration = function() {
       var args, binding, node, su;

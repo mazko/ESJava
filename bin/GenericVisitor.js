@@ -378,37 +378,8 @@
         }
       })();
       return function(lazy) {
-        var block, body, decl, inits, is_ctor, ref, statement, sucall;
-        ref = lazy(id, decls, su, []), id = ref[0], decls = ref[1], su = ref[2], inits = ref[3];
-        is_ctor = function(decl) {
-          return decl.kind === 'constructor';
-        };
-        if (inits.length) {
-          if (!decls.some(is_ctor)) {
-            if (su) {
-              sucall = builders.callExpression(builders["super"](), []);
-              statement = builders.expressionStatement(sucall);
-              decls.push(make_ctor([], builders.blockStatement([statement].concat(slice.call(inits)))));
-            } else {
-              decls.push(make_ctor([], builders.blockStatement(inits)));
-            }
-          } else {
-            decls = (function() {
-              var i, len, results;
-              results = [];
-              for (i = 0, len = decls.length; i < len; i++) {
-                decl = decls[i];
-                if (is_ctor(decl)) {
-                  block = builders.blockStatement(slice.call(inits).concat(slice.call(decl.value.body.body)));
-                  results.push(make_ctor(decl.value.params, block));
-                } else {
-                  results.push(decl);
-                }
-              }
-              return results;
-            })();
-          }
-        }
+        var body, ref;
+        ref = lazy(id, decls, su), id = ref[0], decls = ref[1], su = ref[2];
         body = builders.classBody(decls);
         return builders.classDeclaration(id, body, su);
       };

@@ -6,7 +6,7 @@
  */
 
 (function() {
-  var Dict, FieldScope, GenericVisitor, MemberScope, MicroVisitor, ScopeVisitor, VarScope, builders, estypes, ref,
+  var Dict, GenericVisitor, MemberScope, MicroVisitor, ScopeVisitor, VarScope, builders, estypes, ref,
     slice = [].slice,
     indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -24,9 +24,11 @@
     var VarModel;
 
     VarModel = (function() {
-      function VarModel(type1, _static) {
+      function VarModel(type1, _static, _private, _super) {
         this.type = type1;
-        this["static"] = _static;
+        this["static"] = _static != null ? _static : false;
+        this["private"] = _private != null ? _private : false;
+        this["super"] = _super != null ? _super : false;
       }
 
       return VarModel;
@@ -58,6 +60,20 @@
           _vars: _vars.clone()
         });
       };
+      this.clone_super = function() {
+        var vars;
+        vars = new Dict;
+        _vars.each(function(k, v) {
+          var model;
+          if (!v["private"]) {
+            model = new VarModel(v.type, v["static"], false, true);
+            return vars.set_value(k, model);
+          }
+        });
+        return new this.constructor(null, {
+          _vars: vars
+        });
+      };
       _unique_var_validator = [];
       this.collect_from = function(src) {
         var VarCollector, safe_vars_set;
@@ -82,29 +98,29 @@
             node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
             decl = this.visit.apply(this, [node.name].concat(slice.call(args)));
             type = this.visit.apply(this, [node.type].concat(slice.call(args)));
-            model = new VarModel(type, false);
+            model = new VarModel(type);
             return safe_vars_set(decl.name, model);
           };
 
           VarCollector.prototype.visitVariableDeclarationStatement = function() {
-            var args, decl, decls, has_static, i, len, model, node, results, type;
+            var args, decl, decls, has_static, i, len, model, node, type;
             node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
             decls = this.visit.apply(this, [node.fragments].concat(slice.call(args)));
             type = this.visit.apply(this, [node.type].concat(slice.call(args)));
             has_static = this.constructor.has_modifier(node, 'static');
             model = new VarModel(type, has_static);
-            results = [];
             for (i = 0, len = decls.length; i < len; i++) {
               decl = decls[i];
-              results.push(safe_vars_set(decl.id.name, model));
+              safe_vars_set(decl.id.name, model);
             }
-            return results;
+            return model;
           };
 
           VarCollector.prototype.visitFieldDeclaration = function() {
-            var args, node;
+            var args, model, node;
             node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-            return this.visitVariableDeclarationStatement.apply(this, [node].concat(slice.call(args)));
+            model = this.visitVariableDeclarationStatement.apply(this, [node].concat(slice.call(args)));
+            return model["private"] = this.constructor.has_modifier(node, 'private');
           };
 
           VarCollector.prototype.visitCatchClause = function() {
@@ -158,99 +174,54 @@
 
   })();
 
-  FieldScope = (function(superClass) {
-    var clone, has_static, make_def_init;
-
-    extend(FieldScope, superClass);
-
-    clone = function(obj) {
-      var flags, key, newInstance;
-      if ((obj == null) || typeof obj !== 'object') {
-        return obj;
-      }
-      if (obj instanceof Date) {
-        return new Date(obj.getTime());
-      }
-      if (obj instanceof RegExp) {
-        flags = '';
-        if (obj.global != null) {
-          flags += 'g';
-        }
-        if (obj.ignoreCase != null) {
-          flags += 'i';
-        }
-        if (obj.multiline != null) {
-          flags += 'm';
-        }
-        if (obj.sticky != null) {
-          flags += 'y';
-        }
-        return new RegExp(obj.source, flags);
-      }
-      newInstance = new obj.constructor();
-      for (key in obj) {
-        newInstance[key] = clone(obj[key]);
-      }
-      return newInstance;
-    };
-
-    has_static = function(node) {
-      return MicroVisitor.has_modifier(node, 'static');
-    };
-
-    make_def_init = MicroVisitor.make_def_field_init;
-
-    function FieldScope() {
-      var _collect_from, _raw_inits, args;
-      args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-      FieldScope.__super__.constructor.apply(this, args);
-      _raw_inits = [];
-      this.get_raw_inits = function() {
-        return slice.call(_raw_inits);
-      };
-      _collect_from = this.collect_from;
-      this.collect_from = function(node) {
-        var fragment, i, len, ref1;
-        if (node.node !== 'FieldDeclaration') {
-          throw "ASSERT: FieldDeclaration expected instead " + node.node;
-        }
-        if (!has_static(node)) {
-          ref1 = node.fragments;
-          for (i = 0, len = ref1.length; i < len; i++) {
-            fragment = ref1[i];
-            if (!fragment.initializer) {
-              fragment = clone(fragment);
-              fragment.initializer = make_def_init(node);
-            }
-            _raw_inits.push(fragment);
-          }
-        }
-        return _collect_from(node);
-      };
-    }
-
-    return FieldScope;
-
-  })(VarScope);
-
   MemberScope = (function() {
     var MethodModel;
 
     MethodModel = (function() {
-      function MethodModel(type1, overload1, _static) {
+      function MethodModel(type1, overload1, _static, _private, _super, ctor) {
         this.type = type1;
         this.overload = overload1;
-        this["static"] = _static;
+        this["static"] = _static != null ? _static : false;
+        this["private"] = _private != null ? _private : false;
+        this["super"] = _super != null ? _super : false;
+        this.ctor = ctor != null ? ctor : false;
       }
 
       return MethodModel;
 
     })();
 
-    function MemberScope(ndcls) {
-      var MembersCollector, _fields, _methods;
-      _fields = new FieldScope;
-      _methods = new Dict;
+    function MemberScope(cls_node, arg) {
+      var MembersCollector, _fields, _methods, ref1;
+      ref1 = arg != null ? arg : {
+        _fields: new VarScope,
+        _methods: new Dict
+      }, _fields = ref1._fields, _methods = ref1._methods;
+      this.clone_super = function(cls_node) {
+        var methods;
+        methods = new Dict;
+        _methods.each(function(k, v) {
+          var m, model;
+          model = (function() {
+            var i, len, results;
+            results = [];
+            for (i = 0, len = v.length; i < len; i++) {
+              m = v[i];
+              if (!m["private"]) {
+                results.push(new MethodModel(m.type, m.overload, m["static"], false, true, m.ctor));
+              }
+            }
+            return results;
+          })();
+          if (model.length) {
+            return methods.set_value(k, model);
+          }
+        });
+        return new this.constructor(cls_node, {
+          _fields: _fields.clone_super(),
+          _methods: methods
+        });
+      };
       MembersCollector = (function(superClass) {
         extend(MembersCollector, superClass);
 
@@ -265,7 +236,7 @@
         };
 
         MembersCollector.prototype.visitMethodDeclaration = function() {
-          var args, has_static, i, id, len, model, models, node, overload, retype;
+          var args, has_private, has_static, i, id, len, model, models, node, overload, retype;
           node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
           id = this.visit.apply(this, [node.name].concat(slice.call(args)));
           retype = this.visit.apply(this, [node.returnType2].concat(slice.call(args)));
@@ -273,19 +244,20 @@
           overload = node.parameters.length;
           for (i = 0, len = models.length; i < len; i++) {
             model = models[i];
-            if (overload === model.overload) {
+            if (overload === model.overload && !model["super"]) {
               throw 'NotImpl: Overload by argumens type ' + id.name;
             }
           }
           has_static = this.constructor.has_modifier(node, 'static');
-          models.push(new MethodModel(retype, overload, has_static));
+          has_private = this.constructor.has_modifier(node, 'private');
+          models.push(new MethodModel(retype, overload, has_static, has_private, false, node.constructor));
           return _methods.set_value(id.name, models);
         };
 
         MembersCollector.prototype.visitTypeDeclaration = function() {
           var args, node;
           node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-          if (node !== ndcls) {
+          if (node !== cls_node) {
             throw 'NotImpl: Nested | Inner classes ?';
           }
           this.visit.apply(this, [node.bodyDeclarations].concat(slice.call(args)));
@@ -295,8 +267,8 @@
         return MembersCollector;
 
       })(MicroVisitor);
-      this.scope_id = new MembersCollector().visit(ndcls);
-      this.fields = ['get_type', 'get_raw_inits', 'contains', 'is_static'].reduce(function(left, right) {
+      this.scope_id = new MembersCollector().visit(cls_node);
+      this.fields = ['get_type', 'contains', 'is_static'].reduce(function(left, right) {
         return GenericVisitor.set_prop({
           obj: left,
           prop: right,
@@ -306,16 +278,16 @@
       this.methods = {
         contains: (function(_this) {
           return function() {
-            var args, ref1;
+            var args, ref2;
             args = 1 <= arguments.length ? slice.call(arguments, 0) : [];
-            return null !== (ref1 = _this.methods).get_type.apply(ref1, args);
+            return null !== (ref2 = _this.methods).get_type.apply(ref2, args);
           };
         })(this),
         get_type: function(name, params) {
-          var i, len, model, ref1;
-          ref1 = _methods.get_value(name, []);
-          for (i = 0, len = ref1.length; i < len; i++) {
-            model = ref1[i];
+          var i, len, model, ref2;
+          ref2 = _methods.get_value(name, []);
+          for (i = 0, len = ref2.length; i < len; i++) {
+            model = ref2[i];
             if (params.length === model.overload) {
               return model.type;
             }
@@ -323,28 +295,83 @@
           return null;
         },
         is_static: function(name, params) {
-          var i, len, model, ref1;
-          ref1 = _methods.get_value(name, []);
-          for (i = 0, len = ref1.length; i < len; i++) {
-            model = ref1[i];
+          var i, len, model, ref2;
+          ref2 = _methods.get_value(name, []);
+          for (i = 0, len = ref2.length; i < len; i++) {
+            model = ref2[i];
             if (params.length === model.overload) {
               return !!model["static"];
             }
           }
           return false;
         },
-        overload: function(name, params) {
-          var ref1;
-          if (((ref1 = _methods.get_value(name)) != null ? ref1.length : void 0) > 1) {
-            return name + '$' + params.length;
-          } else {
-            if (_fields.contains(name)) {
-              return name + '$fixed';
+        ls_potential_overloads: function() {
+          var ls;
+          ls = [];
+          _methods.each(function(k, v) {
+            var c, o;
+            o = (function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = v.length; i < len; i++) {
+                c = v[i];
+                if (!c["super"] && !c["private"] && !c.ctor) {
+                  results.push(c);
+                }
+              }
+              return results;
+            })();
+            if (((function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = o.length; i < len; i++) {
+                c = o[i];
+                if (c["static"]) {
+                  results.push(c);
+                }
+              }
+              return results;
+            })()).length) {
+              ls.push({
+                name: k,
+                "static": true,
+                pattern: '$esjava$'
+              });
+            }
+            if (((function() {
+              var i, len, results;
+              results = [];
+              for (i = 0, len = o.length; i < len; i++) {
+                c = o[i];
+                if (!c["static"]) {
+                  results.push(c);
+                }
+              }
+              return results;
+            })()).length) {
+              return ls.push({
+                name: k,
+                "static": false,
+                pattern: '$esjava$'
+              });
+            }
+          });
+          return ls;
+        },
+        overload: (function(_this) {
+          return function(name, params) {
+            var methods;
+            if (_fields.contains(name) && (_fields.is_static(name) === _this.methods.is_static(name, params))) {
+              throw "NotImpl: Same Field & Method name < " + name + " > agnostic for JS Classes :(";
+            }
+            methods = _methods.get_value(name);
+            if (methods != null ? methods.length : void 0) {
+              return name + '$esjava$' + params.length;
             } else {
               return name;
             }
-          }
-        }
+          };
+        })(this)
       };
     }
 
@@ -361,12 +388,12 @@
 
     ScopeVisitor.prototype.visitTypeDeclaration = function() {
       var args, members, node, su;
-      node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-      members = new MemberScope(node);
+      node = arguments[0], members = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+      members || (members = new MemberScope(node));
       su = ScopeVisitor.__super__.visitTypeDeclaration.apply(this, [node, members].concat(slice.call(args)));
       return function(lazy) {
-        return su(function(id, decls, su, inits) {
-          return lazy(id, decls, su, inits, members);
+        return su(function(id, decls, su) {
+          return lazy(id, decls, su, members);
         });
       };
     };

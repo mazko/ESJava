@@ -31,24 +31,15 @@
     }
 
     BindingResolverVisitor.prototype.visitTypeDeclaration = function() {
-      var args, class_id, node, overload, raw_inits, ref, su;
-      node = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-      su = BindingResolverVisitor.__super__.visitTypeDeclaration.apply(this, [node].concat(slice.call(args)));
-      ref = [], raw_inits = ref[0], overload = ref[1], class_id = ref[2];
-      su((function(_this) {
-        return function(id, decls, su, inits, members) {
-          var i, init, len;
-          raw_inits = members.fields.get_raw_inits();
-          overload = members.methods.overload;
-          class_id = members.scope_id;
-          for (i = 0, len = raw_inits.length; i < len; i++) {
-            init = raw_inits[i];
-            _this.visit.apply(_this, [init, members].concat(slice.call(args)));
-          }
-          return [id, decls, su, []];
-        };
-      })(this));
-      return [raw_inits, overload, class_id];
+      var args, members, node, r_members, su;
+      node = arguments[0], members = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+      su = BindingResolverVisitor.__super__.visitTypeDeclaration.apply(this, [node, members].concat(slice.call(args)));
+      r_members = null;
+      su(function(id, decls, su, members) {
+        r_members = members;
+        return [id, decls, su];
+      });
+      return r_members;
     };
 
     BindingResolverVisitor.prototype.visitQualifiedName = function() {
@@ -214,23 +205,36 @@
   })(ScopeVisitor);
 
   ClassBinding = (function() {
-    function ClassBinding(clsnd) {
-      var _bindMap, _joinMap, _visitor, ref;
-      if (clsnd.node !== 'TypeDeclaration') {
-        throw 'TypeDeclaration node expected';
+    function ClassBinding(cls_node, arg) {
+      var _bindMap, _joinMap, _members, _visitor;
+      _members = (arg != null ? arg : {
+        _members: null
+      })._members;
+      this.clone_super = function(cls_node) {
+        var members;
+        members = _members.clone_super(cls_node);
+        return new this.constructor(cls_node, {
+          _members: members
+        });
+      };
+      if (cls_node.node !== 'TypeDeclaration') {
+        throw 'ASSERT: TypeDeclaration node expected';
       }
       _joinMap = new Map;
       _visitor = new BindingResolverVisitor(_joinMap);
-      ref = _visitor.visit(clsnd), this.ctor_raw_field_inits = ref[0], this.overload = ref[1], this.class_id = ref[2];
+      _members = _visitor.visit(cls_node, _members);
+      this.overload = _members.methods.overload;
+      this.ls_potential_overloads = _members.methods.ls_potential_overloads;
+      this.class_id = _members.scope_id;
       _bindMap = new Map;
       this.resolve_id = function(idnd) {
         var foreign;
         foreign = _bindMap.get(idnd);
         return _joinMap.get(foreign);
       };
-      this.bind = function(arg) {
+      this.bind = function(arg1) {
         var curr, foreign, id;
-        id = arg.id, foreign = arg.foreign;
+        id = arg1.id, foreign = arg1.foreign;
         curr = _bindMap.get(id);
         if (curr) {
           throw "ASSERT: es one to one expected " + (dump(id)) + ", " + (dump(curr)) + " => " + (dump(foreign));
