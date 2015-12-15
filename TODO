@@ -1,4 +1,5 @@
 unit testing + rewrite binding impl
+methods overload impl performance bottleneck: this['yychar$esjava$' + args.length](...args) -> switch(args.length) case 0: yychar$esjava$0(...args)
 exports/imports
 enhanced for loop
 try-with-resources
@@ -13,7 +14,6 @@ parser: add line, pos for ASSERT details
 typed method overload
 constructor overload
 reflection ?
-constructor super before this ?
 ---------------------------------------------------------------
 Current binding is naive top -> bottom:
 

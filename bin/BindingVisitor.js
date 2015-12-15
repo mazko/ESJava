@@ -115,7 +115,7 @@
               body = builders.blockStatement([del, builders.returnStatement(expr)]);
               getter = make_static_get(decl.id, [], body);
               if (!this.constructor.has_modifier(node, 'final')) {
-                param = builders.identifier('value');
+                param = builders.identifier('v');
                 expr = builders.assignmentExpression('=', operand, param);
                 expr = builders.expressionStatement(expr);
                 body_set = builders.blockStatement([del, expr]);
@@ -129,10 +129,10 @@
             operand = builders.memberExpression(builders.thisExpression(), esid, false);
             expr = builders.identifier('Object.prototype.hasOwnProperty.call');
             expr = builders.callExpression(expr, [builders.thisExpression(), builders.literal(esid.name)]);
-            expr = builders.conditionalExpression(expr, operand, decl.init);
+            expr = builders.conditionalExpression(expr, operand, builders.assignmentExpression('=', operand, decl.init));
             body = builders.blockStatement([builders.returnStatement(expr)]);
             getter = make_this_get(decl.id, [], body);
-            param = builders.identifier('value');
+            param = builders.identifier('v');
             expr = builders.assignmentExpression('=', operand, param);
             expr = builders.expressionStatement(expr);
             body_set = builders.blockStatement([expr]);
