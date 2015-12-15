@@ -30,16 +30,16 @@ class ResolveThisVisitor extends SuperVisitor
 
   visitQualifiedName: (node, binding, args...) ->
     su = super node, binding, args...
-    (lazy) =>
-      su (object, property) =>
+    (lazy) ->
+      su (object, property) ->
         if property.object and property.object is binding?.class_id
           property = property.property
         lazy object, property
 
   visitFieldAccess: (node, binding, args...) ->
     su = super node, binding, args...
-    (lazy) =>
-      su (id, expr) =>
+    (lazy) ->
+      su (id, expr) ->
         if id.object?.type is 'ThisExpression'
           ugly_id = id.property
           ugly_expr = id.object

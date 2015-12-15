@@ -49,40 +49,36 @@
       var args, binding, node, su;
       node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
       su = ResolveThisVisitor.__super__.visitQualifiedName.apply(this, [node, binding].concat(slice.call(args)));
-      return (function(_this) {
-        return function(lazy) {
-          return su(function(object, property) {
-            if (property.object && property.object === (binding != null ? binding.class_id : void 0)) {
-              property = property.property;
-            }
-            return lazy(object, property);
-          });
-        };
-      })(this);
+      return function(lazy) {
+        return su(function(object, property) {
+          if (property.object && property.object === (binding != null ? binding.class_id : void 0)) {
+            property = property.property;
+          }
+          return lazy(object, property);
+        });
+      };
     };
 
     ResolveThisVisitor.prototype.visitFieldAccess = function() {
       var args, binding, node, su;
       node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
       su = ResolveThisVisitor.__super__.visitFieldAccess.apply(this, [node, binding].concat(slice.call(args)));
-      return (function(_this) {
-        return function(lazy) {
-          return su(function(id, expr) {
-            var ref, resolved, ugly_expr, ugly_id;
-            if (((ref = id.object) != null ? ref.type : void 0) === 'ThisExpression') {
-              ugly_id = id.property;
-              ugly_expr = id.object;
-              resolved = binding.resolve_id(ugly_id);
-              if (Scope.FIELD === (resolved != null ? resolved.scope : void 0)) {
-                return lazy(ugly_id, ugly_expr);
-              }
-            } else if (expr.type === 'ThisExpression' && binding.class_id === id.object) {
-              return lazy(id.property, expr);
+      return function(lazy) {
+        return su(function(id, expr) {
+          var ref, resolved, ugly_expr, ugly_id;
+          if (((ref = id.object) != null ? ref.type : void 0) === 'ThisExpression') {
+            ugly_id = id.property;
+            ugly_expr = id.object;
+            resolved = binding.resolve_id(ugly_id);
+            if (Scope.FIELD === (resolved != null ? resolved.scope : void 0)) {
+              return lazy(ugly_id, ugly_expr);
             }
-            return lazy(id, expr);
-          });
-        };
-      })(this);
+          } else if (expr.type === 'ThisExpression' && binding.class_id === id.object) {
+            return lazy(id.property, expr);
+          }
+          return lazy(id, expr);
+        });
+      };
     };
 
     ResolveThisVisitor.prototype.visitMethodInvocation = function() {
