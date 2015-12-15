@@ -44,7 +44,7 @@
       su = OverloadVisitor.__super__.visitTypeDeclaration.apply(this, [node, binding].concat(slice.call(args)));
       return function(lazy) {
         return su(function() {
-          var args, binding, body, call, decls, expr, i, id, j, len, lit, mem, meth, overload, prop, ref, rest, statement;
+          var args, binding, body, call, decls, expr, i, id, j, len, lit, mem, meth, overload, prop, ref, rest;
           id = arguments[0], decls = arguments[1], args = 4 <= arguments.length ? slice.call(arguments, 2, i = arguments.length - 1) : (i = 2, []), binding = arguments[i++];
           ref = binding.ls_potential_overloads();
           for (j = 0, len = ref.length; j < len; j++) {
@@ -56,8 +56,7 @@
             expr = overload["static"] ? binding.class_id : builders.thisExpression();
             mem = builders.memberExpression(expr, prop, true);
             call = builders.callExpression(mem, [builders.spreadElement(rest)]);
-            statement = builders.expressionStatement(call);
-            body = builders.blockStatement([statement]);
+            body = builders.blockStatement([builders.returnStatement(call)]);
             meth = builders.identifier(overload.name);
             decls.push(make_method(meth, [builders.restElement(rest)], body, overload["static"]));
           }

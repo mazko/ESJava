@@ -675,49 +675,49 @@ class ClassicTokenizerImpl {
         return j;
     }
     yychar_fix(...args) {
-        this['yychar_fix$esjava$' + args.length](...args);
+        return this['yychar_fix$esjava$' + args.length](...args);
     }
     getText(...args) {
-        this['getText$esjava$' + args.length](...args);
+        return this['getText$esjava$' + args.length](...args);
     }
     setBufferSize(...args) {
-        this['setBufferSize$esjava$' + args.length](...args);
+        return this['setBufferSize$esjava$' + args.length](...args);
     }
     yyclose(...args) {
-        this['yyclose$esjava$' + args.length](...args);
+        return this['yyclose$esjava$' + args.length](...args);
     }
     yyreset(...args) {
-        this['yyreset$esjava$' + args.length](...args);
+        return this['yyreset$esjava$' + args.length](...args);
     }
     yystate(...args) {
-        this['yystate$esjava$' + args.length](...args);
+        return this['yystate$esjava$' + args.length](...args);
     }
     yybegin(...args) {
-        this['yybegin$esjava$' + args.length](...args);
+        return this['yybegin$esjava$' + args.length](...args);
     }
     yytext(...args) {
-        this['yytext$esjava$' + args.length](...args);
+        return this['yytext$esjava$' + args.length](...args);
     }
     yycharat(...args) {
-        this['yycharat$esjava$' + args.length](...args);
+        return this['yycharat$esjava$' + args.length](...args);
     }
     yylength(...args) {
-        this['yylength$esjava$' + args.length](...args);
+        return this['yylength$esjava$' + args.length](...args);
     }
     yypushback(...args) {
-        this['yypushback$esjava$' + args.length](...args);
+        return this['yypushback$esjava$' + args.length](...args);
     }
     getNextToken(...args) {
-        this['getNextToken$esjava$' + args.length](...args);
+        return this['getNextToken$esjava$' + args.length](...args);
     }
     ddd(...args) {
-        this['ddd$esjava$' + args.length](...args);
+        return this['ddd$esjava$' + args.length](...args);
     }
     static dddstatic(...args) {
-        ClassicTokenizerImpl['dddstatic$esjava$' + args.length](...args);
+        return ClassicTokenizerImpl['dddstatic$esjava$' + args.length](...args);
     }
     static overstatic(...args) {
-        ClassicTokenizerImpl['overstatic$esjava$' + args.length](...args);
+        return ClassicTokenizerImpl['overstatic$esjava$' + args.length](...args);
     }
 }
 class Test {
@@ -974,16 +974,16 @@ class Test {
         throw 'NotImpl < test_abstract$esjava$0 >';
     }
     test_instanceof(...args) {
-        this['test_instanceof$esjava$' + args.length](...args);
+        return this['test_instanceof$esjava$' + args.length](...args);
     }
     testyychar1(...args) {
-        this['testyychar1$esjava$' + args.length](...args);
+        return this['testyychar1$esjava$' + args.length](...args);
     }
     testyycharover1(...args) {
-        this['testyycharover1$esjava$' + args.length](...args);
+        return this['testyycharover1$esjava$' + args.length](...args);
     }
     test_abstract(...args) {
-        this['test_abstract$esjava$' + args.length](...args);
+        return this['test_abstract$esjava$' + args.length](...args);
     }
 }
 class TestInterface {
@@ -991,7 +991,7 @@ class TestInterface {
         throw 'NotImpl < test$esjava$0 >';
     }
     test(...args) {
-        this['test$esjava$' + args.length](...args);
+        return this['test$esjava$' + args.length](...args);
     }
 }
 class TestInterfaceClass extends TestInterface {
@@ -1224,10 +1224,10 @@ class Animal {
         Animal.test_not_final_not_literal = value;
     }
     static MessageBox(...args) {
-        Animal['MessageBox$esjava$' + args.length](...args);
+        return Animal['MessageBox$esjava$' + args.length](...args);
     }
     move(...args) {
-        this['move$esjava$' + args.length](...args);
+        return this['move$esjava$' + args.length](...args);
     }
 }
 class Snake extends Animal {
@@ -1239,7 +1239,7 @@ class Snake extends Animal {
         super.move$1(3);
     }
     move$0(...args) {
-        this['move$0$esjava$' + args.length](...args);
+        return this['move$0$esjava$' + args.length](...args);
     }
 }
 class Horse extends Animal {
@@ -1251,7 +1251,7 @@ class Horse extends Animal {
         super.move$1(-0x2a);
     }
     move$0(...args) {
-        this['move$0$esjava$' + args.length](...args);
+        return this['move$0$esjava$' + args.length](...args);
     }
 }
 class BabelEvaluate {
@@ -1268,7 +1268,7 @@ class BabelEvaluate {
         }
     }
     static main(...args) {
-        BabelEvaluate['main$esjava$' + args.length](...args);
+        return BabelEvaluate['main$esjava$' + args.length](...args);
     }
 }
 class Horse1 extends I.AM.NOT.IN.COMPILATION_UNIT.Animal {
@@ -1301,10 +1301,10 @@ class I_AM_IN_COMPILATION_UNIT_Animal {
         this._$esjava$horse_p = value;
     }
     hello(...args) {
-        this['hello$esjava$' + args.length](...args);
+        return this['hello$esjava$' + args.length](...args);
     }
     static hello_s(...args) {
-        I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length](...args);
+        return I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length](...args);
     }
 }
 class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
@@ -1347,10 +1347,10 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
         Horse2.test4_p = value;
     }
     hello1(...args) {
-        this['hello1$esjava$' + args.length](...args);
+        return this['hello1$esjava$' + args.length](...args);
     }
     static hello_s2(...args) {
-        Horse2['hello_s2$esjava$' + args.length](...args);
+        return Horse2['hello_s2$esjava$' + args.length](...args);
     }
 }
 class Horse3 extends Horse2 {
@@ -1385,10 +1385,10 @@ class Horse3 extends Horse2 {
         this.hello_p();
     }
     hello1(...args) {
-        this['hello1$esjava$' + args.length](...args);
+        return this['hello1$esjava$' + args.length](...args);
     }
     hello_self(...args) {
-        this['hello_self$esjava$' + args.length](...args);
+        return this['hello_self$esjava$' + args.length](...args);
     }
 }
 class AnimalOverload {
@@ -1415,12 +1415,12 @@ class AnimalOverload {
     static move2$esjava$2(a, b) {
     }
     static move(...args) {
-        AnimalOverload['move$esjava$' + args.length](...args);
+        return AnimalOverload['move$esjava$' + args.length](...args);
     }
     move(...args) {
-        this['move$esjava$' + args.length](...args);
+        return this['move$esjava$' + args.length](...args);
     }
     static move2(...args) {
-        AnimalOverload['move2$esjava$' + args.length](...args);
+        return AnimalOverload['move2$esjava$' + args.length](...args);
     }
 }

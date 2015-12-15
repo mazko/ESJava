@@ -30,8 +30,7 @@ class OverloadVisitor extends SuperVisitor
             builders.thisExpression()
           mem = builders.memberExpression expr, prop, yes
           call = builders.callExpression mem, [builders.spreadElement rest]
-          statement = builders.expressionStatement call
-          body = builders.blockStatement [statement]
+          body = builders.blockStatement [builders.returnStatement call]
           meth = builders.identifier overload.name
           decls.push make_method meth, [builders.restElement rest], body, overload.static
         lazy id, decls, args..., binding

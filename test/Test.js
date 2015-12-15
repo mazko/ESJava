@@ -760,7 +760,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key] = arguments[_key];
             }
 
-            this['yychar_fix$esjava$' + args.length].apply(this, args);
+            return this['yychar_fix$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'getText',
@@ -769,7 +769,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key2] = arguments[_key2];
             }
 
-            this['getText$esjava$' + args.length].apply(this, args);
+            return this['getText$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'setBufferSize',
@@ -778,7 +778,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key3] = arguments[_key3];
             }
 
-            this['setBufferSize$esjava$' + args.length].apply(this, args);
+            return this['setBufferSize$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yyclose',
@@ -787,7 +787,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key4] = arguments[_key4];
             }
 
-            this['yyclose$esjava$' + args.length].apply(this, args);
+            return this['yyclose$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yyreset',
@@ -796,7 +796,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key5] = arguments[_key5];
             }
 
-            this['yyreset$esjava$' + args.length].apply(this, args);
+            return this['yyreset$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yystate',
@@ -805,7 +805,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key6] = arguments[_key6];
             }
 
-            this['yystate$esjava$' + args.length].apply(this, args);
+            return this['yystate$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yybegin',
@@ -814,7 +814,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key7] = arguments[_key7];
             }
 
-            this['yybegin$esjava$' + args.length].apply(this, args);
+            return this['yybegin$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yytext',
@@ -823,7 +823,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key8] = arguments[_key8];
             }
 
-            this['yytext$esjava$' + args.length].apply(this, args);
+            return this['yytext$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yycharat',
@@ -832,7 +832,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key9] = arguments[_key9];
             }
 
-            this['yycharat$esjava$' + args.length].apply(this, args);
+            return this['yycharat$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yylength',
@@ -841,7 +841,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key10] = arguments[_key10];
             }
 
-            this['yylength$esjava$' + args.length].apply(this, args);
+            return this['yylength$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'yypushback',
@@ -850,7 +850,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key11] = arguments[_key11];
             }
 
-            this['yypushback$esjava$' + args.length].apply(this, args);
+            return this['yypushback$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'getNextToken',
@@ -859,7 +859,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key12] = arguments[_key12];
             }
 
-            this['getNextToken$esjava$' + args.length].apply(this, args);
+            return this['getNextToken$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'ddd',
@@ -868,7 +868,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key13] = arguments[_key13];
             }
 
-            this['ddd$esjava$' + args.length].apply(this, args);
+            return this['ddd$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'uuuuuuu',
@@ -981,7 +981,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key14] = arguments[_key14];
             }
 
-            ClassicTokenizerImpl['dddstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
+            return ClassicTokenizerImpl['dddstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
         }
     }, {
         key: 'overstatic',
@@ -990,7 +990,7 @@ var ClassicTokenizerImpl = (function () {
                 args[_key15] = arguments[_key15];
             }
 
-            ClassicTokenizerImpl['overstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
+            return ClassicTokenizerImpl['overstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
         }
     }, {
         key: 'zzzzzzzzzstatic',
@@ -1056,7 +1056,7 @@ var Test = (function () {
                 args[_key16] = arguments[_key16];
             }
 
-            this['test_instanceof$esjava$' + args.length].apply(this, args);
+            return this['test_instanceof$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'testyychar1',
@@ -1065,7 +1065,7 @@ var Test = (function () {
                 args[_key17] = arguments[_key17];
             }
 
-            this['testyychar1$esjava$' + args.length].apply(this, args);
+            return this['testyychar1$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'testyycharover1',
@@ -1074,7 +1074,7 @@ var Test = (function () {
                 args[_key18] = arguments[_key18];
             }
 
-            this['testyycharover1$esjava$' + args.length].apply(this, args);
+            return this['testyycharover1$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'test_abstract',
@@ -1083,7 +1083,7 @@ var Test = (function () {
                 args[_key19] = arguments[_key19];
             }
 
-            this['test_abstract$esjava$' + args.length].apply(this, args);
+            return this['test_abstract$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'double_init_test',
@@ -1382,7 +1382,7 @@ var TestInterface = (function () {
                 args[_key20] = arguments[_key20];
             }
 
-            this['test$esjava$' + args.length].apply(this, args);
+            return this['test$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1685,7 +1685,7 @@ var Animal = (function () {
                 args[_key21] = arguments[_key21];
             }
 
-            this['move$esjava$' + args.length].apply(this, args);
+            return this['move$esjava$' + args.length].apply(this, args);
         }
     }], [{
         key: 'MessageBox$esjava$1',
@@ -1699,7 +1699,7 @@ var Animal = (function () {
                 args[_key22] = arguments[_key22];
             }
 
-            Animal['MessageBox$esjava$' + args.length].apply(Animal, args);
+            return Animal['MessageBox$esjava$' + args.length].apply(Animal, args);
         }
     }, {
         key: 'U_YIN_YANG',
@@ -1778,7 +1778,7 @@ var Snake = (function (_Animal) {
                 args[_key23] = arguments[_key23];
             }
 
-            this['move$0$esjava$' + args.length].apply(this, args);
+            return this['move$0$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1807,7 +1807,7 @@ var Horse = (function (_Animal2) {
                 args[_key24] = arguments[_key24];
             }
 
-            this['move$0$esjava$' + args.length].apply(this, args);
+            return this['move$0$esjava$' + args.length].apply(this, args);
         }
     }]);
 
@@ -1837,7 +1837,7 @@ var BabelEvaluate = (function () {
                 args[_key25] = arguments[_key25];
             }
 
-            BabelEvaluate['main$esjava$' + args.length].apply(BabelEvaluate, args);
+            return BabelEvaluate['main$esjava$' + args.length].apply(BabelEvaluate, args);
         }
     }]);
 
@@ -1882,7 +1882,7 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
                 args[_key26] = arguments[_key26];
             }
 
-            this['hello$esjava$' + args.length].apply(this, args);
+            return this['hello$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'test',
@@ -1913,7 +1913,7 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
                 args[_key27] = arguments[_key27];
             }
 
-            I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length].apply(I_AM_IN_COMPILATION_UNIT_Animal, args);
+            return I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length].apply(I_AM_IN_COMPILATION_UNIT_Animal, args);
         }
     }]);
 
@@ -1953,7 +1953,7 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
                 args[_key28] = arguments[_key28];
             }
 
-            this['hello1$esjava$' + args.length].apply(this, args);
+            return this['hello1$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'test5',
@@ -1973,7 +1973,7 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
                 args[_key29] = arguments[_key29];
             }
 
-            Horse2['hello_s2$esjava$' + args.length].apply(Horse2, args);
+            return Horse2['hello_s2$esjava$' + args.length].apply(Horse2, args);
         }
     }, {
         key: 'test3_s',
@@ -2044,7 +2044,7 @@ var Horse3 = (function (_Horse) {
                 args[_key30] = arguments[_key30];
             }
 
-            this['hello1$esjava$' + args.length].apply(this, args);
+            return this['hello1$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'hello_self',
@@ -2053,7 +2053,7 @@ var Horse3 = (function (_Horse) {
                 args[_key31] = arguments[_key31];
             }
 
-            this['hello_self$esjava$' + args.length].apply(this, args);
+            return this['hello_self$esjava$' + args.length].apply(this, args);
         }
     }, {
         key: 'horse_p',
@@ -2097,7 +2097,7 @@ var AnimalOverload = (function () {
                 args[_key32] = arguments[_key32];
             }
 
-            this['move$esjava$' + args.length].apply(this, args);
+            return this['move$esjava$' + args.length].apply(this, args);
         }
     }], [{
         key: 'move_ps_has_ho_route$esjava$0',
@@ -2121,7 +2121,7 @@ var AnimalOverload = (function () {
                 args[_key33] = arguments[_key33];
             }
 
-            AnimalOverload['move$esjava$' + args.length].apply(AnimalOverload, args);
+            return AnimalOverload['move$esjava$' + args.length].apply(AnimalOverload, args);
         }
     }, {
         key: 'move2',
@@ -2130,7 +2130,7 @@ var AnimalOverload = (function () {
                 args[_key34] = arguments[_key34];
             }
 
-            AnimalOverload['move2$esjava$' + args.length].apply(AnimalOverload, args);
+            return AnimalOverload['move2$esjava$' + args.length].apply(AnimalOverload, args);
         }
     }]);
 
