@@ -5,6 +5,6 @@
 
 - [Online Demo](http://mazko.github.io/ESJava)
 
-- Real World Examples: [Lucene Tokenizers](http://mazko.github.io/blog/posts/2015/10/21/kak-perestat-bespokoitsia-i-nachat-portirovat/)
+- Real World Examples: [Lucene Tokenizers](http://mazko.github.io/blog/posts/2015/10/21/kak-perestat-bespokoitsia-i-nachat-portirovat/) | [Snowball Stemmers](https://github.com/mazko/jssnowball)
 
 - [Parser Only](http://mazko.github.io/jsjavaparser)
