@@ -51,7 +51,7 @@ abstract class Animal {
         // System.out.println(msg);
         alert(msg);
     }
-    void move(int meters) {
+    void move(long meters) {
         MessageBox(name + &quot; moved &quot; + meters + &quot;m.&quot;);
     }
     abstract void move();
@@ -63,10 +63,16 @@ class Snake extends Animal {
     Snake(String name) {
         super(name);
     }
+
     @Override
     void move() {
         MessageBox(&quot;Slithering \u2621 ...&quot;);
         super.move(3);
+    }
+
+    @Override
+    void move(long meters) {
+        super.move(2 * meters);
     }
 }
 
@@ -89,6 +95,7 @@ public class BabelEvaluate {
         };
         for (int in = 0; in &lt; animals.length; in++) {
             animals[in].move();
+            // animals[in].move(in + 5);
         }
     }
 }
