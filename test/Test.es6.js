@@ -675,49 +675,113 @@ class ClassicTokenizerImpl {
         return j;
     }
     yychar_fix(...args) {
-        return this['yychar_fix$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.yychar_fix$esjava$0(...args);
+        }
+        return super.yychar_fix(...args);
     }
     getText(...args) {
-        return this['getText$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.getText$esjava$1(...args);
+        }
+        return super.getText(...args);
     }
     setBufferSize(...args) {
-        return this['setBufferSize$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.setBufferSize$esjava$1(...args);
+        }
+        return super.setBufferSize(...args);
     }
     yyclose(...args) {
-        return this['yyclose$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.yyclose$esjava$0(...args);
+        }
+        return super.yyclose(...args);
     }
     yyreset(...args) {
-        return this['yyreset$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.yyreset$esjava$1(...args);
+        }
+        return super.yyreset(...args);
     }
     yystate(...args) {
-        return this['yystate$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.yystate$esjava$0(...args);
+        }
+        return super.yystate(...args);
     }
     yybegin(...args) {
-        return this['yybegin$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.yybegin$esjava$1(...args);
+        }
+        return super.yybegin(...args);
     }
     yytext(...args) {
-        return this['yytext$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.yytext$esjava$0(...args);
+        }
+        return super.yytext(...args);
     }
     yycharat(...args) {
-        return this['yycharat$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.yycharat$esjava$1(...args);
+        }
+        return super.yycharat(...args);
     }
     yylength(...args) {
-        return this['yylength$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.yylength$esjava$0(...args);
+        }
+        return super.yylength(...args);
     }
     yypushback(...args) {
-        return this['yypushback$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.yypushback$esjava$1(...args);
+        }
+        return super.yypushback(...args);
     }
     getNextToken(...args) {
-        return this['getNextToken$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.getNextToken$esjava$0(...args);
+        }
+        return super.getNextToken(...args);
     }
     ddd(...args) {
-        return this['ddd$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.ddd$esjava$0(...args);
+        case 1:
+            return this.ddd$esjava$1(...args);
+        }
+        return super.ddd(...args);
     }
     static dddstatic(...args) {
-        return ClassicTokenizerImpl['dddstatic$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return ClassicTokenizerImpl.dddstatic$esjava$1(...args);
+        }
+        return super.dddstatic(...args);
     }
     static overstatic(...args) {
-        return ClassicTokenizerImpl['overstatic$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return ClassicTokenizerImpl.overstatic$esjava$1(...args);
+        case 0:
+            return ClassicTokenizerImpl.overstatic$esjava$0(...args);
+        }
+        return super.overstatic(...args);
     }
 }
 class Test {
@@ -974,16 +1038,34 @@ class Test {
         throw 'NotImpl < test_abstract$esjava$0 >';
     }
     test_instanceof(...args) {
-        return this['test_instanceof$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.test_instanceof$esjava$0(...args);
+        }
+        return super.test_instanceof(...args);
     }
     testyychar1(...args) {
-        return this['testyychar1$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.testyychar1$esjava$0(...args);
+        }
+        return super.testyychar1(...args);
     }
     testyycharover1(...args) {
-        return this['testyycharover1$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.testyycharover1$esjava$0(...args);
+        case 1:
+            return this.testyycharover1$esjava$1(...args);
+        }
+        return super.testyycharover1(...args);
     }
     test_abstract(...args) {
-        return this['test_abstract$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.test_abstract$esjava$0(...args);
+        }
+        return super.test_abstract(...args);
     }
 }
 class TestInterface {
@@ -991,7 +1073,11 @@ class TestInterface {
         throw 'NotImpl < test$esjava$0 >';
     }
     test(...args) {
-        return this['test$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.test$esjava$0(...args);
+        }
+        return super.test(...args);
     }
 }
 class TestInterfaceClass extends TestInterface {
@@ -1224,10 +1310,20 @@ class Animal {
         Animal.test_not_final_not_literal = v;
     }
     static MessageBox(...args) {
-        return Animal['MessageBox$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return Animal.MessageBox$esjava$1(...args);
+        }
+        return super.MessageBox(...args);
     }
     move(...args) {
-        return this['move$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.move$esjava$1(...args);
+        case 0:
+            return this.move$esjava$0(...args);
+        }
+        return super.move(...args);
     }
 }
 class Snake extends Animal {
@@ -1239,7 +1335,11 @@ class Snake extends Animal {
         super.move$1(3);
     }
     move$0(...args) {
-        return this['move$0$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.move$0$esjava$0(...args);
+        }
+        return super.move$0(...args);
     }
 }
 class Horse extends Animal {
@@ -1251,7 +1351,11 @@ class Horse extends Animal {
         super.move$1(-0x2a);
     }
     move$0(...args) {
-        return this['move$0$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.move$0$esjava$0(...args);
+        }
+        return super.move$0(...args);
     }
 }
 class BabelEvaluate {
@@ -1268,7 +1372,11 @@ class BabelEvaluate {
         }
     }
     static main(...args) {
-        return BabelEvaluate['main$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return BabelEvaluate.main$esjava$1(...args);
+        }
+        return super.main(...args);
     }
 }
 class Horse1 extends I.AM.NOT.IN.COMPILATION_UNIT.Animal {
@@ -1301,10 +1409,18 @@ class I_AM_IN_COMPILATION_UNIT_Animal {
         this._$esjava$horse_p = v;
     }
     hello(...args) {
-        return this['hello$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.hello$esjava$0(...args);
+        }
+        return super.hello(...args);
     }
     static hello_s(...args) {
-        return I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return I_AM_IN_COMPILATION_UNIT_Animal.hello_s$esjava$0(...args);
+        }
+        return super.hello_s(...args);
     }
 }
 class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
@@ -1347,10 +1463,18 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
         Horse2.test4_p = v;
     }
     hello1(...args) {
-        return this['hello1$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.hello1$esjava$0(...args);
+        }
+        return super.hello1(...args);
     }
     static hello_s2(...args) {
-        return Horse2['hello_s2$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return Horse2.hello_s2$esjava$0(...args);
+        }
+        return super.hello_s2(...args);
     }
 }
 class Horse3 extends Horse2 {
@@ -1385,10 +1509,18 @@ class Horse3 extends Horse2 {
         this.hello_p();
     }
     hello1(...args) {
-        return this['hello1$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.hello1$esjava$0(...args);
+        }
+        return super.hello1(...args);
     }
     hello_self(...args) {
-        return this['hello_self$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return this.hello_self$esjava$0(...args);
+        }
+        return super.hello_self(...args);
     }
 }
 class AnimalOverload {
@@ -1415,12 +1547,28 @@ class AnimalOverload {
     static move2$esjava$2(a, b) {
     }
     static move(...args) {
-        return AnimalOverload['move$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 2:
+            return AnimalOverload.move$esjava$2(...args);
+        }
+        return super.move(...args);
     }
     move(...args) {
-        return this['move$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 1:
+            return this.move$esjava$1(...args);
+        case 0:
+            return this.move$esjava$0(...args);
+        }
+        return super.move(...args);
     }
     static move2(...args) {
-        return AnimalOverload['move2$esjava$' + args.length](...args);
+        switch (args.length) {
+        case 0:
+            return AnimalOverload.move2$esjava$0(...args);
+        case 2:
+            return AnimalOverload.move2$esjava$2(...args);
+        }
+        return super.move2(...args);
     }
 }

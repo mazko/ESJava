@@ -756,119 +756,199 @@ var ClassicTokenizerImpl = (function () {
     }, {
         key: 'yychar_fix',
         value: function yychar_fix() {
+            var _get2;
+
             for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
                 args[_key] = arguments[_key];
             }
 
-            return this['yychar_fix$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.yychar_fix$esjava$0.apply(this, args);
+            }
+            return (_get2 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yychar_fix', this)).call.apply(_get2, [this].concat(args));
         }
     }, {
         key: 'getText',
         value: function getText() {
+            var _get3;
+
             for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
                 args[_key2] = arguments[_key2];
             }
 
-            return this['getText$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.getText$esjava$1.apply(this, args);
+            }
+            return (_get3 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'getText', this)).call.apply(_get3, [this].concat(args));
         }
     }, {
         key: 'setBufferSize',
         value: function setBufferSize() {
+            var _get4;
+
             for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
                 args[_key3] = arguments[_key3];
             }
 
-            return this['setBufferSize$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.setBufferSize$esjava$1.apply(this, args);
+            }
+            return (_get4 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'setBufferSize', this)).call.apply(_get4, [this].concat(args));
         }
     }, {
         key: 'yyclose',
         value: function yyclose() {
+            var _get5;
+
             for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
                 args[_key4] = arguments[_key4];
             }
 
-            return this['yyclose$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.yyclose$esjava$0.apply(this, args);
+            }
+            return (_get5 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yyclose', this)).call.apply(_get5, [this].concat(args));
         }
     }, {
         key: 'yyreset',
         value: function yyreset() {
+            var _get6;
+
             for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
                 args[_key5] = arguments[_key5];
             }
 
-            return this['yyreset$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.yyreset$esjava$1.apply(this, args);
+            }
+            return (_get6 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yyreset', this)).call.apply(_get6, [this].concat(args));
         }
     }, {
         key: 'yystate',
         value: function yystate() {
+            var _get7;
+
             for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
                 args[_key6] = arguments[_key6];
             }
 
-            return this['yystate$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.yystate$esjava$0.apply(this, args);
+            }
+            return (_get7 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yystate', this)).call.apply(_get7, [this].concat(args));
         }
     }, {
         key: 'yybegin',
         value: function yybegin() {
+            var _get8;
+
             for (var _len7 = arguments.length, args = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
                 args[_key7] = arguments[_key7];
             }
 
-            return this['yybegin$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.yybegin$esjava$1.apply(this, args);
+            }
+            return (_get8 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yybegin', this)).call.apply(_get8, [this].concat(args));
         }
     }, {
         key: 'yytext',
         value: function yytext() {
+            var _get9;
+
             for (var _len8 = arguments.length, args = Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
                 args[_key8] = arguments[_key8];
             }
 
-            return this['yytext$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.yytext$esjava$0.apply(this, args);
+            }
+            return (_get9 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yytext', this)).call.apply(_get9, [this].concat(args));
         }
     }, {
         key: 'yycharat',
         value: function yycharat() {
+            var _get10;
+
             for (var _len9 = arguments.length, args = Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
                 args[_key9] = arguments[_key9];
             }
 
-            return this['yycharat$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.yycharat$esjava$1.apply(this, args);
+            }
+            return (_get10 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yycharat', this)).call.apply(_get10, [this].concat(args));
         }
     }, {
         key: 'yylength',
         value: function yylength() {
+            var _get11;
+
             for (var _len10 = arguments.length, args = Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
                 args[_key10] = arguments[_key10];
             }
 
-            return this['yylength$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.yylength$esjava$0.apply(this, args);
+            }
+            return (_get11 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yylength', this)).call.apply(_get11, [this].concat(args));
         }
     }, {
         key: 'yypushback',
         value: function yypushback() {
+            var _get12;
+
             for (var _len11 = arguments.length, args = Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
                 args[_key11] = arguments[_key11];
             }
 
-            return this['yypushback$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.yypushback$esjava$1.apply(this, args);
+            }
+            return (_get12 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'yypushback', this)).call.apply(_get12, [this].concat(args));
         }
     }, {
         key: 'getNextToken',
         value: function getNextToken() {
+            var _get13;
+
             for (var _len12 = arguments.length, args = Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
                 args[_key12] = arguments[_key12];
             }
 
-            return this['getNextToken$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.getNextToken$esjava$0.apply(this, args);
+            }
+            return (_get13 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'getNextToken', this)).call.apply(_get13, [this].concat(args));
         }
     }, {
         key: 'ddd',
         value: function ddd() {
+            var _get14;
+
             for (var _len13 = arguments.length, args = Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
                 args[_key13] = arguments[_key13];
             }
 
-            return this['ddd$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.ddd$esjava$0.apply(this, args);
+                case 1:
+                    return this.ddd$esjava$1.apply(this, args);
+            }
+            return (_get14 = _get(Object.getPrototypeOf(ClassicTokenizerImpl.prototype), 'ddd', this)).call.apply(_get14, [this].concat(args));
         }
     }, {
         key: 'uuuuuuu',
@@ -977,20 +1057,34 @@ var ClassicTokenizerImpl = (function () {
     }, {
         key: 'dddstatic',
         value: function dddstatic() {
+            var _get15;
+
             for (var _len14 = arguments.length, args = Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
                 args[_key14] = arguments[_key14];
             }
 
-            return ClassicTokenizerImpl['dddstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
+            switch (args.length) {
+                case 1:
+                    return ClassicTokenizerImpl.dddstatic$esjava$1.apply(ClassicTokenizerImpl, args);
+            }
+            return (_get15 = _get(Object.getPrototypeOf(ClassicTokenizerImpl), 'dddstatic', this)).call.apply(_get15, [this].concat(args));
         }
     }, {
         key: 'overstatic',
         value: function overstatic() {
+            var _get16;
+
             for (var _len15 = arguments.length, args = Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
                 args[_key15] = arguments[_key15];
             }
 
-            return ClassicTokenizerImpl['overstatic$esjava$' + args.length].apply(ClassicTokenizerImpl, args);
+            switch (args.length) {
+                case 1:
+                    return ClassicTokenizerImpl.overstatic$esjava$1.apply(ClassicTokenizerImpl, args);
+                case 0:
+                    return ClassicTokenizerImpl.overstatic$esjava$0.apply(ClassicTokenizerImpl, args);
+            }
+            return (_get16 = _get(Object.getPrototypeOf(ClassicTokenizerImpl), 'overstatic', this)).call.apply(_get16, [this].concat(args));
         }
     }, {
         key: 'zzzzzzzzzstatic',
@@ -1052,38 +1146,64 @@ var Test = (function () {
     }, {
         key: 'test_instanceof',
         value: function test_instanceof() {
+            var _get17;
+
             for (var _len16 = arguments.length, args = Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
                 args[_key16] = arguments[_key16];
             }
 
-            return this['test_instanceof$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.test_instanceof$esjava$0.apply(this, args);
+            }
+            return (_get17 = _get(Object.getPrototypeOf(Test.prototype), 'test_instanceof', this)).call.apply(_get17, [this].concat(args));
         }
     }, {
         key: 'testyychar1',
         value: function testyychar1() {
+            var _get18;
+
             for (var _len17 = arguments.length, args = Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
                 args[_key17] = arguments[_key17];
             }
 
-            return this['testyychar1$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.testyychar1$esjava$0.apply(this, args);
+            }
+            return (_get18 = _get(Object.getPrototypeOf(Test.prototype), 'testyychar1', this)).call.apply(_get18, [this].concat(args));
         }
     }, {
         key: 'testyycharover1',
         value: function testyycharover1() {
+            var _get19;
+
             for (var _len18 = arguments.length, args = Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
                 args[_key18] = arguments[_key18];
             }
 
-            return this['testyycharover1$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.testyycharover1$esjava$0.apply(this, args);
+                case 1:
+                    return this.testyycharover1$esjava$1.apply(this, args);
+            }
+            return (_get19 = _get(Object.getPrototypeOf(Test.prototype), 'testyycharover1', this)).call.apply(_get19, [this].concat(args));
         }
     }, {
         key: 'test_abstract',
         value: function test_abstract() {
+            var _get20;
+
             for (var _len19 = arguments.length, args = Array(_len19), _key19 = 0; _key19 < _len19; _key19++) {
                 args[_key19] = arguments[_key19];
             }
 
-            return this['test_abstract$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.test_abstract$esjava$0.apply(this, args);
+            }
+            return (_get20 = _get(Object.getPrototypeOf(Test.prototype), 'test_abstract', this)).call.apply(_get20, [this].concat(args));
         }
     }, {
         key: 'double_init_test',
@@ -1378,11 +1498,17 @@ var TestInterface = (function () {
     }, {
         key: 'test',
         value: function test() {
+            var _get21;
+
             for (var _len20 = arguments.length, args = Array(_len20), _key20 = 0; _key20 < _len20; _key20++) {
                 args[_key20] = arguments[_key20];
             }
 
-            return this['test$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.test$esjava$0.apply(this, args);
+            }
+            return (_get21 = _get(Object.getPrototypeOf(TestInterface.prototype), 'test', this)).call.apply(_get21, [this].concat(args));
         }
     }]);
 
@@ -1681,11 +1807,19 @@ var Animal = (function () {
     }, {
         key: 'move',
         value: function move() {
+            var _get22;
+
             for (var _len21 = arguments.length, args = Array(_len21), _key21 = 0; _key21 < _len21; _key21++) {
                 args[_key21] = arguments[_key21];
             }
 
-            return this['move$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.move$esjava$1.apply(this, args);
+                case 0:
+                    return this.move$esjava$0.apply(this, args);
+            }
+            return (_get22 = _get(Object.getPrototypeOf(Animal.prototype), 'move', this)).call.apply(_get22, [this].concat(args));
         }
     }], [{
         key: 'MessageBox$esjava$1',
@@ -1695,11 +1829,17 @@ var Animal = (function () {
     }, {
         key: 'MessageBox',
         value: function MessageBox() {
+            var _get23;
+
             for (var _len22 = arguments.length, args = Array(_len22), _key22 = 0; _key22 < _len22; _key22++) {
                 args[_key22] = arguments[_key22];
             }
 
-            return Animal['MessageBox$esjava$' + args.length].apply(Animal, args);
+            switch (args.length) {
+                case 1:
+                    return Animal.MessageBox$esjava$1.apply(Animal, args);
+            }
+            return (_get23 = _get(Object.getPrototypeOf(Animal), 'MessageBox', this)).call.apply(_get23, [this].concat(args));
         }
     }, {
         key: 'U_YIN_YANG',
@@ -1774,11 +1914,17 @@ var Snake = (function (_Animal) {
     }, {
         key: 'move$0',
         value: function move$0() {
+            var _get24;
+
             for (var _len23 = arguments.length, args = Array(_len23), _key23 = 0; _key23 < _len23; _key23++) {
                 args[_key23] = arguments[_key23];
             }
 
-            return this['move$0$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.move$0$esjava$0.apply(this, args);
+            }
+            return (_get24 = _get(Object.getPrototypeOf(Snake.prototype), 'move$0', this)).call.apply(_get24, [this].concat(args));
         }
     }]);
 
@@ -1803,11 +1949,17 @@ var Horse = (function (_Animal2) {
     }, {
         key: 'move$0',
         value: function move$0() {
+            var _get25;
+
             for (var _len24 = arguments.length, args = Array(_len24), _key24 = 0; _key24 < _len24; _key24++) {
                 args[_key24] = arguments[_key24];
             }
 
-            return this['move$0$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.move$0$esjava$0.apply(this, args);
+            }
+            return (_get25 = _get(Object.getPrototypeOf(Horse.prototype), 'move$0', this)).call.apply(_get25, [this].concat(args));
         }
     }]);
 
@@ -1833,11 +1985,17 @@ var BabelEvaluate = (function () {
     }, {
         key: 'main',
         value: function main() {
+            var _get26;
+
             for (var _len25 = arguments.length, args = Array(_len25), _key25 = 0; _key25 < _len25; _key25++) {
                 args[_key25] = arguments[_key25];
             }
 
-            return BabelEvaluate['main$esjava$' + args.length].apply(BabelEvaluate, args);
+            switch (args.length) {
+                case 1:
+                    return BabelEvaluate.main$esjava$1.apply(BabelEvaluate, args);
+            }
+            return (_get26 = _get(Object.getPrototypeOf(BabelEvaluate), 'main', this)).call.apply(_get26, [this].concat(args));
         }
     }]);
 
@@ -1878,11 +2036,17 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
     }, {
         key: 'hello',
         value: function hello() {
+            var _get27;
+
             for (var _len26 = arguments.length, args = Array(_len26), _key26 = 0; _key26 < _len26; _key26++) {
                 args[_key26] = arguments[_key26];
             }
 
-            return this['hello$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.hello$esjava$0.apply(this, args);
+            }
+            return (_get27 = _get(Object.getPrototypeOf(I_AM_IN_COMPILATION_UNIT_Animal.prototype), 'hello', this)).call.apply(_get27, [this].concat(args));
         }
     }, {
         key: 'test',
@@ -1909,11 +2073,17 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
     }, {
         key: 'hello_s',
         value: function hello_s() {
+            var _get28;
+
             for (var _len27 = arguments.length, args = Array(_len27), _key27 = 0; _key27 < _len27; _key27++) {
                 args[_key27] = arguments[_key27];
             }
 
-            return I_AM_IN_COMPILATION_UNIT_Animal['hello_s$esjava$' + args.length].apply(I_AM_IN_COMPILATION_UNIT_Animal, args);
+            switch (args.length) {
+                case 0:
+                    return I_AM_IN_COMPILATION_UNIT_Animal.hello_s$esjava$0.apply(I_AM_IN_COMPILATION_UNIT_Animal, args);
+            }
+            return (_get28 = _get(Object.getPrototypeOf(I_AM_IN_COMPILATION_UNIT_Animal), 'hello_s', this)).call.apply(_get28, [this].concat(args));
         }
     }]);
 
@@ -1949,11 +2119,17 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
     }, {
         key: 'hello1',
         value: function hello1() {
+            var _get29;
+
             for (var _len28 = arguments.length, args = Array(_len28), _key28 = 0; _key28 < _len28; _key28++) {
                 args[_key28] = arguments[_key28];
             }
 
-            return this['hello1$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.hello1$esjava$0.apply(this, args);
+            }
+            return (_get29 = _get(Object.getPrototypeOf(Horse2.prototype), 'hello1', this)).call.apply(_get29, [this].concat(args));
         }
     }, {
         key: 'test5',
@@ -1969,11 +2145,17 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
     }, {
         key: 'hello_s2',
         value: function hello_s2() {
+            var _get30;
+
             for (var _len29 = arguments.length, args = Array(_len29), _key29 = 0; _key29 < _len29; _key29++) {
                 args[_key29] = arguments[_key29];
             }
 
-            return Horse2['hello_s2$esjava$' + args.length].apply(Horse2, args);
+            switch (args.length) {
+                case 0:
+                    return Horse2.hello_s2$esjava$0.apply(Horse2, args);
+            }
+            return (_get30 = _get(Object.getPrototypeOf(Horse2), 'hello_s2', this)).call.apply(_get30, [this].concat(args));
         }
     }, {
         key: 'test3_s',
@@ -2040,20 +2222,32 @@ var Horse3 = (function (_Horse) {
     }, {
         key: 'hello1',
         value: function hello1() {
+            var _get31;
+
             for (var _len30 = arguments.length, args = Array(_len30), _key30 = 0; _key30 < _len30; _key30++) {
                 args[_key30] = arguments[_key30];
             }
 
-            return this['hello1$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.hello1$esjava$0.apply(this, args);
+            }
+            return (_get31 = _get(Object.getPrototypeOf(Horse3.prototype), 'hello1', this)).call.apply(_get31, [this].concat(args));
         }
     }, {
         key: 'hello_self',
         value: function hello_self() {
+            var _get32;
+
             for (var _len31 = arguments.length, args = Array(_len31), _key31 = 0; _key31 < _len31; _key31++) {
                 args[_key31] = arguments[_key31];
             }
 
-            return this['hello_self$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 0:
+                    return this.hello_self$esjava$0.apply(this, args);
+            }
+            return (_get32 = _get(Object.getPrototypeOf(Horse3.prototype), 'hello_self', this)).call.apply(_get32, [this].concat(args));
         }
     }, {
         key: 'horse_p',
@@ -2093,11 +2287,19 @@ var AnimalOverload = (function () {
     }, {
         key: 'move',
         value: function move() {
+            var _get33;
+
             for (var _len32 = arguments.length, args = Array(_len32), _key32 = 0; _key32 < _len32; _key32++) {
                 args[_key32] = arguments[_key32];
             }
 
-            return this['move$esjava$' + args.length].apply(this, args);
+            switch (args.length) {
+                case 1:
+                    return this.move$esjava$1.apply(this, args);
+                case 0:
+                    return this.move$esjava$0.apply(this, args);
+            }
+            return (_get33 = _get(Object.getPrototypeOf(AnimalOverload.prototype), 'move', this)).call.apply(_get33, [this].concat(args));
         }
     }], [{
         key: 'move_ps_has_ho_route$esjava$0',
@@ -2117,20 +2319,34 @@ var AnimalOverload = (function () {
     }, {
         key: 'move',
         value: function move() {
+            var _get34;
+
             for (var _len33 = arguments.length, args = Array(_len33), _key33 = 0; _key33 < _len33; _key33++) {
                 args[_key33] = arguments[_key33];
             }
 
-            return AnimalOverload['move$esjava$' + args.length].apply(AnimalOverload, args);
+            switch (args.length) {
+                case 2:
+                    return AnimalOverload.move$esjava$2.apply(AnimalOverload, args);
+            }
+            return (_get34 = _get(Object.getPrototypeOf(AnimalOverload), 'move', this)).call.apply(_get34, [this].concat(args));
         }
     }, {
         key: 'move2',
         value: function move2() {
+            var _get35;
+
             for (var _len34 = arguments.length, args = Array(_len34), _key34 = 0; _key34 < _len34; _key34++) {
                 args[_key34] = arguments[_key34];
             }
 
-            return AnimalOverload['move2$esjava$' + args.length].apply(AnimalOverload, args);
+            switch (args.length) {
+                case 0:
+                    return AnimalOverload.move2$esjava$0.apply(AnimalOverload, args);
+                case 2:
+                    return AnimalOverload.move2$esjava$2.apply(AnimalOverload, args);
+            }
+            return (_get35 = _get(Object.getPrototypeOf(AnimalOverload), 'move2', this)).call.apply(_get35, [this].concat(args));
         }
     }]);
 

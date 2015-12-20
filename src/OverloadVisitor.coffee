@@ -18,22 +18,29 @@ class OverloadVisitor extends SuperVisitor
   visitTypeDeclaration: (node, binding, args...) ->
     su = super node, binding, args...
     (lazy) ->
-      su (id, decls, args..., binding) ->
-        for overload in binding.ls_potential_overloads()
-          lit = builders.literal overload.name + overload.pattern
-          rest = builders.identifier 'args'
-          prop = builders.memberExpression rest, builders.identifier 'length'
-          prop = builders.binaryExpression '+', lit, prop
-          expr = if overload.static
-            binding.class_id
+      su (__id, __decls, __args..., __binding) ->
+        for o in __binding.ls_potential_overloads()
+          expr = if o.static
+            __binding.class_id
           else
             builders.thisExpression()
-          mem = builders.memberExpression expr, prop, yes
-          call = builders.callExpression mem, [builders.spreadElement rest]
-          body = builders.blockStatement [builders.returnStatement call]
-          meth = builders.identifier overload.name
-          decls.push make_method meth, [builders.restElement rest], body, overload.static
-        lazy id, decls, args..., binding
+          rest = builders.identifier 'args'
+          cases = for par_cnt in o.pars
+            nm = builders.identifier __binding.overload o.name, new Array par_cnt
+            call = builders.memberExpression expr, nm, no
+            call = builders.callExpression call, [builders.spreadElement rest]
+            test = builders.literal par_cnt
+            builders.switchCase test, [builders.returnStatement call]
+          discriminant = builders.memberExpression rest, builders.identifier 'length'
+          sw = builders.switchStatement discriminant, cases
+          # http://www.2ality.com/2015/02/es6-classes-final.html
+          # super-call static methods works both wit instance & class
+          meth = builders.identifier o.name
+          def_call = builders.memberExpression builders.super(), meth
+          def_call = builders.callExpression def_call, [builders.spreadElement rest]
+          body = builders.blockStatement [sw, builders.returnStatement def_call]
+          __decls.push make_method meth, [builders.restElement rest], body, o.static
+        lazy __id, __decls, __args..., __binding
 
   visitMethodDeclaration: (node, binding, args...) ->
     su = super node, binding, args...

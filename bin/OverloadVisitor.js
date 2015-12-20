@@ -44,23 +44,36 @@
       su = OverloadVisitor.__super__.visitTypeDeclaration.apply(this, [node, binding].concat(slice.call(args)));
       return function(lazy) {
         return su(function() {
-          var args, binding, body, call, decls, expr, i, id, j, len, lit, mem, meth, overload, prop, ref, rest;
-          id = arguments[0], decls = arguments[1], args = 4 <= arguments.length ? slice.call(arguments, 2, i = arguments.length - 1) : (i = 2, []), binding = arguments[i++];
-          ref = binding.ls_potential_overloads();
+          var __args, __binding, __decls, __id, body, call, cases, def_call, discriminant, expr, i, j, len, meth, nm, o, par_cnt, ref, rest, sw, test;
+          __id = arguments[0], __decls = arguments[1], __args = 4 <= arguments.length ? slice.call(arguments, 2, i = arguments.length - 1) : (i = 2, []), __binding = arguments[i++];
+          ref = __binding.ls_potential_overloads();
           for (j = 0, len = ref.length; j < len; j++) {
-            overload = ref[j];
-            lit = builders.literal(overload.name + overload.pattern);
+            o = ref[j];
+            expr = o["static"] ? __binding.class_id : builders.thisExpression();
             rest = builders.identifier('args');
-            prop = builders.memberExpression(rest, builders.identifier('length'));
-            prop = builders.binaryExpression('+', lit, prop);
-            expr = overload["static"] ? binding.class_id : builders.thisExpression();
-            mem = builders.memberExpression(expr, prop, true);
-            call = builders.callExpression(mem, [builders.spreadElement(rest)]);
-            body = builders.blockStatement([builders.returnStatement(call)]);
-            meth = builders.identifier(overload.name);
-            decls.push(make_method(meth, [builders.restElement(rest)], body, overload["static"]));
+            cases = (function() {
+              var k, len1, ref1, results;
+              ref1 = o.pars;
+              results = [];
+              for (k = 0, len1 = ref1.length; k < len1; k++) {
+                par_cnt = ref1[k];
+                nm = builders.identifier(__binding.overload(o.name, new Array(par_cnt)));
+                call = builders.memberExpression(expr, nm, false);
+                call = builders.callExpression(call, [builders.spreadElement(rest)]);
+                test = builders.literal(par_cnt);
+                results.push(builders.switchCase(test, [builders.returnStatement(call)]));
+              }
+              return results;
+            })();
+            discriminant = builders.memberExpression(rest, builders.identifier('length'));
+            sw = builders.switchStatement(discriminant, cases);
+            meth = builders.identifier(o.name);
+            def_call = builders.memberExpression(builders["super"](), meth);
+            def_call = builders.callExpression(def_call, [builders.spreadElement(rest)]);
+            body = builders.blockStatement([sw, builders.returnStatement(def_call)]);
+            __decls.push(make_method(meth, [builders.restElement(rest)], body, o["static"]));
           }
-          return lazy.apply(null, [id, decls].concat(slice.call(args), [binding]));
+          return lazy.apply(null, [__id, __decls].concat(slice.call(__args), [__binding]));
         });
       };
     };

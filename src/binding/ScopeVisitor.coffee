@@ -126,8 +126,10 @@ class MemberScope
         ls = []
         _methods.each (k,v) ->
           o = (c for c in v when not c.super and not c.private and not c.ctor)
-          ls.push name:k, static:yes, pattern:'$esjava$' if (c for c in o when c.static).length
-          ls.push name:k, static:no, pattern:'$esjava$' if (c for c in o when not c.static).length
+          statics = (c.overload for c in o when c.static)
+          ls.push name:k, static:yes, pars:statics if statics.length
+          instances = (c.overload for c in o when not c.static)
+          ls.push name:k, static:no, pars:instances if instances.length
         ls
 
       overload: (name, params) => 

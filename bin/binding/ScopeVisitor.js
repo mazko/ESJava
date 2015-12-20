@@ -309,7 +309,7 @@
           var ls;
           ls = [];
           _methods.each(function(k, v) {
-            var c, o;
+            var c, instances, o, statics;
             o = (function() {
               var i, len, results;
               results = [];
@@ -321,38 +321,40 @@
               }
               return results;
             })();
-            if (((function() {
+            statics = (function() {
               var i, len, results;
               results = [];
               for (i = 0, len = o.length; i < len; i++) {
                 c = o[i];
                 if (c["static"]) {
-                  results.push(c);
+                  results.push(c.overload);
                 }
               }
               return results;
-            })()).length) {
+            })();
+            if (statics.length) {
               ls.push({
                 name: k,
                 "static": true,
-                pattern: '$esjava$'
+                pars: statics
               });
             }
-            if (((function() {
+            instances = (function() {
               var i, len, results;
               results = [];
               for (i = 0, len = o.length; i < len; i++) {
                 c = o[i];
                 if (!c["static"]) {
-                  results.push(c);
+                  results.push(c.overload);
                 }
               }
               return results;
-            })()).length) {
+            })();
+            if (instances.length) {
               return ls.push({
                 name: k,
                 "static": false,
-                pattern: '$esjava$'
+                pars: instances
               });
             }
           });
