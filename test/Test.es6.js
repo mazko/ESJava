@@ -1572,3 +1572,123 @@ class AnimalOverload {
         return super.move2(...args);
     }
 }
+class SuperAnimal {
+    get name() {
+        return Object.prototype.hasOwnProperty.call(this, '_$esjava$name') ? this._$esjava$name : this._$esjava$name = null;
+    }
+    set name(v) {
+        this._$esjava$name = v;
+    }
+    constructor(name) {
+        this.name = name;
+    }
+    static MessageBox$esjava$1(msg) {
+        System.out.println(msg);
+    }
+    bad$esjava$0() {
+        return "";
+    }
+    move$esjava$1(meters) {
+        SuperAnimal.MessageBox$esjava$1(this.bad$esjava$0() + this.name + " moved " + meters + "m.");
+    }
+    move$esjava$0() {
+        throw 'NotImpl < move$esjava$0 >';
+    }
+    static get U_YIN_YANG() {
+        return '\u262F';
+    }
+    static get U_CAUTION_SIGN() {
+        return '\u0023';
+    }
+    static MessageBox(...args) {
+        switch (args.length) {
+        case 1:
+            return SuperAnimal.MessageBox$esjava$1(...args);
+        }
+        return super.MessageBox(...args);
+    }
+    bad(...args) {
+        switch (args.length) {
+        case 0:
+            return this.bad$esjava$0(...args);
+        }
+        return super.bad(...args);
+    }
+    move(...args) {
+        switch (args.length) {
+        case 1:
+            return this.move$esjava$1(...args);
+        case 0:
+            return this.move$esjava$0(...args);
+        }
+        return super.move(...args);
+    }
+}
+class SuperSnake extends SuperAnimal {
+    constructor(name) {
+        super(name);
+    }
+    move$esjava$0() {
+        SuperSnake.MessageBox$esjava$1("Slithering \u2621 ...");
+        super.move$esjava$1(3);
+    }
+    move(...args) {
+        switch (args.length) {
+        case 0:
+            return this.move$esjava$0(...args);
+        }
+        return super.move(...args);
+    }
+}
+class SuperHorse extends SuperAnimal {
+    constructor(name) {
+        super(name);
+    }
+    move$esjava$1(meters) {
+        super.MessageBox$esjava$1(this.name + " 111moved " + meters + "m.");
+        super.no_method_no_overload();
+        this.no_method_no_overload();
+        no_method_no_overload();
+    }
+    bad$esjava$0() {
+        return "42:";
+    }
+    move$esjava$0() {
+        Horse.MessageBox("Galloping \u0021\u0021!");
+        super.move$esjava$1(-0o52);
+    }
+    bad(...args) {
+        switch (args.length) {
+        case 0:
+            return this.bad$esjava$0(...args);
+        }
+        return super.bad(...args);
+    }
+    move(...args) {
+        switch (args.length) {
+        case 1:
+            return this.move$esjava$1(...args);
+        case 0:
+            return this.move$esjava$0(...args);
+        }
+        return super.move(...args);
+    }
+}
+class SuperBabelEvaluate {
+    static main$esjava$1(args) {
+        let animals = [
+            new Snake(Animal.U_CAUTION_SIGN + "Sammy the Python"),
+            new Horse(Animal.U_YIN_YANG + "Tommy the Palomino")
+        ];
+        for (let in$esjava = 0; in$esjava < animals.length; in$esjava++) {
+            animals[in$esjava].move();
+        }
+    }
+    static main(...args) {
+        switch (args.length) {
+        case 1:
+            return SuperBabelEvaluate.main$esjava$1(...args);
+        }
+        return super.main(...args);
+    }
+}

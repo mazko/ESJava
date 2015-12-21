@@ -2353,3 +2353,235 @@ var AnimalOverload = (function () {
     return AnimalOverload;
 })();
 
+var SuperAnimal = (function () {
+    _createClass(SuperAnimal, [{
+        key: 'name',
+        get: function get() {
+            return Object.prototype.hasOwnProperty.call(this, '_$esjava$name') ? this._$esjava$name : this._$esjava$name = null;
+        },
+        set: function set(v) {
+            this._$esjava$name = v;
+        }
+    }]);
+
+    function SuperAnimal(name) {
+        _classCallCheck(this, SuperAnimal);
+
+        this.name = name;
+    }
+
+    _createClass(SuperAnimal, [{
+        key: 'bad$esjava$0',
+        value: function bad$esjava$0() {
+            return "";
+        }
+    }, {
+        key: 'move$esjava$1',
+        value: function move$esjava$1(meters) {
+            SuperAnimal.MessageBox$esjava$1(this.bad$esjava$0() + this.name + " moved " + meters + "m.");
+        }
+    }, {
+        key: 'move$esjava$0',
+        value: function move$esjava$0() {
+            throw 'NotImpl < move$esjava$0 >';
+        }
+    }, {
+        key: 'bad',
+        value: function bad() {
+            var _get36;
+
+            for (var _len35 = arguments.length, args = Array(_len35), _key35 = 0; _key35 < _len35; _key35++) {
+                args[_key35] = arguments[_key35];
+            }
+
+            switch (args.length) {
+                case 0:
+                    return this.bad$esjava$0.apply(this, args);
+            }
+            return (_get36 = _get(Object.getPrototypeOf(SuperAnimal.prototype), 'bad', this)).call.apply(_get36, [this].concat(args));
+        }
+    }, {
+        key: 'move',
+        value: function move() {
+            var _get37;
+
+            for (var _len36 = arguments.length, args = Array(_len36), _key36 = 0; _key36 < _len36; _key36++) {
+                args[_key36] = arguments[_key36];
+            }
+
+            switch (args.length) {
+                case 1:
+                    return this.move$esjava$1.apply(this, args);
+                case 0:
+                    return this.move$esjava$0.apply(this, args);
+            }
+            return (_get37 = _get(Object.getPrototypeOf(SuperAnimal.prototype), 'move', this)).call.apply(_get37, [this].concat(args));
+        }
+    }], [{
+        key: 'MessageBox$esjava$1',
+        value: function MessageBox$esjava$1(msg) {
+            System.out.println(msg);
+        }
+    }, {
+        key: 'MessageBox',
+        value: function MessageBox() {
+            var _get38;
+
+            for (var _len37 = arguments.length, args = Array(_len37), _key37 = 0; _key37 < _len37; _key37++) {
+                args[_key37] = arguments[_key37];
+            }
+
+            switch (args.length) {
+                case 1:
+                    return SuperAnimal.MessageBox$esjava$1.apply(SuperAnimal, args);
+            }
+            return (_get38 = _get(Object.getPrototypeOf(SuperAnimal), 'MessageBox', this)).call.apply(_get38, [this].concat(args));
+        }
+    }, {
+        key: 'U_YIN_YANG',
+        get: function get() {
+            return '☯';
+        }
+    }, {
+        key: 'U_CAUTION_SIGN',
+        get: function get() {
+            return '#';
+        }
+    }]);
+
+    return SuperAnimal;
+})();
+
+var SuperSnake = (function (_SuperAnimal) {
+    _inherits(SuperSnake, _SuperAnimal);
+
+    function SuperSnake(name) {
+        _classCallCheck(this, SuperSnake);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(SuperSnake).call(this, name));
+    }
+
+    _createClass(SuperSnake, [{
+        key: 'move$esjava$0',
+        value: function move$esjava$0() {
+            SuperSnake.MessageBox$esjava$1('Slithering ☡ ...');
+            _get(Object.getPrototypeOf(SuperSnake.prototype), 'move$esjava$1', this).call(this, 3);
+        }
+    }, {
+        key: 'move',
+        value: function move() {
+            var _get39;
+
+            for (var _len38 = arguments.length, args = Array(_len38), _key38 = 0; _key38 < _len38; _key38++) {
+                args[_key38] = arguments[_key38];
+            }
+
+            switch (args.length) {
+                case 0:
+                    return this.move$esjava$0.apply(this, args);
+            }
+            return (_get39 = _get(Object.getPrototypeOf(SuperSnake.prototype), 'move', this)).call.apply(_get39, [this].concat(args));
+        }
+    }]);
+
+    return SuperSnake;
+})(SuperAnimal);
+
+var SuperHorse = (function (_SuperAnimal2) {
+    _inherits(SuperHorse, _SuperAnimal2);
+
+    function SuperHorse(name) {
+        _classCallCheck(this, SuperHorse);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(SuperHorse).call(this, name));
+    }
+
+    _createClass(SuperHorse, [{
+        key: 'move$esjava$1',
+        value: function move$esjava$1(meters) {
+            _get(Object.getPrototypeOf(SuperHorse.prototype), 'MessageBox$esjava$1', this).call(this, this.name + " 111moved " + meters + "m.");
+            _get(Object.getPrototypeOf(SuperHorse.prototype), 'no_method_no_overload', this).call(this);
+            this.no_method_no_overload();
+            no_method_no_overload();
+        }
+    }, {
+        key: 'bad$esjava$0',
+        value: function bad$esjava$0() {
+            return "42:";
+        }
+    }, {
+        key: 'move$esjava$0',
+        value: function move$esjava$0() {
+            Horse.MessageBox('Galloping !!!');
+            _get(Object.getPrototypeOf(SuperHorse.prototype), 'move$esjava$1', this).call(this, -42);
+        }
+    }, {
+        key: 'bad',
+        value: function bad() {
+            var _get40;
+
+            for (var _len39 = arguments.length, args = Array(_len39), _key39 = 0; _key39 < _len39; _key39++) {
+                args[_key39] = arguments[_key39];
+            }
+
+            switch (args.length) {
+                case 0:
+                    return this.bad$esjava$0.apply(this, args);
+            }
+            return (_get40 = _get(Object.getPrototypeOf(SuperHorse.prototype), 'bad', this)).call.apply(_get40, [this].concat(args));
+        }
+    }, {
+        key: 'move',
+        value: function move() {
+            var _get41;
+
+            for (var _len40 = arguments.length, args = Array(_len40), _key40 = 0; _key40 < _len40; _key40++) {
+                args[_key40] = arguments[_key40];
+            }
+
+            switch (args.length) {
+                case 1:
+                    return this.move$esjava$1.apply(this, args);
+                case 0:
+                    return this.move$esjava$0.apply(this, args);
+            }
+            return (_get41 = _get(Object.getPrototypeOf(SuperHorse.prototype), 'move', this)).call.apply(_get41, [this].concat(args));
+        }
+    }]);
+
+    return SuperHorse;
+})(SuperAnimal);
+
+var SuperBabelEvaluate = (function () {
+    function SuperBabelEvaluate() {
+        _classCallCheck(this, SuperBabelEvaluate);
+    }
+
+    _createClass(SuperBabelEvaluate, null, [{
+        key: 'main$esjava$1',
+        value: function main$esjava$1(args) {
+            var animals = [new Snake(Animal.U_CAUTION_SIGN + "Sammy the Python"), new Horse(Animal.U_YIN_YANG + "Tommy the Palomino")];
+            for (var in$esjava = 0; in$esjava < animals.length; in$esjava++) {
+                animals[in$esjava].move();
+            }
+        }
+    }, {
+        key: 'main',
+        value: function main() {
+            var _get42;
+
+            for (var _len41 = arguments.length, args = Array(_len41), _key41 = 0; _key41 < _len41; _key41++) {
+                args[_key41] = arguments[_key41];
+            }
+
+            switch (args.length) {
+                case 1:
+                    return SuperBabelEvaluate.main$esjava$1.apply(SuperBabelEvaluate, args);
+            }
+            return (_get42 = _get(Object.getPrototypeOf(SuperBabelEvaluate), 'main', this)).call.apply(_get42, [this].concat(args));
+        }
+    }]);
+
+    return SuperBabelEvaluate;
+})();
+

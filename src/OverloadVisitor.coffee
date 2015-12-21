@@ -58,5 +58,12 @@ class OverloadVisitor extends SuperVisitor
         id.name = binding.overload id.name, params if do_overload
         lazy id, params, expr
 
+  visitSuperMethodInvocation: (node, binding, args...) ->
+    su = super node, binding, args...
+    (lazy) ->
+      su (id, params, expr) ->
+        id.name = binding.overload id.name, params
+        lazy id, params, expr
+
 
 module.exports = OverloadVisitor

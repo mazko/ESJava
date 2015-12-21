@@ -109,6 +109,18 @@
       };
     };
 
+    OverloadVisitor.prototype.visitSuperMethodInvocation = function() {
+      var args, binding, node, su;
+      node = arguments[0], binding = arguments[1], args = 3 <= arguments.length ? slice.call(arguments, 2) : [];
+      su = OverloadVisitor.__super__.visitSuperMethodInvocation.apply(this, [node, binding].concat(slice.call(args)));
+      return function(lazy) {
+        return su(function(id, params, expr) {
+          id.name = binding.overload(id.name, params);
+          return lazy(id, params, expr);
+        });
+      };
+    };
+
     return OverloadVisitor;
 
   })(SuperVisitor);

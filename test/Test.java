@@ -1274,3 +1274,79 @@ class AnimalOverload {
     }
 
 }
+
+//////////////////////////////////////////////////////////////
+
+abstract class SuperAnimal {
+    /*
+       Data Type Default Value (for fields)
+       boolean false
+       byte 0 short 0 int 0 long 0L 
+       float 0.0f double 0.0d
+       char '\u0000' 
+       String (or any object) null boolean false
+    */
+    final String name;
+    Animal(final String name) {
+        this.name = name;
+    }
+    static void MessageBox(String msg) {
+        System.out.println(msg);
+        //alert(msg);
+    }
+
+    String bad(){
+        return "";
+    }
+    void move(long meters) {
+        MessageBox(bad() + name + " moved " + meters + "m.");
+    }
+    abstract void move();
+    static final char U_YIN_YANG = '\u262F'; // ☯
+    static final char U_CAUTION_SIGN = '\043'; // #
+}
+
+class SuperSnake extends SuperAnimal {
+    Snake(String name) {
+        super(name);
+    }
+    @Override
+    void move() {
+        MessageBox("Slithering \u2621 ...");
+        super.move(3);
+    }
+}
+
+class SuperHorse extends SuperAnimal {
+    Horse(String name) {
+        super(name);
+    }
+    @Override
+    void move(long meters) {
+        super.MessageBox(name + " 111moved " + meters + "m.");
+        super.no_method_no_overload();
+        this.no_method_no_overload();
+        no_method_no_overload();
+    }
+    @Override
+    String bad(){
+        return "42:";
+    }
+    @Override
+    void move() {
+        Horse.MessageBox("Galloping \041\u0021!");
+        super.move(-052l);
+    }
+}
+
+public class SuperBabelEvaluate {
+    public static void main(String[] args) {
+        Animal[] animals = new Animal[] {
+            new Snake(Animal.U_CAUTION_SIGN + "Sammy the Python"), 
+            new Horse(Animal.U_YIN_YANG + "Tommy the Palomino")
+        };
+        for (int in = 0; in < animals.length; in++) {
+            animals[in].move();
+        }
+    }
+}
