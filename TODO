@@ -1,18 +1,34 @@
-unit testing + rewrite binding impl
-exports/imports
-enhanced for loop
-try-with-resources
-multiple interfaces inheritance (mixins?)
-inner classes/anonymous + super binding
-enums
-generics
-varargs
-Threads(web workers)?
-java class [methods, fields?] names may conflict ws js keywords
-parser: add line, pos for ASSERT details
-typed method overload
-constructor overload
-reflection ?
+- inheritance: implement private instance members (both this.methods & this.fields) - auto rename declarations + usage like '_$esjava$classname$membername'
+
+- unit testing + rewrite binding impl
+
+- exports/imports
+
+- enhanced for loop
+
+- try-with-resources
+
+- multiple interfaces inheritance (mixins?)
+
+- inner classes/anonymous + super binding
+
+- enums
+
+- generics
+
+- varargs
+
+- Threads(web workers)?
+
+- java class [methods, fields?] names may conflict ws js keywords
+
+- parser: add line, pos for ASSERT details
+
+- typed method overload
+
+- constructor overload
+
+- reflection ?
 ---------------------------------------------------------------
 Current binding is naive top -> bottom:
 
