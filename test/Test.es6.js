@@ -1478,12 +1478,6 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
     }
 }
 class Horse3 extends Horse2 {
-    get horse_p() {
-        return Object.prototype.hasOwnProperty.call(this, '_$esjava$horse_p') ? this._$esjava$horse_p : this._$esjava$horse_p = null;
-    }
-    set horse_p(v) {
-        this._$esjava$horse_p = v;
-    }
     hello1$esjava$0() {
         this.hello$esjava$0();
         this.hello1$esjava$0();
@@ -1491,7 +1485,7 @@ class Horse3 extends Horse2 {
         Horse3.test3_s++;
         test4_p++;
         this.test5.charCodeAt(0);
-        this.horse_p = null;
+        horse_p = null;
         Horse3.hello_s$esjava$0();
         hello_p();
         hello_p1();

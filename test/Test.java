@@ -1214,7 +1214,6 @@ class Horse2 extends I_AM_IN_COMPILATION_UNIT_Animal {
 }
 
 class Horse3 extends Horse2 {
-  private Horse1 horse_p;
   void hello1() {
     hello();
     hello1();

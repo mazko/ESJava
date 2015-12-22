@@ -2200,7 +2200,7 @@ var Horse3 = (function (_Horse) {
             Horse3.test3_s++;
             test4_p++;
             this.test5.charCodeAt(0);
-            this.horse_p = null;
+            horse_p = null;
             Horse3.hello_s$esjava$0();
             hello_p();
             hello_p1();
@@ -2248,14 +2248,6 @@ var Horse3 = (function (_Horse) {
                     return this.hello_self$esjava$0.apply(this, args);
             }
             return (_get32 = _get(Object.getPrototypeOf(Horse3.prototype), 'hello_self', this)).call.apply(_get32, [this].concat(args));
-        }
-    }, {
-        key: 'horse_p',
-        get: function get() {
-            return Object.prototype.hasOwnProperty.call(this, '_$esjava$horse_p') ? this._$esjava$horse_p : this._$esjava$horse_p = null;
-        },
-        set: function set(v) {
-            this._$esjava$horse_p = v;
         }
     }]);
 

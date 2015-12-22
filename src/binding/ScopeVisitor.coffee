@@ -20,14 +20,19 @@ class VarScope
     @contains = _vars.contains
     @get_type = (name, def=null) -> _vars.get_value(name)?.type or def
     @is_static = (name) -> !!_vars.get_value(name)?.static
+    @is_private = (name) -> !!_vars.get_value(name)?.private
     @clone = -> new @constructor null, _vars:_vars.clone()
     @clone_super = ->
       vars = new Dict
+      su_fields = []
       _vars.each (k, v) ->
         if not v.private
           model = new VarModel v.type, v.static, no, yes
-          vars.set_value k, model 
-      new @constructor null, _vars:vars
+          vars.set_value k, model
+        model = new VarModel v.type, v.static, v.private, yes
+        model.name = k
+        su_fields.push model
+      [su_fields, new @constructor null, _vars:vars]
     _unique_var_validator = []
     @collect_from = (src) ->
       safe_vars_set = (nm, args...) ->
@@ -70,18 +75,83 @@ class VarScope
 
 class MemberScope
 
+  validate = (fields, methods, su_fields, su_methods) ->
+    # fields ws fields
+    for f in su_fields when not f.static and fields.contains(f.name) and not fields.is_static f.name
+      # class A {
+      #  private int conflict;
+      # }
+      # class B extends A {
+      #  private? int conflict;
+      # }
+      if f.private
+        throw "NotImpl: field < #{f.name} > conflicts with super private one"
+      # class A {
+      #  int conflict;
+      # }
+      # class B extends A {
+      #  private int conflict;
+      # }
+      if fields.is_private f.name
+        throw "NotImpl: private field < #{f.name} > conflicts with super one"
+
+    # methods ws methods
+    for m in su_methods when not m.static and methods.contains(m.name, new Array(m.overload)) and not methods.is_static m.name, new Array(m.overload)
+      # class A {
+      #  private int conflict(){};
+      # }
+      # class B extends A {
+      #  private? int conflict(){};
+      # }
+      if m.private
+        throw "NotImpl: method < #{m.name} > conflicts with super private one"
+      # class A {
+      #  int conflict(){};
+      # }
+      # class B extends A {
+      #  private int conflict(){};
+      # }
+      if methods.is_private m.name, new Array(m.overload)
+        throw "NotImpl: private method < #{m.name} > conflicts with super one"
+
+    # fields ws methods
+    for o in methods.ls_potential_overloads()
+      # class A {
+      #  int conflict;
+      # }
+      # class B extends A {
+      #  int conflict(){};
+      # }
+      for f in su_fields when not o.static and not f.static and f.name is o.name
+        throw "NotImpl: method < #{o.name} > conflicts with same super field"
+      # class A {
+      #  int conflict;
+      #  int conflict(){};
+      # }
+      if fields.contains(o.name) and (o.static is fields.is_static o.name)
+        throw "NotImpl: field < #{o.name} > conflicts with same method"
+
   class MethodModel
     constructor: (@type, @overload, @static=no, @private=no, @super=no, @ctor=no) ->
 
-  constructor: (cls_node, {_fields,_methods}={_fields:new VarScope, _methods:new Dict}) ->
+  constructor: (cls_node, {_fields,_methods,_su_fields,_su_methods}={_fields:new VarScope, _methods:new Dict, _su_fields:[], _su_methods:[]}) ->
 
     @clone_super = (cls_node) ->
       methods = new Dict
+      su_methods = [_su_methods...]
       _methods.each (k, v) ->
         model = for m in v when not m.private
           new MethodModel m.type, m.overload, m.static, no, yes, m.ctor
         methods.set_value k, model if model.length
-      new @constructor cls_node, _fields:_fields.clone_super(), _methods:methods
+        for m in v
+          model = new MethodModel m.type, m.overload, m.static, m.private, yes, m.ctor
+          model.name = k
+          su_methods.push model
+      [su_fields, fields] = _fields.clone_super()
+      su_fields = [_su_fields..., su_fields...]
+      new @constructor cls_node, 
+        _fields:fields, _methods:methods, 
+        _su_fields:su_fields, _su_methods:su_methods
 
     class MembersCollector extends MicroVisitor
       visitFieldDeclaration: (node, args...) ->
@@ -93,6 +163,8 @@ class MemberScope
         overload = node.parameters.length
         for model in models when overload is model.overload and not model.super
           throw 'NotImpl: Overload by argumens type ' + id.name
+        # filter super
+        models = (model for model in models when overload isnt model.overload)
         has_static = @constructor.has_modifier node, 'static'
         has_private = @constructor.has_modifier node, 'private'
         models.push new MethodModel retype, overload, has_static, has_private, no, node.constructor
@@ -104,7 +176,7 @@ class MemberScope
 
     @scope_id = new MembersCollector().visit cls_node
 
-    @fields = ['get_type', 'contains', 'is_static'].reduce (left, right) ->
+    @fields = ['get_type', 'contains', 'is_static', 'is_private'].reduce (left, right) ->
         GenericVisitor.set_prop obj:left, prop:right, value:_fields[right]
       , {}
 
@@ -122,6 +194,11 @@ class MemberScope
           return !!model.static if params.length is model.overload
         no
 
+      is_private: (name, params) ->
+        for model in _methods.get_value name, []
+          return !!model.private if params.length is model.overload
+        no
+
       ls_potential_overloads: ->
         ls = []
         _methods.each (k,v) ->
@@ -132,16 +209,15 @@ class MemberScope
           ls.push name:k, static:no, pars:instances if instances.length
         ls
 
-      overload: (name, params) => 
-        if _fields.contains(name) and (_fields.is_static(name) is @methods.is_static(name, params))
-          throw "NotImpl: Same Field & Method name < #{name} > agnostic for JS Classes :("
+      overload: (name, params) ->
         methods = _methods.get_value name
         if methods?.length
           name + '$esjava$' + params.length
         else 
           name
 
-
+    # validation after data collected
+    validate @fields, @methods, _su_fields, _su_methods
 
 class ScopeVisitor extends GenericVisitor
 
