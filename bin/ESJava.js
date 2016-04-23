@@ -11,7 +11,7 @@
     hasProp = {}.hasOwnProperty,
     slice = [].slice;
 
-  javaparser = require('../lib/javaparser7');
+  javaparser = require('java-parser');
 
   SuperVisitor = require('./OverloadVisitor');
 

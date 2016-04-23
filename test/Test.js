@@ -2,7 +2,7 @@
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 require('java.io.IOException');
 
@@ -26,7 +26,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var StandardTokenizer = (function (_Tokenizer) {
+var StandardTokenizer = function (_Tokenizer) {
     _inherits(StandardTokenizer, _Tokenizer);
 
     function StandardTokenizer() {
@@ -127,9 +127,9 @@ var StandardTokenizer = (function (_Tokenizer) {
     }]);
 
     return StandardTokenizer;
-})(Tokenizer);
+}(Tokenizer);
 
-var ClassicTokenizerImpl = (function () {
+var ClassicTokenizerImpl = function () {
     _createClass(ClassicTokenizerImpl, [{
         key: 'yychar_fix$esjava$0',
         value: function yychar_fix$esjava$0() {
@@ -601,7 +601,7 @@ var ClassicTokenizerImpl = (function () {
     }, {
         key: 'zzScanError$esjava$1',
         value: function zzScanError$esjava$1(errorCode) {
-            var message = undefined;
+            var message = void 0;
             try {
                 message = ClassicTokenizerImpl.ZZ_ERROR_MSG[errorCode];
             } catch (e) {
@@ -620,10 +620,10 @@ var ClassicTokenizerImpl = (function () {
     }, {
         key: 'getNextToken$esjava$0',
         value: function getNextToken$esjava$0() {
-            var zzInput = undefined;
-            var zzAction = undefined;
-            var zzCurrentPosL = undefined;
-            var zzMarkedPosL = undefined;
+            var zzInput = void 0;
+            var zzAction = void 0;
+            var zzCurrentPosL = void 0;
+            var zzMarkedPosL = void 0;
             var zzEndReadL = this.zzEndRead;
             var zzBufferL = this.zzBuffer;
             var zzCMapL = ClassicTokenizerImpl.ZZ_CMAP;
@@ -1105,9 +1105,9 @@ var ClassicTokenizerImpl = (function () {
     }]);
 
     return ClassicTokenizerImpl;
-})();
+}();
 
-var Test = (function () {
+var Test = function () {
     function Test() {
         _classCallCheck(this, Test);
     }
@@ -1378,7 +1378,7 @@ var Test = (function () {
                 var _ZZ_CMAP_PACKED7 = 0;
                 _ZZ_CMAP_PACKED7 = 42;
             }
-            for (var _x3 = "hello"; x;) {
+            for (var _x3 = "hello"; _x3;) {
                 _x3.charCodeAt();
             }
             Test.ZZ_CMAP_PACKED = 42;
@@ -1483,9 +1483,9 @@ var Test = (function () {
     }]);
 
     return Test;
-})();
+}();
 
-var TestInterface = (function () {
+var TestInterface = function () {
     function TestInterface() {
         _classCallCheck(this, TestInterface);
     }
@@ -1513,9 +1513,9 @@ var TestInterface = (function () {
     }]);
 
     return TestInterface;
-})();
+}();
 
-var TestInterfaceClass = (function (_TestInterface) {
+var TestInterfaceClass = function (_TestInterface) {
     _inherits(TestInterfaceClass, _TestInterface);
 
     function TestInterfaceClass() {
@@ -1525,9 +1525,9 @@ var TestInterfaceClass = (function (_TestInterface) {
     }
 
     return TestInterfaceClass;
-})(TestInterface);
+}(TestInterface);
 
-var TestExtendsClass = (function (_TestInterface2) {
+var TestExtendsClass = function (_TestInterface2) {
     _inherits(TestExtendsClass, _TestInterface2);
 
     function TestExtendsClass() {
@@ -1537,9 +1537,9 @@ var TestExtendsClass = (function (_TestInterface2) {
     }
 
     return TestExtendsClass;
-})(TestInterface);
+}(TestInterface);
 
-var NumberExtendsClass = (function (_TestInterface3) {
+var NumberExtendsClass = function (_TestInterface3) {
     _inherits(NumberExtendsClass, _TestInterface3);
 
     function NumberExtendsClass() {
@@ -1775,9 +1775,9 @@ var NumberExtendsClass = (function (_TestInterface3) {
     }]);
 
     return NumberExtendsClass;
-})(TestInterface);
+}(TestInterface);
 
-var Animal = (function () {
+var Animal = function () {
     _createClass(Animal, [{
         key: 'name',
         get: function get() {
@@ -1894,9 +1894,9 @@ var Animal = (function () {
     }]);
 
     return Animal;
-})();
+}();
 
-var Snake = (function (_Animal) {
+var Snake = function (_Animal) {
     _inherits(Snake, _Animal);
 
     function Snake(name) {
@@ -1929,9 +1929,9 @@ var Snake = (function (_Animal) {
     }]);
 
     return Snake;
-})(Animal);
+}(Animal);
 
-var Horse = (function (_Animal2) {
+var Horse = function (_Animal2) {
     _inherits(Horse, _Animal2);
 
     function Horse(name) {
@@ -1964,9 +1964,9 @@ var Horse = (function (_Animal2) {
     }]);
 
     return Horse;
-})(Animal);
+}(Animal);
 
-var BabelEvaluate = (function () {
+var BabelEvaluate = function () {
     function BabelEvaluate() {
         _classCallCheck(this, BabelEvaluate);
     }
@@ -1978,8 +1978,8 @@ var BabelEvaluate = (function () {
             for (var i = 0; i < animals.length; i++) {
                 animals[i].move$0();
             }
-            var i1 = undefined,
-                i2 = undefined;
+            var i1 = void 0,
+                i2 = void 0;
             for (i1 = 42, i2 = codePointOffset;;) {}
         }
     }, {
@@ -2000,9 +2000,9 @@ var BabelEvaluate = (function () {
     }]);
 
     return BabelEvaluate;
-})();
+}();
 
-var Horse1 = (function (_I$AM$NOT$IN$COMPILAT) {
+var Horse1 = function (_I$AM$NOT$IN$COMPILAT) {
     _inherits(Horse1, _I$AM$NOT$IN$COMPILAT);
 
     function Horse1() {
@@ -2012,9 +2012,9 @@ var Horse1 = (function (_I$AM$NOT$IN$COMPILAT) {
     }
 
     return Horse1;
-})(I.AM.NOT.IN.COMPILATION_UNIT.Animal);
+}(I.AM.NOT.IN.COMPILATION_UNIT.Animal);
 
-var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
+var I_AM_IN_COMPILATION_UNIT_Animal = function () {
     function I_AM_IN_COMPILATION_UNIT_Animal() {
         _classCallCheck(this, I_AM_IN_COMPILATION_UNIT_Animal);
     }
@@ -2088,9 +2088,9 @@ var I_AM_IN_COMPILATION_UNIT_Animal = (function () {
     }]);
 
     return I_AM_IN_COMPILATION_UNIT_Animal;
-})();
+}();
 
-var Horse2 = (function (_I_AM_IN_COMPILATION_) {
+var Horse2 = function (_I_AM_IN_COMPILATION_) {
     _inherits(Horse2, _I_AM_IN_COMPILATION_);
 
     function Horse2() {
@@ -2180,9 +2180,9 @@ var Horse2 = (function (_I_AM_IN_COMPILATION_) {
     }]);
 
     return Horse2;
-})(I_AM_IN_COMPILATION_UNIT_Animal);
+}(I_AM_IN_COMPILATION_UNIT_Animal);
 
-var Horse3 = (function (_Horse) {
+var Horse3 = function (_Horse) {
     _inherits(Horse3, _Horse);
 
     function Horse3() {
@@ -2252,9 +2252,9 @@ var Horse3 = (function (_Horse) {
     }]);
 
     return Horse3;
-})(Horse2);
+}(Horse2);
 
-var AnimalOverload = (function () {
+var AnimalOverload = function () {
     function AnimalOverload() {
         _classCallCheck(this, AnimalOverload);
     }
@@ -2343,9 +2343,9 @@ var AnimalOverload = (function () {
     }]);
 
     return AnimalOverload;
-})();
+}();
 
-var SuperAnimal = (function () {
+var SuperAnimal = function () {
     _createClass(SuperAnimal, [{
         key: 'name',
         get: function get() {
@@ -2442,9 +2442,9 @@ var SuperAnimal = (function () {
     }]);
 
     return SuperAnimal;
-})();
+}();
 
-var SuperSnake = (function (_SuperAnimal) {
+var SuperSnake = function (_SuperAnimal) {
     _inherits(SuperSnake, _SuperAnimal);
 
     function SuperSnake(name) {
@@ -2477,9 +2477,9 @@ var SuperSnake = (function (_SuperAnimal) {
     }]);
 
     return SuperSnake;
-})(SuperAnimal);
+}(SuperAnimal);
 
-var SuperHorse = (function (_SuperAnimal2) {
+var SuperHorse = function (_SuperAnimal2) {
     _inherits(SuperHorse, _SuperAnimal2);
 
     function SuperHorse(name) {
@@ -2542,9 +2542,9 @@ var SuperHorse = (function (_SuperAnimal2) {
     }]);
 
     return SuperHorse;
-})(SuperAnimal);
+}(SuperAnimal);
 
-var SuperBabelEvaluate = (function () {
+var SuperBabelEvaluate = function () {
     function SuperBabelEvaluate() {
         _classCallCheck(this, SuperBabelEvaluate);
     }
@@ -2575,5 +2575,5 @@ var SuperBabelEvaluate = (function () {
     }]);
 
     return SuperBabelEvaluate;
-})();
+}();
 

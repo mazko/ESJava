@@ -1,2 +1,2 @@
 test/test.sh && \
-browserify -t coffeeify --extension=".coffee" --standalone javaconves6func src/ESJava.coffee > bundle.js
+./node_modules/browserify/bin/cmd.js -t coffeeify --extension=".coffee" --standalone javaconves6func src/ESJava.coffee > bundle.js

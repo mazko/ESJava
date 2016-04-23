@@ -3,7 +3,7 @@
 @license New BSD License <http://creativecommons.org/licenses/BSD/>
 ###
 
-javaparser   = require '../lib/javaparser7'
+javaparser   = require 'java-parser'
 SuperVisitor = require './OverloadVisitor'
 Scope        = require './binding/BindingScope'
 estypes      = require 'ast-types'
